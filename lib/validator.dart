@@ -2,26 +2,24 @@ library emailvalidator;
 
 import 'dart:core';
 
-enum SubDomainType { None, Alphabetic, Numeric, AlphaNumeric }
-
 class EmailValidator {
   
   int index = 0;
   static final _atomCharacters = "!#\$\%&'*+-/=?^_`{|}~";
 
- isLetterOrDigit(c) {
+ bool isLetterOrDigit(c) {
 		return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9');
 	}
 
-	isAtom(c, allowInternational) {
+	bool isAtom(c, bool allowInternational) {
 		return c.charCodeAt(0) < 128 ? this.isLetterOrDigit(c) || _atomCharacters.indexOf(c) != -1 : allowInternational;
 	}
 
-	isDomain(c, allowInternational)	{
+	bool isDomain(c, bool allowInternational)	{
 		return c.charCodeAt(0) < 128 ? this.isLetterOrDigit(c) || c == '-' : allowInternational;
 	}
 
-	skipAtom(text, allowInternational) {
+	bool skipAtom(text, bool allowInternational) {
 		var self = this;
 		var startIndex = self.index;
 
@@ -32,7 +30,7 @@ class EmailValidator {
 		return self.index > startIndex;
 	}
 
-	skipSubDomain(text, allowInternational) {
+	bool skipSubDomain(text, bool allowInternational) {
 		var self = this;
 		var startIndex = self.index;
 
@@ -49,7 +47,7 @@ class EmailValidator {
 		return (self.index - startIndex) < 64 && text[self.index - 1] != '-';
 	}
 
-	skipDomain(text, allowTopLevelDomains, allowInternational) {
+	bool skipDomain(String text, bool allowTopLevelDomains, bool allowInternational) {
 		var self = this;
 
 		if (!self.skipSubDomain(text, allowInternational)) {
@@ -75,7 +73,7 @@ class EmailValidator {
 		return true;
 	}
 
-	skipQuoted(text, allowInternational) {
+	bool skipQuoted(String text, bool allowInternational) {
 		var self = this;
 		var escaped = false;
 
@@ -108,7 +106,7 @@ class EmailValidator {
 		return true;
 	}
 
-	skipWord(text, allowInternational) {
+	 bool skipWord(String text, bool allowInternational) {
 		var self = this;
 
 		if (text[self.index] == '"') {
@@ -118,7 +116,7 @@ class EmailValidator {
 		return self.skipAtom(text, allowInternational);
 	}
 
-	skipIPv4Literal(text) {
+	bool skipIPv4Literal(text) {
 		var self = this;
 		var groups = 0;
 
@@ -145,7 +143,7 @@ class EmailValidator {
 		return groups == 4;
 	}
 
-	isHexDigit(c)	{
+	bool isHexDigit(c)	{
 		return (c >= 'A' && c <= 'F') || (c >= 'a' && c <= 'f') || (c >= '0' && c <= '9');
 	}
 
@@ -164,7 +162,7 @@ class EmailValidator {
 	//             ; The "::" represents at least 2 16-bit groups of zeros
 	//             ; No more than 4 groups in addition to the "::" and
 	//             ; IPv4-address-literal may be present
-	skipIPv6Literal(text) {
+	bool skipIPv6Literal(String text) {
 		var self = this;
 		var compact = false;
 		var colons = 0;
@@ -202,7 +200,7 @@ class EmailValidator {
 			}
 
 			startIndex = self.index;
-			while (self.index < text.length && text[self.index] === ':') {
+			while (self.index < text.length && text[self.index] == ':') {
 				self.index++;
 			}
 
@@ -230,7 +228,8 @@ class EmailValidator {
 		return compact ? colons < 7 : colons == 7;
 	}
 
-  validate(String email, [allowTopLevelDomains = false, allowInternational = false]) {
+  bool validate(String email, 
+    [allowTopLevelDomains = false, allowInternational = false]) {
 		var self = this;
 
 		if (email == null) {
