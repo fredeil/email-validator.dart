@@ -1,6 +1,6 @@
 # Email validator
 
-A simple (but correct) Dart class for validating email addresses. This is a port from the C# library https://github.com/jstedfast/EmailValidation.
+A simple (but correct) Dart class for validating email addresses. This is a port from the C# library [jstedfast/EmailValidation](https://github.com/jstedfast/EmailValidation).
 
 ## Installation
 
@@ -9,6 +9,7 @@ Dart requires the latest version of [Dart](https://www.dartlang.org/). You can d
 ### 1. Depend on it
 
 Add this to your package's `pubspec.yaml` file:
+
 ```yaml
 dependencies:
     emailvalidator: "0.1.0"
