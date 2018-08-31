@@ -233,7 +233,7 @@ class EmailValidator {
     index = 0;
 
     if (email == null) {
-      return false;
+      throw new ArgumentError();
     }
 
     if (email.length < 0 || email.length >= 255) {
