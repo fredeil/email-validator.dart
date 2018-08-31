@@ -2,12 +2,12 @@ library email_validator;
 
 import 'dart:core';
 
-enum subDomainType { None, Alphabetic, Numeric, AlphaNumeric }
+enum type { None, Alphabetic, Numeric, AlphaNumeric }
 
 class EmailValidator {
   static int _index = 0;
   static final _atomCharacters = "!#\$%&'*+-/=?^_`{|}~";
-  static subDomainType domainType = subDomainType.None;
+  static type _domainType = type.None;
 
   static bool _isDigit(c) {
     return (c.codeUnitAt(0) >= 48 && c.codeUnitAt(0) <= 57);
@@ -31,12 +31,12 @@ class EmailValidator {
   static bool _isDomain(c, bool allowInternational) {
     if (c.codeUnitAt(0) < 128) {
       if (_isLetter(c) || c == '-') {
-        domainType = subDomainType.Alphabetic;
+        _domainType = type.Alphabetic;
         return true;
       }
 
       if (_isDigit(c)) {
-        domainType = subDomainType.Numeric;
+        _domainType = type.Numeric;
         return true;
       }
 
@@ -44,7 +44,7 @@ class EmailValidator {
     }
 
     if (allowInternational) {
-      domainType = subDomainType.Alphabetic;
+      _domainType = type.Alphabetic;
       return true;
     }
 
@@ -54,26 +54,26 @@ class EmailValidator {
   static bool _isDomainStart(c, bool allowInternational) {
     if (c.codeUnitAt(0) < 128) {
       if (_isLetter(c)) {
-        domainType = subDomainType.Alphabetic;
+        _domainType = type.Alphabetic;
         return true;
       }
 
       if (_isDigit(c)) {
-        domainType = subDomainType.Numeric;
+        _domainType = type.Numeric;
         return true;
       }
 
-      domainType = subDomainType.None;
+      _domainType = type.None;
 
       return false;
     }
 
     if (allowInternational) {
-      domainType = subDomainType.Alphabetic;
+      _domainType = type.Alphabetic;
       return true;
     }
 
-    domainType = subDomainType.None;
+    _domainType = type.None;
 
     return false;
   }
@@ -117,7 +117,7 @@ class EmailValidator {
     }
 
     // Note: by allowing AlphaNumeric, we get away with not having to support punycode.
-    if (domainType == subDomainType.Numeric) return false;
+    if (_domainType == type.Numeric) return false;
 
     return true;
   }
