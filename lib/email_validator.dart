@@ -14,9 +14,7 @@ class EmailValidator {
   }
 
   static bool _isAtom(String c, bool allowInternational) {
-    return c.codeUnitAt(0) < 128
-        ? _isLetterOrDigit(c) || _atomCharacters.indexOf(c) != -1
-        : allowInternational;
+    return c.codeUnitAt(0) < 128 ? _isLetterOrDigit(c) || _atomCharacters.indexOf(c) != -1 : allowInternational;
   }
 
   static bool _isDomain(String c, bool allowInternational) {
@@ -80,6 +78,7 @@ class EmailValidator {
   static bool _skipQuoted(String text, bool allowInternational) {
     var escaped = false;
 
+    // skip over leading '"'
     _index++;
 
     while (_index < text.length) {
@@ -108,14 +107,6 @@ class EmailValidator {
     _index++;
 
     return true;
-  }
-
-  static bool _skipWord(String text, bool allowInternational) {
-
-    if (text[_index] == '"')
-      return _skipQuoted(text, allowInternational);
-
-    return _skipAtom(text, allowInternational);
   }
 
   static bool _skipIPv4Literal(String text) {
@@ -221,25 +212,32 @@ class EmailValidator {
     if (email.length < 0 || email.length >= 255)
       return false;
 
-    if (!_skipWord(email, allowInternational) || _index >= email.length) 
-      return false;
-
-    while (email[_index] == '.') {
-      _index++;
-
-      if (_index >= email.length)
+		// Local-part = Dot-string / Quoted-string
+    // Dot-string = Atom *("." Atom)
+    // Quoted-string = DQUOTE *qcontent DQUOTE
+    if(email[_index] == '"') {
+      if (!_skipQuoted(email, allowInternational) || _index >= email.length) 
         return false;
-
-      if (!_skipWord(email, allowInternational))
+    } else {
+      if(!_skipAtom(email, allowInternational) || _index >= email.length)
         return false;
+      
+      while (email[_index] == '.') {
+        _index++;
 
-      if (_index >= email.length)
-        return false;
+        if (_index >= email.length)
+          return false;
+
+        if (!_skipAtom(email, allowInternational))
+          return false;
+
+        if (_index >= email.length)
+          return false;
+      }
     }
 
     if (_index + 1 >= email.length || _index > 64 || email[_index++] != '@')
       return false;
-
 
     if (email[_index] != '[') {
       // domain
@@ -265,14 +263,13 @@ class EmailValidator {
       if (!_skipIPv6Literal(email))
         return false;
         
-    } 
-    else if (!_skipIPv4Literal(email))
-      return false;
-
-    if (_index >= email.length || email[_index] != ']') {
-      _index++;
-      return false;
+    } else { 
+      if (!_skipIPv4Literal(email))
+        return false;
     }
+
+    if (_index >= email.length || email[_index++] != ']')
+      return false;
 
     return _index == email.length;
   }
