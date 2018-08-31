@@ -144,10 +144,11 @@ class EmailValidator {
     return groups == 4;
   }
 
-  static bool _isHexDigit(c) {
-    return (c >= 'A' && c <= 'F') ||
-        (c >= 'a' && c <= 'f') ||
-        (c >= '0' && c <= '9');
+  static bool _isHexDigit(String str) {
+    var c = str.codeUnitAt(0);
+    return (c >= 65 && c <= 70) ||
+        (c >= 97 && c <= 102) ||
+        (c >= 48 && c <= 57);
   }
 
   static bool _skipIPv6Literal(String text) {
