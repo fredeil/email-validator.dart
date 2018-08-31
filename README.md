@@ -28,6 +28,7 @@ Alternatively, your editor might support pub. Check the docs for your editor to 
 #### 3. Import it
 
 Now in your Dart code, you can use:
+
 ```Dart
 import 'package:emailvalidator/validator.dart';
 ```
@@ -46,6 +47,11 @@ void main() {
 }
 ```
 
-## License
+## Tests
 
-[MIT](LICENSE)
+To test the package, run:
+
+```bash
+$ ./tool/run_tests.sh
+...
+```
