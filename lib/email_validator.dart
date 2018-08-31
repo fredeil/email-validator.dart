@@ -50,23 +50,19 @@ class EmailValidator {
 
     if (!_skipSubDomain(text, allowInternational)) 
       return false;
-    
 
     if (_index < text.length && text[_index] == '.') {
-
-      do 
-      {
+      do {
         _index++;
 
         if (_index == text.length) 
           return false;
         
 
-        if (_skipSubDomain(text, allowInternational)) 
+        if (!_skipSubDomain(text, allowInternational)) 
           return false;
         
-      } 
-      while (_index < text.length && text[_index] == '.');
+      } while (_index < text.length && text[_index] == '.');
 
     } 
     else if (!allowTopLevelDomains) 
@@ -82,7 +78,6 @@ class EmailValidator {
     _index++;
 
     while (_index < text.length) {
-
       if (text.codeUnitAt(_index) >= 128 && !allowInternational) 
         return false;
       
@@ -90,14 +85,11 @@ class EmailValidator {
         escaped = !escaped;
 
       else if (!escaped) 
-
         if (text[_index] == '"') 
           break;
-
       else 
         escaped = false;
       
-
       _index++;
     }
 
@@ -116,9 +108,7 @@ class EmailValidator {
       var startIndex = _index;
       var value = 0;
 
-      while (_index < text.length &&
-          text[_index].codeUnitAt(0) >= 48 &&
-          text[_index].codeUnitAt(0) <= 57) {
+      while (_index < text.length && text[_index].codeUnitAt(0) >= 48 && text[_index].codeUnitAt(0) <= 57) {
         value = (value * 10) + (text[_index].codeUnitAt(0) - 48);
         _index++;
       }
@@ -190,10 +180,8 @@ class EmailValidator {
 
         compact = true;
         colons += 2;
-
       } else 
         colons++;
-
     }
 
     if (colons < 2)
@@ -207,7 +195,7 @@ class EmailValidator {
     _index = 0;
 
     if (email == null)
-      throw new ArgumentError();
+      throw new ArgumentError("email");
 
     if (email.length < 0 || email.length >= 255)
       return false;
@@ -257,7 +245,7 @@ class EmailValidator {
     var ipv6 = email.substring(_index);
 
     if (ipv6.toLowerCase() == 'ipv6:') {
-
+      
       _index += 'IPv6:'.length;
 
       if (!_skipIPv6Literal(email))
