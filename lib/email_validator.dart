@@ -28,9 +28,8 @@ class EmailValidator {
   static bool _skipAtom(text, bool allowInternational) {
     var startIndex = _index;
 
-    while (_index < text.length && _isAtom(text[_index], allowInternational)) {
+    while (_index < text.length && _isAtom(text[_index], allowInternational))
       _index++;
-    }
 
     return _index > startIndex;
   }
@@ -38,41 +37,42 @@ class EmailValidator {
   static bool _skipSubDomain(text, bool allowInternational) {
     var startIndex = _index;
 
-    if (!_isDomain(text[_index], allowInternational) || text[_index] == '-') {
+    if (!_isDomain(text[_index], allowInternational) || text[_index] == '-') 
       return false;
-    }
 
     _index++;
 
-    while (
-        _index < text.length && _isDomain(text[_index], allowInternational)) {
+    while (_index < text.length && _isDomain(text[_index], allowInternational))
       _index++;
-    }
 
     return (_index - startIndex) < 64 && text[_index - 1] != '-';
   }
 
-  static bool _skipDomain(
-      String text, bool allowTopLevelDomains, bool allowInternational) {
-    if (!_skipSubDomain(text, allowInternational)) {
+  static bool _skipDomain(String text, bool allowTopLevelDomains, bool allowInternational) {
+
+    if (!_skipSubDomain(text, allowInternational)) 
       return false;
-    }
+    
 
     if (_index < text.length && text[_index] == '.') {
-      do {
+
+      do 
+      {
         _index++;
 
-        if (_index == text.length) {
+        if (_index == text.length) 
           return false;
-        }
+        
 
-        if (_skipSubDomain(text, allowInternational)) {
+        if (_skipSubDomain(text, allowInternational)) 
           return false;
-        }
-      } while (_index < text.length && text[_index] == '.');
-    } else if (!allowTopLevelDomains) {
+        
+      } 
+      while (_index < text.length && text[_index] == '.');
+
+    } 
+    else if (!allowTopLevelDomains) 
       return false;
-    }
 
     return true;
   }
@@ -83,26 +83,27 @@ class EmailValidator {
     _index++;
 
     while (_index < text.length) {
-      if (text.codeUnitAt(_index) >= 128 && !allowInternational) {
-        return false;
-      }
 
-      if (text[_index] == '\\') {
+      if (text.codeUnitAt(_index) >= 128 && !allowInternational) 
+        return false;
+      
+      if (text[_index] == '\\') 
         escaped = !escaped;
-      } else if (!escaped) {
-        if (text[_index] == '"') {
+
+      else if (!escaped) 
+
+        if (text[_index] == '"') 
           break;
-        }
-      } else {
+
+      else 
         escaped = false;
-      }
+      
 
       _index++;
     }
 
-    if (_index >= text.length || text[_index] != '"') {
+    if (_index >= text.length || text[_index] != '"')
       return false;
-    }
 
     _index++;
 
@@ -110,9 +111,9 @@ class EmailValidator {
   }
 
   static bool _skipWord(String text, bool allowInternational) {
-    if (text[_index] == '"') {
+
+    if (text[_index] == '"')
       return _skipQuoted(text, allowInternational);
-    }
 
     return _skipAtom(text, allowInternational);
   }
@@ -131,15 +132,13 @@ class EmailValidator {
         _index++;
       }
 
-      if (_index == startIndex || _index - startIndex > 3 || value > 255) {
+      if (_index == startIndex || _index - startIndex > 3 || value > 255)
         return false;
-      }
 
       groups++;
 
-      if (groups < 4 && _index < text.length && text[_index] == '.') {
+      if (groups < 4 && _index < text.length && text[_index] == '.')
         _index++;
-      }
     }
 
     return groups == 4;
@@ -159,105 +158,93 @@ class EmailValidator {
     while (_index < text.length) {
       var startIndex = _index;
 
-      while (_index < text.length && _isHexDigit(text[_index])) {
+      while (_index < text.length && _isHexDigit(text[_index]))
         _index++;
-      }
 
-      if (_index >= text.length) {
+      if (_index >= text.length)
         break;
-      }
 
       if (_index > startIndex && colons > 2 && text[_index] == '.') {
         // IPv6v4
         _index = startIndex;
 
-        if (!_skipIPv4Literal(text)) {
+        if (!_skipIPv4Literal(text))
           return false;
-        }
 
         return compact ? colons < 6 : colons == 6;
       }
 
       var count = _index - startIndex;
 
-      if (count > 4) {
+      if (count > 4)
         return false;
-      }
 
       if (text[_index] != ':') {
         break;
       }
 
       startIndex = _index;
-      while (_index < text.length && text[_index] == ':') {
+
+      while (_index < text.length && text[_index] == ':')
         _index++;
-      }
 
       count = _index - startIndex;
-      if (count > 2) {
+
+      if (count > 2)
         return false;
-      }
 
       if (count == 2) {
-        if (compact) {
+        if (compact)
           return false;
-        }
 
         compact = true;
         colons += 2;
-      } else {
+
+      } else 
         colons++;
-      }
+
     }
 
-    if (colons < 2) {
+    if (colons < 2)
       return false;
-    }
 
     return compact ? colons < 7 : colons == 7;
   }
 
-  static bool validate(String email,
-      [allowTopLevelDomains = true, allowInternational = false]) {
+  static bool validate(String email, [allowTopLevelDomains = true, allowInternational = false]) {
+   
     _index = 0;
 
-    if (email == null) {
+    if (email == null)
       throw new ArgumentError();
-    }
 
-    if (email.length < 0 || email.length >= 255) {
+    if (email.length < 0 || email.length >= 255)
       return false;
-    }
 
-    if (!_skipWord(email, allowInternational) || _index >= email.length) {
+    if (!_skipWord(email, allowInternational) || _index >= email.length) 
       return false;
-    }
 
     while (email[_index] == '.') {
       _index++;
 
-      if (_index >= email.length) {
+      if (_index >= email.length)
         return false;
-      }
 
-      if (!_skipWord(email, allowInternational)) {
+      if (!_skipWord(email, allowInternational))
         return false;
-      }
 
-      if (_index >= email.length) {
+      if (_index >= email.length)
         return false;
-      }
     }
 
-    if (_index + 1 >= email.length || _index > 64 || email[_index++] != '@') {
+    if (_index + 1 >= email.length || _index > 64 || email[_index++] != '@')
       return false;
-    }
+
 
     if (email[_index] != '[') {
       // domain
-      if (!_skipDomain(email, allowTopLevelDomains, allowInternational)) {
+      if (!_skipDomain(email, allowTopLevelDomains, allowInternational))
         return false;
-      }
 
       return _index == email.length;
     }
@@ -266,19 +253,21 @@ class EmailValidator {
     _index++;
 
     // we need at least 8 more characters
-    if (_index + 8 >= email.length) {
+    if (_index + 8 >= email.length)
       return false;
-    }
 
     var ipv6 = email.substring(_index);
+
     if (ipv6.toLowerCase() == 'ipv6:') {
+
       _index += 'IPv6:'.length;
-      if (!_skipIPv6Literal(email)) {
+
+      if (!_skipIPv6Literal(email))
         return false;
-      }
-    } else if (!_skipIPv4Literal(email)) {
+        
+    } 
+    else if (!_skipIPv4Literal(email))
       return false;
-    }
 
     if (_index >= email.length || email[_index] != ']') {
       _index++;
