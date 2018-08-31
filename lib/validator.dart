@@ -6,19 +6,20 @@ class EmailValidator {
   static int index = 0;
   static final _atomCharacters = "!#\$\%&'*+-/=?^_`{|}~";
 
-  static bool _isLetterOrDigit(c) {
-    return (c >= 'A' && c <= 'Z') ||
-        (c >= 'a' && c <= 'z') ||
-        (c >= '0' && c <= '9');
+  static bool _isLetterOrDigit(String str) {
+    var c = str.codeUnitAt(0);
+    return (c >= 65 && c <= 90) ||
+        (c >= 97 && c <= 122) ||
+        (c >= 48 && c <= 57);
   }
 
-  static bool _isAtom(c, bool allowInternational) {
+  static bool _isAtom(String c, bool allowInternational) {
     return c.codeUnitAt(0) < 128
         ? _isLetterOrDigit(c) || _atomCharacters.indexOf(c) != -1
         : allowInternational;
   }
 
-  static bool _isDomain(c, bool allowInternational) {
+  static bool _isDomain(String c, bool allowInternational) {
     return c.codeUnitAt(0) < 128
         ? _isLetterOrDigit(c) || c == '-'
         : allowInternational;
@@ -259,7 +260,8 @@ class EmailValidator {
       }
     }
 
-    if (index + 1 >= email.length || index > 64 || email[index++] != '@') {
+    if (index + 1 >= email.length || index > 64 || email[index] != '@') {
+      index++;
       return false;
     }
 

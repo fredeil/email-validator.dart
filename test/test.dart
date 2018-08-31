@@ -118,7 +118,7 @@ void main() {
       ];
 
 
-  test("String.split() splits the string on the delimiter", () {
+  test("Validate validAddresses are valid emails", () {
     var actual = EmailValidator.validate("fredrik@gmail.com");
     expect(actual, equals(true));
   });
