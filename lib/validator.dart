@@ -6,53 +6,53 @@ class EmailValidator {
   static int index = 0;
   static final _atomCharacters = "!#\$\%&'*+-/=?^_`{|}~";
 
-  static bool isLetterOrDigit(c) {
+  static bool _isLetterOrDigit(c) {
     return (c >= 'A' && c <= 'Z') ||
         (c >= 'a' && c <= 'z') ||
         (c >= '0' && c <= '9');
   }
 
-  static bool isAtom(c, bool allowInternational) {
+  static bool _isAtom(c, bool allowInternational) {
     return c.codeUnitAt(0) < 128
-        ? isLetterOrDigit(c) || _atomCharacters.indexOf(c) != -1
+        ? _isLetterOrDigit(c) || _atomCharacters.indexOf(c) != -1
         : allowInternational;
   }
 
-  static bool isDomain(c, bool allowInternational) {
+  static bool _isDomain(c, bool allowInternational) {
     return c.codeUnitAt(0) < 128
-        ? isLetterOrDigit(c) || c == '-'
+        ? _isLetterOrDigit(c) || c == '-'
         : allowInternational;
   }
 
-  static bool skipAtom(text, bool allowInternational) {
+  static bool _skipAtom(text, bool allowInternational) {
     var startIndex = index;
 
-    while (index < text.length && isAtom(text[index], allowInternational)) {
+    while (index < text.length && _isAtom(text[index], allowInternational)) {
       index++;
     }
 
     return index > startIndex;
   }
 
-  static bool skipSubDomain(text, bool allowInternational) {
+  static bool _skipSubDomain(text, bool allowInternational) {
     var startIndex = index;
 
-    if (!isDomain(text[index], allowInternational) || text[index] == '-') {
+    if (!_isDomain(text[index], allowInternational) || text[index] == '-') {
       return false;
     }
 
     index++;
 
-    while (index < text.length && isDomain(text[index], allowInternational)) {
+    while (index < text.length && _isDomain(text[index], allowInternational)) {
       index++;
     }
 
     return (index - startIndex) < 64 && text[index - 1] != '-';
   }
 
-  static bool skipDomain(
+  static bool _skipDomain(
       String text, bool allowTopLevelDomains, bool allowInternational) {
-    if (!skipSubDomain(text, allowInternational)) {
+    if (!_skipSubDomain(text, allowInternational)) {
       return false;
     }
 
@@ -64,7 +64,7 @@ class EmailValidator {
           return false;
         }
 
-        if (skipSubDomain(text, allowInternational)) {
+        if (_skipSubDomain(text, allowInternational)) {
           return false;
         }
       } while (index < text.length && text[index] == '.');
@@ -75,7 +75,7 @@ class EmailValidator {
     return true;
   }
 
-  static bool skipQuoted(String text, bool allowInternational) {
+  static bool _skipQuoted(String text, bool allowInternational) {
     var escaped = false;
 
     index++;
@@ -107,15 +107,15 @@ class EmailValidator {
     return true;
   }
 
-  static bool skipWord(String text, bool allowInternational) {
+  static bool _skipWord(String text, bool allowInternational) {
     if (text[index] == '"') {
-      return skipQuoted(text, allowInternational);
+      return _skipQuoted(text, allowInternational);
     }
 
-    return skipAtom(text, allowInternational);
+    return _skipAtom(text, allowInternational);
   }
 
-  static bool skipIPv4Literal(text) {
+  static bool _skipIPv4Literal(text) {
     var groups = 0;
 
     while (index < text.length && groups < 4) {
@@ -141,7 +141,7 @@ class EmailValidator {
     return groups == 4;
   }
 
-  static bool isHexDigit(c) {
+  static bool _isHexDigit(c) {
     return (c >= 'A' && c <= 'F') ||
         (c >= 'a' && c <= 'f') ||
         (c >= '0' && c <= '9');
@@ -162,14 +162,14 @@ class EmailValidator {
   //             ; The "::" represents at least 2 16-bit groups of zeros
   //             ; No more than 4 groups in addition to the "::" and
   //             ; IPv4-address-literal may be present
-  static bool skipIPv6Literal(String text) {
+  static bool _skipIPv6Literal(String text) {
     var compact = false;
     var colons = 0;
 
     while (index < text.length) {
       var startIndex = index;
 
-      while (index < text.length && isHexDigit(text[index])) {
+      while (index < text.length && _isHexDigit(text[index])) {
         index++;
       }
 
@@ -181,7 +181,7 @@ class EmailValidator {
         // IPv6v4
         index = startIndex;
 
-        if (!skipIPv4Literal(text)) {
+        if (!_(text)) {
           return false;
         }
 
@@ -239,7 +239,7 @@ class EmailValidator {
       return false;
     }
 
-    if (!skipWord(email, allowInternational) || index >= email.length) {
+    if (!_skipWord(email, allowInternational) || index >= email.length) {
       return false;
     }
 
@@ -250,7 +250,7 @@ class EmailValidator {
         return false;
       }
 
-      if (!skipWord(email, allowInternational)) {
+      if (!_skipWord(email, allowInternational)) {
         return false;
       }
 
@@ -265,7 +265,7 @@ class EmailValidator {
 
     if (email[index] != '[') {
       // domain
-      if (!skipDomain(email, allowTopLevelDomains, allowInternational)) {
+      if (!_skipDomain(email, allowTopLevelDomains, allowInternational)) {
         return false;
       }
 
@@ -283,10 +283,10 @@ class EmailValidator {
     var ipv6 = email.substring(index, 5);
     if (ipv6.toLowerCase() == 'ipv6:') {
       index += 'IPv6:'.length;
-      if (!skipIPv6Literal(email)) {
+      if (!_skipIPv6Literal(email)) {
         return false;
       }
-    } else if (!skipIPv4Literal(email)) {
+    } else if (!_(email)) {
       return false;
     }
 

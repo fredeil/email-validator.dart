@@ -120,7 +120,6 @@ void main() {
 
   test("String.split() splits the string on the delimiter", () {
     var actual = EmailValidator.validate("fredrik@gmail.com");
-
     expect(actual, equals(true));
   });
 }
