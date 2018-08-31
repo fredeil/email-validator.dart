@@ -181,7 +181,7 @@ class EmailValidator {
         // IPv6v4
         index = startIndex;
 
-        if (!_(text)) {
+        if (!_skipIPv4Literal(text)) {
           return false;
         }
 
