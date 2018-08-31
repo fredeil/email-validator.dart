@@ -13,19 +13,19 @@ class EmailValidator {
         (c >= 48 && c <= 57);
   }
 
-  static bool _isAtom(String c, [bool allowInternational = true]) {
+  static bool _isAtom(String c, bool allowInternational) {
     return c.codeUnitAt(0) < 128
         ? _isLetterOrDigit(c) || _atomCharacters.indexOf(c) != -1
         : allowInternational;
   }
 
-  static bool _isDomain(String c, [bool allowInternational = true]) {
+  static bool _isDomain(String c, bool allowInternational) {
     return c.codeUnitAt(0) < 128
         ? _isLetterOrDigit(c) || c == '-'
         : allowInternational;
   }
 
-  static bool _skipAtom(text, [bool allowInternational = true]) {
+  static bool _skipAtom(text, bool allowInternational) {
     var startIndex = _index;
 
     while (_index < text.length && _isAtom(text[_index], allowInternational)) {
@@ -35,7 +35,7 @@ class EmailValidator {
     return _index > startIndex;
   }
 
-  static bool _skipSubDomain(text, [bool allowInternational = true]) {
+  static bool _skipSubDomain(text, bool allowInternational) {
     var startIndex = _index;
 
     if (!_isDomain(text[_index], allowInternational) || text[_index] == '-') {
@@ -52,8 +52,8 @@ class EmailValidator {
     return (_index - startIndex) < 64 && text[_index - 1] != '-';
   }
 
-  static bool _skipDomain(String text, bool allowTopLevelDomains,
-      [bool allowInternational = true]) {
+  static bool _skipDomain(
+      String text, bool allowTopLevelDomains, bool allowInternational) {
     if (!_skipSubDomain(text, allowInternational)) {
       return false;
     }
@@ -77,7 +77,7 @@ class EmailValidator {
     return true;
   }
 
-  static bool _skipQuoted(String text, [bool allowInternational = true]) {
+  static bool _skipQuoted(String text, bool allowInternational) {
     var escaped = false;
 
     _index++;
@@ -109,7 +109,7 @@ class EmailValidator {
     return true;
   }
 
-  static bool _skipWord(String text, [bool allowInternational = true]) {
+  static bool _skipWord(String text, bool allowInternational) {
     if (text[_index] == '"') {
       return _skipQuoted(text, allowInternational);
     }
@@ -124,8 +124,9 @@ class EmailValidator {
       var startIndex = _index;
       var value = 0;
 
-      while (
-          _index < text.length && text[_index].codeUnitAt(0) >= 48 && text[_index].codeUnitAt(0) <= 57) {
+      while (_index < text.length &&
+          text[_index].codeUnitAt(0) >= 48 &&
+          text[_index].codeUnitAt(0) <= 57) {
         value = (value * 10) + (text[_index].codeUnitAt(0) - 48);
         _index++;
       }
