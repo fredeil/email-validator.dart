@@ -1,6 +1,6 @@
 import 'dart:core';
 import 'package:test/test.dart';
-import 'package:emailvalidator/validator.dart';
+import 'package:email_validator/validator.dart';
 
 void main() {
   var validAddresses = [

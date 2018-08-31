@@ -1,4 +1,4 @@
-name: emailvalidator
+name: email_validator
 description: A simple (but correct) dart class for validating email addresses
 version: 0.1.0
 author: Fredrik Eilertsen <fredrik.eilertsen@gmail.com>

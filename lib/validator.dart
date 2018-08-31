@@ -1,4 +1,4 @@
-library emailvalidator;
+library email_validator;
 
 import 'dart:core';
 
