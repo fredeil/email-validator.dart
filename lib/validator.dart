@@ -3,78 +3,71 @@ library emailvalidator;
 import 'dart:core';
 
 class EmailValidator {
-  int index = 0;
+  static int index = 0;
   static final _atomCharacters = "!#\$\%&'*+-/=?^_`{|}~";
 
-  bool isLetterOrDigit(c) {
+  static bool isLetterOrDigit(c) {
     return (c >= 'A' && c <= 'Z') ||
         (c >= 'a' && c <= 'z') ||
         (c >= '0' && c <= '9');
   }
 
-  bool isAtom(c, bool allowInternational) {
+  static bool isAtom(c, bool allowInternational) {
     return c.codeUnitAt(0) < 128
-        ? this.isLetterOrDigit(c) || _atomCharacters.indexOf(c) != -1
+        ? isLetterOrDigit(c) || _atomCharacters.indexOf(c) != -1
         : allowInternational;
   }
 
-  bool isDomain(c, bool allowInternational) {
+  static bool isDomain(c, bool allowInternational) {
     return c.codeUnitAt(0) < 128
-        ? this.isLetterOrDigit(c) || c == '-'
+        ? isLetterOrDigit(c) || c == '-'
         : allowInternational;
   }
 
-  bool skipAtom(text, bool allowInternational) {
-    var self = this;
-    var startIndex = self.index;
+  static bool skipAtom(text, bool allowInternational) {
+    var startIndex = index;
 
-    while (self.index < text.length &&
-        self.isAtom(text[self.index], allowInternational)) {
-      self.index++;
+    while (index < text.length && isAtom(text[index], allowInternational)) {
+      index++;
     }
 
-    return self.index > startIndex;
+    return index > startIndex;
   }
 
-  bool skipSubDomain(text, bool allowInternational) {
-    var self = this;
-    var startIndex = self.index;
+  static bool skipSubDomain(text, bool allowInternational) {
+    var startIndex = index;
 
-    if (!self.isDomain(text[self.index], allowInternational) ||
-        text[self.index] == '-') {
+    if (!isDomain(text[index], allowInternational) || text[index] == '-') {
       return false;
     }
 
-    self.index++;
+    index++;
 
-    while (self.index < text.length &&
-        self.isDomain(text[self.index], allowInternational)) {
-      self.index++;
+    while (index < text.length && isDomain(text[index], allowInternational)) {
+      index++;
     }
 
-    return (self.index - startIndex) < 64 && text[self.index - 1] != '-';
+    return (index - startIndex) < 64 && text[index - 1] != '-';
   }
 
-  bool skipDomain(
+  static bool skipDomain(
       String text, bool allowTopLevelDomains, bool allowInternational) {
-    var self = this;
-
-    if (!self.skipSubDomain(text, allowInternational)) {
+    if (!skipSubDomain(text, allowInternational)) {
       return false;
     }
 
-    if (self.index < text.length && text[self.index] == '.') {
+    if (index < text.length && text[index] == '.') {
       do {
-        self.index++;
+        index++;
 
-        if (self.index == text.length) {
+        if (index == text.length) {
           return false;
         }
 
-        if (!self.skipSubDomain(text, allowInternational)) {
+        if (skipSubDomain(text, allowInternational)) {
           return false;
         }
-      } while (self.index < text.length && text[self.index] == '.');
+      } while (index < text.length && text[index] == '.');
     } else if (!allowTopLevelDomains) {
       return false;
     }
@@ -82,81 +75,73 @@ class EmailValidator {
     return true;
   }
 
-  bool skipQuoted(String text, bool allowInternational) {
-    var self = this;
+  static bool skipQuoted(String text, bool allowInternational) {
     var escaped = false;
 
-    self.index++;
+    index++;
 
-    while (self.index < text.length) {
-      if (text.codeUnitAt(this.index) >= 128 && !allowInternational) {
+    while (index < text.length) {
+      if (text.codeUnitAt(index) >= 128 && !allowInternational) {
         return false;
       }
 
-      if (text[self.index] == '\\') {
+      if (text[index] == '\\') {
         escaped = !escaped;
       } else if (!escaped) {
-        if (text[self.index] == '"') {
+        if (text[index] == '"') {
           break;
         }
       } else {
         escaped = false;
       }
 
-      self.index++;
+      index++;
     }
 
-    if (self.index >= text.length || text[self.index] != '"') {
+    if (index >= text.length || text[index] != '"') {
       return false;
     }
 
-    self.index++;
+    index++;
 
     return true;
   }
 
-  bool skipWord(String text, bool allowInternational) {
-    var self = this;
-
-    if (text[self.index] == '"') {
-      return self.skipQuoted(text, allowInternational);
+  static bool skipWord(String text, bool allowInternational) {
+    if (text[index] == '"') {
+      return skipQuoted(text, allowInternational);
     }
 
-    return self.skipAtom(text, allowInternational);
+    return skipAtom(text, allowInternational);
   }
 
-  bool skipIPv4Literal(text) {
-    var self = this;
+  static bool skipIPv4Literal(text) {
     var groups = 0;
 
-    while (self.index < text.length && groups < 4) {
-      var startIndex = self.index;
+    while (index < text.length && groups < 4) {
+      var startIndex = index;
       var value = 0;
 
-      while (self.index < text.length &&
-          text[self.index] >= '0' &&
-          text[self.index] <= '9') {
-        value = (value * 10) + (text[self.index] - '0');
-        self.index++;
+      while (index < text.length && text[index] >= '0' && text[index] <= '9') {
+        value = (value * 10) + (text[index] - '0');
+        index++;
       }
 
-      if (self.index == startIndex ||
-          self.index - startIndex > 3 ||
-          value > 255) {
+      if (index == startIndex || index - startIndex > 3 || value > 255) {
         return false;
       }
 
       groups++;
 
-      if (groups < 4 && self.index < text.length && text[self.index] == '.') {
-        self.index++;
+      if (groups < 4 && index < text.length && text[index] == '.') {
+        index++;
       }
     }
 
     return groups == 4;
   }
 
-  bool isHexDigit(c) {
+  static bool isHexDigit(c) {
     return (c >= 'A' && c <= 'F') ||
         (c >= 'a' && c <= 'f') ||
         (c >= '0' && c <= '9');
@@ -177,49 +162,48 @@ class EmailValidator {
   //             ; The "::" represents at least 2 16-bit groups of zeros
   //             ; No more than 4 groups in addition to the "::" and
   //             ; IPv4-address-literal may be present
-  bool skipIPv6Literal(String text) {
-    var self = this;
+  static bool skipIPv6Literal(String text) {
     var compact = false;
     var colons = 0;
 
-    while (self.index < text.length) {
-      var startIndex = self.index;
+    while (index < text.length) {
+      var startIndex = index;
 
-      while (self.index < text.length && self.isHexDigit(text[self.index])) {
-        self.index++;
+      while (index < text.length && isHexDigit(text[index])) {
+        index++;
       }
 
-      if (self.index >= text.length) {
+      if (index >= text.length) {
         break;
       }
 
-      if (self.index > startIndex && colons > 2 && text[self.index] == '.') {
+      if (index > startIndex && colons > 2 && text[index] == '.') {
         // IPv6v4
-        self.index = startIndex;
+        index = startIndex;
 
-        if (!self.skipIPv4Literal(text)) {
+        if (!skipIPv4Literal(text)) {
           return false;
         }
 
         return compact ? colons < 6 : colons == 6;
       }
 
-      var count = self.index - startIndex;
+      var count = index - startIndex;
 
       if (count > 4) {
         return false;
       }
 
-      if (text[self.index] != ':') {
+      if (text[index] != ':') {
         break;
       }
 
-      startIndex = self.index;
-      while (self.index < text.length && text[self.index] == ':') {
-        self.index++;
+      startIndex = index;
+      while (index < text.length && text[index] == ':') {
+        index++;
       }
 
-      count = self.index - startIndex;
+      count = index - startIndex;
       if (count > 2) {
         return false;
       }
@@ -243,10 +227,11 @@ class EmailValidator {
     return compact ? colons < 7 : colons == 7;
   }
 
-  bool validate(String email,
+  static bool validate(String email,
       [allowTopLevelDomains = false, allowInternational = false]) {
-    var self = this;
 
+    index = 0;
+    
     if (email == null) {
       return false;
     }
@@ -255,64 +240,61 @@ class EmailValidator {
       return false;
     }
 
-    if (!self.skipWord(email, allowInternational) ||
-        self.index >= email.length) {
+    if (!skipWord(email, allowInternational) || index >= email.length) {
       return false;
     }
 
-    while (email[self.index] == '.') {
-      self.index++;
+    while (email[index] == '.') {
+      index++;
 
-      if (self.index >= email.length) {
+      if (index >= email.length) {
         return false;
       }
 
-      if (!self.skipWord(email, allowInternational)) {
+      if (!skipWord(email, allowInternational)) {
         return false;
       }
 
-      if (self.index >= email.length) {
+      if (index >= email.length) {
         return false;
       }
     }
 
-    if (self.index + 1 >= email.length ||
-        self.index > 64 ||
-        email[self.index++] != '@') {
+    if (index + 1 >= email.length || index > 64 || email[index++] != '@') {
       return false;
     }
 
-    if (email[self.index] != '[') {
+    if (email[index] != '[') {
       // domain
-      if (!self.skipDomain(email, allowTopLevelDomains, allowInternational)) {
+      if (!skipDomain(email, allowTopLevelDomains, allowInternational)) {
         return false;
       }
 
-      return self.index == email.length;
+      return index == email.length;
     }
 
     // address literal
-    self.index++;
+    index++;
 
     // we need at least 8 more characters
-    if (self.index + 8 >= email.length) {
+    if (index + 8 >= email.length) {
       return false;
     }
 
-    var ipv6 = email.substring(self.index, 5);
+    var ipv6 = email.substring(index, 5);
     if (ipv6.toLowerCase() == 'ipv6:') {
-      self.index += 'IPv6:'.length;
-      if (!self.skipIPv6Literal(email)) {
+      index += 'IPv6:'.length;
+      if (!skipIPv6Literal(email)) {
         return false;
       }
-    } else if (!self.skipIPv4Literal(email)) {
+    } else if (!skipIPv4Literal(email)) {
       return false;
     }
 
-    if (self.index >= email.length || email[self.index++] != ']') {
+    if (index >= email.length || email[index++] != ']') {
       return false;
     }
 
-    return self.index == email.length;
+    return index == email.length;
   }
 }
