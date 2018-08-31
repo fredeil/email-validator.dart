@@ -286,7 +286,7 @@ class EmailValidator {
       if (!_skipIPv6Literal(email)) {
         return false;
       }
-    } else if (!_(email)) {
+    } else if (!_skipIPv4Literal(email)) {
       return false;
     }
 
