@@ -5,6 +5,7 @@ import 'package:email_validator/email_validator.dart';
 
 void main() {
   var validAddresses = [
+    "fredrik@dualog.com",
     "\"Abc\\@def\"@example.com",
     "\"Fred Bloggs\"@example.com",
     "\"Joe\\\\Blow\"@example.com",
