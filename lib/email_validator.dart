@@ -13,19 +13,19 @@ class EmailValidator {
         (c >= 48 && c <= 57);
   }
 
-  static bool _isAtom(String c, bool allowInternational) {
+  static bool _isAtom(String c, [bool allowInternational = true]) {
     return c.codeUnitAt(0) < 128
         ? _isLetterOrDigit(c) || _atomCharacters.indexOf(c) != -1
         : allowInternational;
   }
 
-  static bool _isDomain(String c, bool allowInternational) {
+  static bool _isDomain(String c, [bool allowInternational = true]) {
     return c.codeUnitAt(0) < 128
         ? _isLetterOrDigit(c) || c == '-'
         : allowInternational;
   }
 
-  static bool _skipAtom(text, bool allowInternational) {
+  static bool _skipAtom(text, [bool allowInternational = true]) {
     var startIndex = _index;
 
     while (_index < text.length && _isAtom(text[_index], allowInternational)) {
@@ -35,7 +35,7 @@ class EmailValidator {
     return _index > startIndex;
   }
 
-  static bool _skipSubDomain(text, bool allowInternational) {
+  static bool _skipSubDomain(text, [bool allowInternational = true]) {
     var startIndex = _index;
 
     if (!_isDomain(text[_index], allowInternational) || text[_index] == '-') {
@@ -53,7 +53,7 @@ class EmailValidator {
   }
 
   static bool _skipDomain(
-      String text, bool allowTopLevelDomains, bool allowInternational) {
+      String text, bool allowTopLevelDomains, [bool allowInternational = true]) {
     if (!_skipSubDomain(text, allowInternational)) {
       return false;
     }
@@ -77,7 +77,7 @@ class EmailValidator {
     return true;
   }
 
-  static bool _skipQuoted(String text, bool allowInternational) {
+  static bool _skipQuoted(String text, [bool allowInternational = true]) {
     var escaped = false;
 
     _index++;
@@ -109,7 +109,7 @@ class EmailValidator {
     return true;
   }
 
-  static bool _skipWord(String text, bool allowInternational) {
+  static bool _skipWord(String text, [bool allowInternational = true]) {
     if (text[_index] == '"') {
       return _skipQuoted(text, allowInternational);
     }
@@ -217,7 +217,7 @@ class EmailValidator {
   }
 
   static bool validate(String email,
-      [allowTopLevelDomains = false, allowInternational = false]) {
+      [allowTopLevelDomains = true, allowInternational = false]) {
     _index = 0;
 
     if (email == null) {
