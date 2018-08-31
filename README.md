@@ -1,6 +1,6 @@
 # Email validator
 
-A simple (but correct) Dart class for validating email addresses.
+A simple (but correct) Dart class for validating email addresses. This is a port from the C# library https://github.com/jstedfast/EmailValidation.
 
 ## Installation
 
