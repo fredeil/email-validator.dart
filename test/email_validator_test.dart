@@ -1,5 +1,6 @@
 import 'dart:core';
 import 'package:test/test.dart';
+//import 'package:email_validator/email_validator.dart';
 import 'package:email_validator/email_validator.dart';
 
 void main() {
@@ -107,7 +108,7 @@ void main() {
 
     // examples of real (invalid) input from real users.
     "No longer available.",
-    "Moved."
+    "Moved.",
   ];
 
   var validInternational = [
@@ -117,20 +118,19 @@ void main() {
     "θσερ@εχαμπλε.ψομ", // Greek
   ];
 
-  test("Validate that validate throws error on null email", () {
-    expect(() => EmailValidator.validate(null),
-        throwsA(new isInstanceOf<ArgumentError>()));
-  });
+// test("Validate that validate throws error on null email", () {
+// expect(() => EmailValidator.validate(null), throwsA(new isInstanceOf<ArgumentError>()));
+//});
 
   test("Validate invalidAddresses are invalid emails", () {
     invalidAddresses.forEach((actual) => expect(
-        EmailValidator.validate(actual), equals(false),
+        EmailValidator.Validate(actual), equals(false),
         reason: "E-mail: " + actual));
   });
 
   test("Validate validAddresses are valid emails", () {
     validAddresses.forEach((actual) => expect(
-        EmailValidator.validate(actual), equals(true),
+        EmailValidator.Validate(actual), equals(true),
         reason: "E-mail: " + actual));
   });
 }
