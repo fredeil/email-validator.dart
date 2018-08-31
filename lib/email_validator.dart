@@ -3,7 +3,7 @@ library email_validator;
 import 'dart:core';
 
 class EmailValidator {
-  static int index = 0;
+  static int _index = 0;
   static final _atomCharacters = "!#\$\%&'*+-/=?^_`{|}~";
 
   static bool _isLetterOrDigit(String str) {
@@ -26,29 +26,30 @@ class EmailValidator {
   }
 
   static bool _skipAtom(text, bool allowInternational) {
-    var startIndex = index;
+    var startIndex = _index;
 
-    while (index < text.length && _isAtom(text[index], allowInternational)) {
-      index++;
+    while (_index < text.length && _isAtom(text[_index], allowInternational)) {
+      _index++;
     }
 
-    return index > startIndex;
+    return _index > startIndex;
   }
 
   static bool _skipSubDomain(text, bool allowInternational) {
-    var startIndex = index;
+    var startIndex = _index;
 
-    if (!_isDomain(text[index], allowInternational) || text[index] == '-') {
+    if (!_isDomain(text[_index], allowInternational) || text[_index] == '-') {
       return false;
     }
 
-    index++;
+    _index++;
 
-    while (index < text.length && _isDomain(text[index], allowInternational)) {
-      index++;
+    while (
+        _index < text.length && _isDomain(text[_index], allowInternational)) {
+      _index++;
     }
 
-    return (index - startIndex) < 64 && text[index - 1] != '-';
+    return (_index - startIndex) < 64 && text[_index - 1] != '-';
   }
 
   static bool _skipDomain(
@@ -57,18 +58,18 @@ class EmailValidator {
       return false;
     }
 
-    if (index < text.length && text[index] == '.') {
+    if (_index < text.length && text[_index] == '.') {
       do {
-        index++;
+        _index++;
 
-        if (index == text.length) {
+        if (_index == text.length) {
           return false;
         }
 
         if (_skipSubDomain(text, allowInternational)) {
           return false;
         }
-      } while (index < text.length && text[index] == '.');
+      } while (_index < text.length && text[_index] == '.');
     } else if (!allowTopLevelDomains) {
       return false;
     }
@@ -79,37 +80,37 @@ class EmailValidator {
   static bool _skipQuoted(String text, bool allowInternational) {
     var escaped = false;
 
-    index++;
+    _index++;
 
-    while (index < text.length) {
-      if (text.codeUnitAt(index) >= 128 && !allowInternational) {
+    while (_index < text.length) {
+      if (text.codeUnitAt(_index) >= 128 && !allowInternational) {
         return false;
       }
 
-      if (text[index] == '\\') {
+      if (text[_index] == '\\') {
         escaped = !escaped;
       } else if (!escaped) {
-        if (text[index] == '"') {
+        if (text[_index] == '"') {
           break;
         }
       } else {
         escaped = false;
       }
 
-      index++;
+      _index++;
     }
 
-    if (index >= text.length || text[index] != '"') {
+    if (_index >= text.length || text[_index] != '"') {
       return false;
     }
 
-    index++;
+    _index++;
 
     return true;
   }
 
   static bool _skipWord(String text, bool allowInternational) {
-    if (text[index] == '"') {
+    if (text[_index] == '"') {
       return _skipQuoted(text, allowInternational);
     }
 
@@ -119,23 +120,24 @@ class EmailValidator {
   static bool _skipIPv4Literal(text) {
     var groups = 0;
 
-    while (index < text.length && groups < 4) {
-      var startIndex = index;
+    while (_index < text.length && groups < 4) {
+      var startIndex = _index;
       var value = 0;
 
-      while (index < text.length && text[index] >= '0' && text[index] <= '9') {
-        value = (value * 10) + (text[index] - '0');
-        index++;
+      while (
+          _index < text.length && text[_index] >= '0' && text[_index] <= '9') {
+        value = (value * 10) + (text[_index] - '0');
+        _index++;
       }
 
-      if (index == startIndex || index - startIndex > 3 || value > 255) {
+      if (_index == startIndex || _index - startIndex > 3 || value > 255) {
         return false;
       }
 
       groups++;
 
-      if (groups < 4 && index < text.length && text[index] == '.') {
-        index++;
+      if (groups < 4 && _index < text.length && text[_index] == '.') {
+        _index++;
       }
     }
 
@@ -167,20 +169,20 @@ class EmailValidator {
     var compact = false;
     var colons = 0;
 
-    while (index < text.length) {
-      var startIndex = index;
+    while (_index < text.length) {
+      var startIndex = _index;
 
-      while (index < text.length && _isHexDigit(text[index])) {
-        index++;
+      while (_index < text.length && _isHexDigit(text[_index])) {
+        _index++;
       }
 
-      if (index >= text.length) {
+      if (_index >= text.length) {
         break;
       }
 
-      if (index > startIndex && colons > 2 && text[index] == '.') {
+      if (_index > startIndex && colons > 2 && text[_index] == '.') {
         // IPv6v4
-        index = startIndex;
+        _index = startIndex;
 
         if (!_skipIPv4Literal(text)) {
           return false;
@@ -189,22 +191,22 @@ class EmailValidator {
         return compact ? colons < 6 : colons == 6;
       }
 
-      var count = index - startIndex;
+      var count = _index - startIndex;
 
       if (count > 4) {
         return false;
       }
 
-      if (text[index] != ':') {
+      if (text[_index] != ':') {
         break;
       }
 
-      startIndex = index;
-      while (index < text.length && text[index] == ':') {
-        index++;
+      startIndex = _index;
+      while (_index < text.length && text[_index] == ':') {
+        _index++;
       }
 
-      count = index - startIndex;
+      count = _index - startIndex;
       if (count > 2) {
         return false;
       }
@@ -230,7 +232,7 @@ class EmailValidator {
 
   static bool validate(String email,
       [allowTopLevelDomains = false, allowInternational = false]) {
-    index = 0;
+    _index = 0;
 
     if (email == null) {
       throw new ArgumentError();
@@ -240,14 +242,14 @@ class EmailValidator {
       return false;
     }
 
-    if (!_skipWord(email, allowInternational) || index >= email.length) {
+    if (!_skipWord(email, allowInternational) || _index >= email.length) {
       return false;
     }
 
-    while (email[index] == '.') {
-      index++;
+    while (email[_index] == '.') {
+      _index++;
 
-      if (index >= email.length) {
+      if (_index >= email.length) {
         return false;
       }
 
@@ -255,36 +257,36 @@ class EmailValidator {
         return false;
       }
 
-      if (index >= email.length) {
+      if (_index >= email.length) {
         return false;
       }
     }
 
-    if (index + 1 >= email.length || index > 64 || email[index] != '@') {
-      index++;
+    if (_index + 1 >= email.length || _index > 64 || email[_index] != '@') {
+      _index++;
       return false;
     }
 
-    if (email[index] != '[') {
+    if (email[_index] != '[') {
       // domain
       if (!_skipDomain(email, allowTopLevelDomains, allowInternational)) {
         return false;
       }
 
-      return index == email.length;
+      return _index == email.length;
     }
 
     // address literal
-    index++;
+    _index++;
 
     // we need at least 8 more characters
-    if (index + 8 >= email.length) {
+    if (_index + 8 >= email.length) {
       return false;
     }
 
-    var ipv6 = email.substring(index, 5);
+    var ipv6 = email.substring(_index, 5);
     if (ipv6.toLowerCase() == 'ipv6:') {
-      index += 'IPv6:'.length;
+      _index += 'IPv6:'.length;
       if (!_skipIPv6Literal(email)) {
         return false;
       }
@@ -292,10 +294,11 @@ class EmailValidator {
       return false;
     }
 
-    if (index >= email.length || email[index++] != ']') {
+    if (_index >= email.length || email[_index] != ']') {
+      _index++;
       return false;
     }
 
-    return index == email.length;
+    return _index == email.length;
   }
 }
