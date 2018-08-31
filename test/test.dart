@@ -119,8 +119,7 @@ void main() {
 
 
   test("String.split() splits the string on the delimiter", () {
-    var validator = new EmailValidator();
-    var actual = validator.validate("fredrik@gmail.com");
+    var actual = EmailValidator.validate("fredrik@gmail.com");
 
     expect(actual, equals(true));
   });

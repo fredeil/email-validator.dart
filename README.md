@@ -41,9 +41,9 @@ Read the unit tests under `test`, or see code example below:
 void main() {
 
     var email = "fredrik@gmail.com";
-    var validator = new EmailValidator();
 
-    assert(validator.validate(email) == true);
+    assert(EmailValidator.validate(email) == true);
+
 }
 ```
 

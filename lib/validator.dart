@@ -229,9 +229,8 @@ class EmailValidator {
 
   static bool validate(String email,
       [allowTopLevelDomains = false, allowInternational = false]) {
-
     index = 0;
-    
+
     if (email == null) {
       return false;
     }
