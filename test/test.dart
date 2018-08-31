@@ -123,12 +123,14 @@ void main() {
   });
 
   test("Validate invalidAddresses are invalid emails", () {
-    invalidAddresses.forEach((actual) =>
-        expect(EmailValidator.validate(actual), equals(false), reason: "E-mail: " + actual));
+    invalidAddresses.forEach((actual) => expect(
+        EmailValidator.validate(actual), equals(false),
+        reason: "E-mail: " + actual));
   });
 
   test("Validate validAddresses are valid emails", () {
-    validAddresses.forEach((actual) =>
-        expect(EmailValidator.validate("fredrik@gmail.com"), equals(true), reason: "E-mail: " + actual));
+    validAddresses.forEach((actual) => expect(
+        EmailValidator.validate(actual), equals(true),
+        reason: "E-mail: " + actual));
   });
 }

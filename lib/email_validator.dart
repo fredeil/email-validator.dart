@@ -52,8 +52,8 @@ class EmailValidator {
     return (_index - startIndex) < 64 && text[_index - 1] != '-';
   }
 
-  static bool _skipDomain(
-      String text, bool allowTopLevelDomains, [bool allowInternational = true]) {
+  static bool _skipDomain(String text, bool allowTopLevelDomains,
+      [bool allowInternational = true]) {
     if (!_skipSubDomain(text, allowInternational)) {
       return false;
     }
@@ -248,8 +248,7 @@ class EmailValidator {
       }
     }
 
-    if (_index + 1 >= email.length || _index > 64 || email[_index] != '@') {
-      _index++;
+    if (_index + 1 >= email.length || _index > 64 || email[_index++] != '@') {
       return false;
     }
 
