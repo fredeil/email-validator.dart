@@ -9,16 +9,18 @@ Dart requires the latest version of [Dart](https://www.dartlang.org/). You can d
 ### 1. Depend on it
 
 Add this to your package's `pubspec.yaml` file:
-
-    dependencies:
-      emailvalidator: "0.1.0"
+```yaml
+dependencies:
+    emailvalidator: "0.1.0"
+```
 
 #### 2. Install it
 
 You can install packages from the command line:
 
 ```bash
-    $ pub get
+$ pub get
+..
 ```
 
 Alternatively, your editor might support pub. Check the docs for your editor to learn more.
@@ -26,8 +28,9 @@ Alternatively, your editor might support pub. Check the docs for your editor to 
 #### 3. Import it
 
 Now in your Dart code, you can use:
-
-    import 'package:emailvalidator/validator.dart';
+```Dart
+import 'package:emailvalidator/validator.dart';
+```
 
 ## Usage
 
