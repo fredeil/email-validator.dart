@@ -117,7 +117,7 @@ class EmailValidator {
     return _skipAtom(text, allowInternational);
   }
 
-  static bool _skipIPv4Literal(text) {
+  static bool _skipIPv4Literal(String text) {
     var groups = 0;
 
     while (_index < text.length && groups < 4) {
@@ -125,8 +125,8 @@ class EmailValidator {
       var value = 0;
 
       while (
-          _index < text.length && text[_index] >= '0' && text[_index] <= '9') {
-        value = (value * 10) + (text[_index] - '0');
+          _index < text.length && text[_index].codeUnitAt(0) >= 48 && text[_index].codeUnitAt(0) <= 57) {
+        value = (value * 10) + (text[_index].codeUnitAt(0) - 48);
         _index++;
       }
 
@@ -269,7 +269,7 @@ class EmailValidator {
       return false;
     }
 
-    var ipv6 = email.substring(_index, 5);
+    var ipv6 = email.substring(_index);
     if (ipv6.toLowerCase() == 'ipv6:') {
       _index += 'IPv6:'.length;
       if (!_skipIPv6Literal(email)) {
