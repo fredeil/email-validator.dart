@@ -29,8 +29,6 @@ void main() {
     "\"much.more unusual\"@example.com",
     "\"very.unusual.@.unusual.com\"@example.com",
     "\"very.(),:;<>[]\\\".VERY.\\\"very@\\\\ \\\"very\\\".unusual\"@strange.example.com",
-    "postbox@com",
-    "admin@mailserver1",
     "!#\$%&'*+-/=?^_`{}|~@example.org",
     "\"()<>[]:,;@\\\\\\\"!#\$%&'*+-/=?^_`{}| ~.a\"@example.org",
     "\" \"@example.org",

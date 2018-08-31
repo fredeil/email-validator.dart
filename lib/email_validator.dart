@@ -293,8 +293,8 @@ class EmailValidator {
     // we need at least 8 more characters
     if (_index + 8 >= email.length) return false;
 
-    var ipv6 = email.substring(_index);
-    if (ipv6.toLowerCase() == "ipv6:") {
+    var ipv6 = email.substring(_index - 1).toLowerCase();
+    if (ipv6.contains("ipv6:")) {
       _index += "IPv6:".length;
       if (!_skipIPv6Literal(email)) return false;
     } else {
