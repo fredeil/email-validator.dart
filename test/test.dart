@@ -31,8 +31,8 @@ void main() {
 			"\"very.(),:;<>[]\\\".VERY.\\\"very@\\\\ \\\"very\\\".unusual\"@strange.example.com",
 			"postbox@com",
 			"admin@mailserver1",
-			"!#$%&'*+-/=?^_`{}|~@example.org",
-			"\"()<>[]:,;@\\\\\\\"!#$%&'*+-/=?^_`{}| ~.a\"@example.org",
+			"!#\$%&'*+-/=?^_`{}|~@example.org",
+			"\"()<>[]:,;@\\\\\\\"!#\$%&'*+-/=?^_`{}| ~.a\"@example.org",
 			"\" \"@example.org",
 
 			// examples from https://github.com/Sembiance/email-validator
