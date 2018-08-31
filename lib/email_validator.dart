@@ -150,21 +150,6 @@ class EmailValidator {
         (c >= '0' && c <= '9');
   }
 
-  // This needs to handle the following forms:
-  //
-  // IPv6-addr = IPv6-full / IPv6-comp / IPv6v4-full / IPv6v4-comp
-  // IPv6-hex  = 1*4HEXDIG
-  // IPv6-full = IPv6-hex 7(":" IPv6-hex)
-  // IPv6-comp = [IPv6-hex *5(":" IPv6-hex)] "::" [IPv6-hex *5(":" IPv6-hex)]
-  //             ; The "::" represents at least 2 16-bit groups of zeros
-  //             ; No more than 6 groups in addition to the "::" may be
-  //             ; present
-  // IPv6v4-full = IPv6-hex 5(":" IPv6-hex) ":" IPv4-address-literal
-  // IPv6v4-comp = [IPv6-hex *3(":" IPv6-hex)] "::"
-  //               [IPv6-hex *3(":" IPv6-hex) ":"] IPv4-address-literal
-  //             ; The "::" represents at least 2 16-bit groups of zeros
-  //             ; No more than 4 groups in addition to the "::" and
-  //             ; IPv4-address-literal may be present
   static bool _skipIPv6Literal(String text) {
     var compact = false;
     var colons = 0;

@@ -12,7 +12,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-    emailvalidator: "0.1.0"
+    email_validator: "0.1.0"
 ```
 
 #### 2. Install it
@@ -31,7 +31,7 @@ Alternatively, your editor might support pub. Check the docs for your editor to 
 Now in your Dart code, you can use:
 
 ```Dart
-import 'package:emailvalidator/validator.dart';
+import 'package:email_validator/email_validator.dart';
 ```
 
 ## Usage
