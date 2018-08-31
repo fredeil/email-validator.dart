@@ -117,19 +117,26 @@ void main() {
     "θσερ@εχαμπλε.ψομ", // Greek
   ];
 
-// test("Validate that validate throws error on null email", () {
-// expect(() => EmailValidator.validate(null), throwsA(new isInstanceOf<ArgumentError>()));
-//});
+  test("Validate that validate throws error on null email", () {
+    expect(() => EmailValidator.Validate(null),
+        throwsA(new isInstanceOf<ArgumentError>()));
+  });
 
   test("Validate invalidAddresses are invalid emails", () {
     invalidAddresses.forEach((actual) => expect(
-        EmailValidator.Validate(actual), equals(false),
+        EmailValidator.Validate(actual, true), equals(false),
         reason: "E-mail: " + actual));
   });
 
   test("Validate validAddresses are valid emails", () {
     validAddresses.forEach((actual) => expect(
-        EmailValidator.Validate(actual), equals(true),
+        EmailValidator.Validate(actual, true), equals(true),
+        reason: "E-mail: " + actual));
+  });
+
+    test("Validate validInternational are valid emails", () {
+    validInternational.forEach((actual) => expect(
+        EmailValidator.Validate(actual, true, true), equals(true),
         reason: "E-mail: " + actual));
   });
 }
