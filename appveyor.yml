@@ -1,0 +1,15 @@
+build: off
+
+branches:
+  only:
+    - master
+    # Feature branches beginning with "feature."
+    - "/^feature\\..*/"
+
+install:
+- choco install dart-sdk
+- refreshenv
+- pub get
+
+test_script:
+- pub run test
