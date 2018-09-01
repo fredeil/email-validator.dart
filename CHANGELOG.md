@@ -1,3 +1,7 @@
+## 0.1.4
+
+* Now supports a broader variety of Dart sdk versions
+
 ## 0.1.0
 
 * Validate emails through a static method `EmailValidator.validate()`.
