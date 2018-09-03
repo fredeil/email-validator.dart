@@ -1,6 +1,6 @@
 # Email validator [![Build status](https://ci.appveyor.com/api/projects/status/fb7ssu5fg8k334vi?svg=true)](https://ci.appveyor.com/project/fredeil/email-validator-dart)
 
-A simple (but correct) Dart class for validating email addresses. This is a port from the C# library [jstedfast/EmailValidation](https://github.com/jstedfast/EmailValidation).
+A simple (but correct) Dart class for validating email addresses-
 
 ## Installation
 
@@ -46,13 +46,3 @@ void main() {
     assert(EmailValidator.validate(email) == true);
 
 }
-```
-
-## Tests
-
-To test the package, run:
-
-```bash
-$ ./tool/run_tests.sh
-...
-```
