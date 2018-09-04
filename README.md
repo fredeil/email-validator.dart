@@ -12,7 +12,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-    email_validator: '^0.1.4'
+    email_validator: '^0.1.6'
 ```
 
 #### 2. Install it
