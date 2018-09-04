@@ -1,3 +1,7 @@
+## 0.1.5
+
+* Cleaned up code a bit, no API changes.
+
 ## 0.1.4
 
 * Now supports a broader variety of Dart sdk versions
