@@ -6,29 +6,29 @@ enum type { None, Alphabetic, Numeric, AlphaNumeric }
 
 class EmailValidator {
   static int _index = 0;
-  static final _atomCharacters = "!#\$%&'*+-/=?^_`{|}~";
+  static const String _atomCharacters = "!#\$%&'*+-/=?^_`{|}~";
   static type _domainType = type.None;
 
-  static bool _isDigit(c) {
-    return (c.codeUnitAt(0) >= 48 && c.codeUnitAt(0) <= 57);
+  static bool _isDigit(String c) {
+    return c.codeUnitAt(0) >= 48 && c.codeUnitAt(0) <= 57;
   }
 
-  static bool _isLetter(c) {
+  static bool _isLetter(String c) {
     return (c.codeUnitAt(0) >= 65 && c.codeUnitAt(0) <= 90) ||
         (c.codeUnitAt(0) >= 97 && c.codeUnitAt(0) <= 122);
   }
 
-  static bool _isLetterOrDigit(c) {
+  static bool _isLetterOrDigit(String c) {
     return _isLetter(c) || _isDigit(c);
   }
 
-  static bool _isAtom(c, bool allowInternational) {
+  static bool _isAtom(String c, bool allowInternational) {
     return c.codeUnitAt(0) < 128
-        ? _isLetterOrDigit(c) || _atomCharacters.indexOf(c) != -1
+        ? _isLetterOrDigit(c) || _atomCharacters.contains(c)
         : allowInternational;
   }
 
-  static bool _isDomain(c, bool allowInternational) {
+  static bool _isDomain(String c, bool allowInternational) {
     if (c.codeUnitAt(0) < 128) {
       if (_isLetter(c) || c == '-') {
         _domainType = type.Alphabetic;
@@ -51,7 +51,7 @@ class EmailValidator {
     return false;
   }
 
-  static bool _isDomainStart(c, bool allowInternational) {
+  static bool _isDomainStart(String c, bool allowInternational) {
     if (c.codeUnitAt(0) < 128) {
       if (_isLetter(c)) {
         _domainType = type.Alphabetic;
@@ -79,7 +79,7 @@ class EmailValidator {
   }
 
   static bool _skipAtom(String text, bool allowInternational) {
-    int startIndex = _index;
+    final int startIndex = _index;
 
     while (_index < text.length && _isAtom(text[_index], allowInternational))
       _index++;
@@ -88,7 +88,7 @@ class EmailValidator {
   }
 
   static bool _skipSubDomain(String text, bool allowInternational) {
-    int startIndex = _index;
+    final int startIndex = _index;
 
     if (!_isDomainStart(text[_index], allowInternational)) return false;
 
@@ -102,22 +102,26 @@ class EmailValidator {
 
   static bool _skipDomain(
       String text, bool allowTopLevelDomains, bool allowInternational) {
-    if (!_skipSubDomain(text, allowInternational)) return false;
+    if (!_skipSubDomain(text, allowInternational)) 
+      return false;
 
     if (_index < text.length && text[_index] == '.') {
       do {
         _index++;
 
-        if (_index == text.length) return false;
+        if (_index == text.length) 
+          return false;
 
-        if (!_skipSubDomain(text, allowInternational)) return false;
+        if (!_skipSubDomain(text, allowInternational)) 
+          return false;
       } while (_index < text.length && text[_index] == '.');
     } else if (!allowTopLevelDomains) {
       return false;
     }
 
     // Note: by allowing AlphaNumeric, we get away with not having to support punycode.
-    if (_domainType == type.Numeric) return false;
+    if (_domainType == type.Numeric) 
+      return false;
 
     return true;
   }
@@ -135,7 +139,8 @@ class EmailValidator {
       if (text[_index] == '\\') {
         escaped = !escaped;
       } else if (!escaped) {
-        if (text[_index] == '"') break;
+        if (text[_index] == '"') 
+          break;
       } else {
         escaped = false;
       }
@@ -143,7 +148,8 @@ class EmailValidator {
       _index++;
     }
 
-    if (_index >= text.length || text[_index] != '"') return false;
+    if (_index >= text.length || text[_index] != '"') 
+      return false;
 
     _index++;
 
@@ -154,7 +160,7 @@ class EmailValidator {
     int groups = 0;
 
     while (_index < text.length && groups < 4) {
-      int startIndex = _index;
+      final int startIndex = _index;
       int value = 0;
 
       while (_index < text.length &&
@@ -175,8 +181,8 @@ class EmailValidator {
     return groups == 4;
   }
 
-  static bool _isHexDigit(str) {
-    var c = str.codeUnitAt(0);
+  static bool _isHexDigit(String str) {
+    final int c = str.codeUnitAt(0);
     return (c >= 65 && c <= 70) ||
         (c >= 97 && c <= 102) ||
         (c >= 48 && c <= 57);
@@ -204,32 +210,40 @@ class EmailValidator {
     while (_index < text.length) {
       int startIndex = _index;
 
-      while (_index < text.length && _isHexDigit(text[_index])) _index++;
+      while (_index < text.length && _isHexDigit(text[_index])) 
+        _index++;
 
-      if (_index >= text.length) break;
+      if (_index >= text.length) 
+        break;
 
       if (_index > startIndex && colons > 2 && text[_index] == '.') {
         // IPv6v4
         _index = startIndex;
 
-        if (!_skipIPv4Literal(text)) return false;
+        if (!_skipIPv4Literal(text)) 
+          return false;
 
         return compact ? colons < 6 : colons == 6;
       }
 
       int count = _index - startIndex;
-      if (count > 4) return false;
+      if (count > 4) 
+        return false;
 
-      if (text[_index] != ':') break;
+      if (text[_index] != ':') 
+        break;
 
       startIndex = _index;
-      while (_index < text.length && text[_index] == ':') _index++;
+      while (_index < text.length && text[_index] == ':')
+        _index++;
 
       count = _index - startIndex;
-      if (count > 2) return false;
+      if (count > 2) 
+        return false;
 
       if (count == 2) {
-        if (compact) return false;
+        if (compact) 
+          return false;
 
         compact = true;
         colons += 2;
@@ -238,7 +252,8 @@ class EmailValidator {
       }
     }
 
-    if (colons < 2) return false;
+    if (colons < 2) 
+      return false;
 
     return compact ? colons < 7 : colons == 7;
   }
@@ -248,9 +263,11 @@ class EmailValidator {
       [bool allowTopLevelDomains = false, bool allowInternational = false]) {
     _index = 0;
 
-    if (email == null) throw new ArgumentError("email");
+    if (email == null) 
+      throw new ArgumentError('email');
 
-    if (email.length == 0 || email.length >= 255) return false;
+    if (email.isEmpty || email.length >= 255) 
+      return false;
 
     // Local-part = Dot-string / Quoted-string
     //       ; MAY be case-sensitive
@@ -268,11 +285,14 @@ class EmailValidator {
       while (email[_index] == '.') {
         _index++;
 
-        if (_index >= email.length) return false;
+        if (_index >= email.length) 
+          return false;
 
-        if (!_skipAtom(email, allowInternational)) return false;
+        if (!_skipAtom(email, allowInternational)) 
+          return false;
 
-        if (_index >= email.length) return false;
+        if (_index >= email.length) 
+          return false;
       }
     }
 
@@ -291,17 +311,22 @@ class EmailValidator {
     _index++;
 
     // we need at least 8 more characters
-    if (_index + 8 >= email.length) return false;
+    if (_index + 8 >= email.length) 
+      return false;
 
-    var ipv6 = email.substring(_index - 1).toLowerCase();
-    if (ipv6.contains("ipv6:")) {
-      _index += "IPv6:".length;
-      if (!_skipIPv6Literal(email)) return false;
+    final String ipv6 = email.substring(_index - 1).toLowerCase();
+
+    if (ipv6.contains('ipv6:')) {
+      _index += 'IPv6:'.length;
+      if (!_skipIPv6Literal(email)) 
+        return false;
     } else {
-      if (!_skipIPv4Literal(email)) return false;
+      if (!_skipIPv4Literal(email)) 
+        return false;
     }
 
-    if (_index >= email.length || email[_index++] != ']') return false;
+    if (_index >= email.length || email[_index++] != ']') 
+      return false;
 
     return _index == email.length;
   }
