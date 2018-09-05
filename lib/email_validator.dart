@@ -259,7 +259,7 @@ class EmailValidator {
   }
 
   /// Validate the specified email address.
-  static bool Validate(String email,
+  static bool validate(String email,
       [bool allowTopLevelDomains = false, bool allowInternational = false]) {
     _index = 0;
 
