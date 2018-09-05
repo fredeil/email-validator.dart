@@ -1,3 +1,7 @@
+# 1.0.0
+
+* EmailValidator.Validate() is now, by Dart convention, EmailValidator.validate().
+
 ## 0.1.6
 
 * Cleaned up code a bit, no API changes.
