@@ -1,6 +1,6 @@
 # Email validator [![Build status](https://ci.appveyor.com/api/projects/status/fb7ssu5fg8k334vi?svg=true)](https://ci.appveyor.com/project/fredeil/email-validator-dart)
 
-A simple (but correct) Dart class for validating email addresses without using RegEx. Can also be used to validate emails within Flutter apps. [Flutter email validation](https://github.com/fredeil/flutter-email-validator).
+A simple (but correct) Dart class for validating email addresses without using RegEx. Can also be used to validate emails within Flutter apps (see [Flutter email validation](https://github.com/fredeil/flutter-email-validator)).
 
 ## Installation
 
