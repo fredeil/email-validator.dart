@@ -46,7 +46,3 @@ void main() {
     assert(EmailValidator.validate(email) == true);
 
 }
-
-## LICENSE
-
-MIT
