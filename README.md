@@ -44,5 +44,5 @@ void main() {
     var email = "fredrik@gmail.com";
 
     assert(EmailValidator.validate(email) == true);
-
 }
+
