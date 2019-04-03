@@ -45,4 +45,8 @@ void main() {
 
     assert(EmailValidator.validate(email) == true);
 }
+```
 
+## Tips
+
+You can also use this repo as a template for creating Dart packages, just clone the repo and start hacking :) 
