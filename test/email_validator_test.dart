@@ -1,9 +1,9 @@
-import 'dart:core';
 import 'package:test/test.dart';
-import 'package:email_validator/email_validator.dart';
+
+import '../lib/email_validator.dart';
 
 void main() {
-  var validAddresses = [
+  final List<String> validAddresses = [
     'fredrik@dualog.com',
     '\"Abc\\@def\"@example.com',
     '\"Fred Bloggs\"@example.com',
@@ -63,7 +63,7 @@ void main() {
     'uncommon-tld@sld.travel'
   ];
 
-  var invalidAddresses = [
+  final List<String> invalidAddresses = [
     'invalid',
     'invalid@',
     'invalid @',
@@ -122,19 +122,19 @@ void main() {
   });
 
   test('Validate invalidAddresses are invalid emails', () {
-    invalidAddresses.forEach((actual) => expect(
+    invalidAddresses.forEach((String actual) => expect(
         EmailValidator.validate(actual, true), equals(false),
         reason: 'E-mail: ' + actual));
   });
 
   test('Validate validAddresses are valid emails', () {
-    validAddresses.forEach((actual) => expect(
+    validAddresses.forEach((String actual) => expect(
         EmailValidator.validate(actual, true), equals(true),
         reason: 'E-mail: ' + actual));
   });
 
     test('Validate validInternational are valid emails', () {
-    validInternational.forEach((actual) => expect(
+    validInternational.forEach((String actual) => expect(
         EmailValidator.validate(actual, true, true), equals(true),
         reason: 'E-mail: ' + actual));
   });
