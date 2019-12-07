@@ -1,4 +1,8 @@
-# 1.0.2
+# 1.0.3
+
+* Minor code style fixes again
+  
+## 1.0.2
 
 * Minor code style fixes
   
