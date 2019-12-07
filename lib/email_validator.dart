@@ -301,11 +301,13 @@ class EmailValidator {
     //
     // Quoted-string = DQUOTE *qcontent DQUOTE
     if (email[_index] == '"') {
-      if (!_skipQuoted(email, allowInternational) || _index >= email.length)
+      if (!_skipQuoted(email, allowInternational) || _index >= email.length) {
         return false;
+      }
     } else {
-      if (!_skipAtom(email, allowInternational) || _index >= email.length)
+      if (!_skipAtom(email, allowInternational) || _index >= email.length) {
         return false;
+      }
 
       while (email[_index] == '.') {
         _index++;
