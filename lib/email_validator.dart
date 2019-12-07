@@ -279,10 +279,12 @@ class EmailValidator {
 
   /// Validate the specified email address.
   static bool validate(String email,
-      [bool allowTopLevelDomains = false, bool allowInternational = false]) {
+      [bool allowTopLevelDomains = false, bool allowInternational = true]) {
     _index = 0;
 
-    if (email == null) throw new ArgumentError('email');
+    if (email == null) {
+      throw new ArgumentError('email');
+    }
 
     if (email.isEmpty || email.length >= 255) {
       return false;
@@ -318,13 +320,15 @@ class EmailValidator {
       }
     }
 
-    if (_index + 1 >= email.length || _index > 64 || email[_index++] != '@')
+    if (_index + 1 >= email.length || _index > 64 || email[_index++] != '@') {
       return false;
+    }
 
     if (email[_index] != '[') {
       // domain
-      if (!_skipDomain(email, allowTopLevelDomains, allowInternational))
+      if (!_skipDomain(email, allowTopLevelDomains, allowInternational)) {
         return false;
+      }
 
       return _index == email.length;
     }

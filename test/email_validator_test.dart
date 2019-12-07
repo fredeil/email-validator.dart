@@ -109,7 +109,7 @@ void main() {
     'Moved.',
   ];
 
-  var validInternational = [
+  final List<String> validInternational = [
     '伊昭傑@郵件.商務', // Chinese
     'राम@मोहन.ईन्फो', // Hindi
     'юзер@екзампл.ком', // Ukranian
