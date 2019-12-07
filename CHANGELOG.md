@@ -1,4 +1,8 @@
-# 1.0.0
+# 1.0.1
+
+* Allow international now defaults to true.
+  
+## 1.0.0
 
 * EmailValidator.Validate() is now, by Dart convention, EmailValidator.validate().
 
