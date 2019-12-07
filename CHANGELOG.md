@@ -1,4 +1,8 @@
-# 1.0.1
+# 1.0.2
+
+* Minor code style fixes
+  
+## 1.0.1
 
 * Allow international now defaults to true.
   
