@@ -81,8 +81,9 @@ class EmailValidator {
   static bool _skipAtom(String text, bool allowInternational) {
     final int startIndex = _index;
 
-    while (_index < text.length && _isAtom(text[_index], allowInternational))
+    while (_index < text.length && _isAtom(text[_index], allowInternational)) {
       _index++;
+    }
 
     return _index > startIndex;
   }
@@ -96,8 +97,9 @@ class EmailValidator {
 
     _index++;
 
-    while (_index < text.length && _isDomain(text[_index], allowInternational))
+    while (_index < text.length && _isDomain(text[_index], allowInternational)) {
       _index++;
+    }
 
     return (_index - startIndex) < 64 && text[_index - 1] != '-';
   }
@@ -139,8 +141,9 @@ class EmailValidator {
     _index++;
 
     while (_index < text.length) {
-      if (text[_index].codeUnitAt(0) >= 128 && !allowInternational)
+      if (text[_index].codeUnitAt(0) >= 128 && !allowInternational) {
         return false;
+      }
 
       if (text[_index] == '\\') {
         escaped = !escaped;
@@ -178,8 +181,9 @@ class EmailValidator {
         _index++;
       }
 
-      if (_index == startIndex || _index - startIndex > 3 || value > 255)
+      if (_index == startIndex || _index - startIndex > 3 || value > 255) {
         return false;
+      }
 
       groups++;
 
@@ -283,7 +287,7 @@ class EmailValidator {
     _index = 0;
 
     if (email == null) {
-      throw new ArgumentError('email');
+      throw ArgumentError('email');
     }
 
     if (email.isEmpty || email.length >= 255) {
