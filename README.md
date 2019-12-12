@@ -15,6 +15,7 @@ dependencies:
     email_validator: '^1.0.0'
 ```
 
+
 #### 2. Install it
 
 You can install packages from the command line:
