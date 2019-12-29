@@ -1,4 +1,8 @@
-# 1.0.3
+# 1.0.4
+
+* Fix Dart sdk analysis warnings
+  
+## 1.0.3
 
 * Minor code style fixes again
   
