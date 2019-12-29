@@ -79,7 +79,7 @@ class EmailValidator {
   }
 
   static bool _skipAtom(String text, bool allowInternational) {
-    final int startIndex = _index;
+    final startIndex = _index;
 
     while (_index < text.length && _isAtom(text[_index], allowInternational)) {
       _index++;
@@ -89,7 +89,7 @@ class EmailValidator {
   }
 
   static bool _skipSubDomain(String text, bool allowInternational) {
-    final int startIndex = _index;
+    final startIndex = _index;
 
     if (!_isDomainStart(text[_index], allowInternational)) {
       return false;
@@ -135,7 +135,7 @@ class EmailValidator {
   }
 
   static bool _skipQuoted(String text, bool allowInternational) {
-    bool escaped = false;
+    var escaped = false;
 
     // skip over leading '"'
     _index++;
@@ -168,11 +168,11 @@ class EmailValidator {
   }
 
   static bool _skipIPv4Literal(String text) {
-    int groups = 0;
+    var groups = 0;
 
     while (_index < text.length && groups < 4) {
-      final int startIndex = _index;
-      int value = 0;
+      final startIndex = _index;
+      var value = 0;
 
       while (_index < text.length &&
           text[_index].codeUnitAt(0) >= 48 &&
@@ -196,7 +196,7 @@ class EmailValidator {
   }
 
   static bool _isHexDigit(String str) {
-    final int c = str.codeUnitAt(0);
+    final c = str.codeUnitAt(0);
     return (c >= 65 && c <= 70) ||
         (c >= 97 && c <= 102) ||
         (c >= 48 && c <= 57);
@@ -218,11 +218,11 @@ class EmailValidator {
   //             ; No more than 4 groups in addition to the "::" and
   //             ; IPv4-address-literal may be present
   static bool _skipIPv6Literal(String text) {
-    bool compact = false;
-    int colons = 0;
+    var compact = false;
+    var colons = 0;
 
     while (_index < text.length) {
-      int startIndex = _index;
+      var startIndex = _index;
 
       while (_index < text.length && _isHexDigit(text[_index])) {
         _index++;
@@ -243,7 +243,7 @@ class EmailValidator {
         return compact ? colons < 6 : colons == 6;
       }
 
-      int count = _index - startIndex;
+      var count = _index - startIndex;
       if (count > 4) {
         return false;
       }
@@ -347,7 +347,7 @@ class EmailValidator {
       return false;
     }
 
-    final String ipv6 = email.substring(_index - 1).toLowerCase();
+    final ipv6 = email.substring(_index - 1).toLowerCase();
 
     if (ipv6.contains('ipv6:')) {
       _index += 'IPv6:'.length;
