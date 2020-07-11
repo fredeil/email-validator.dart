@@ -1,9 +1,6 @@
 name: email_validator
 version: 1.0.5
 
-authors: 
-  - Fredrik Eilertsen <fredrik.eilertsen@gmail.com>
-
 homepage: https://github.com/fredeil/email-validator.dart
 description: A simple (but correct) dart class for validating email addresses
   
