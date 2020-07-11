@@ -1,4 +1,8 @@
-# 1.0.4
+# 1.0.5
+
+* Add parameter documentation for the `EmailValidator.validate` method
+
+## 1.0.4
 
 * Fix Dart sdk analysis warnings
   
