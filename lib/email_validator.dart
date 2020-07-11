@@ -282,6 +282,14 @@ class EmailValidator {
   }
 
   /// Validate the specified email address.
+  /// 
+  /// If [allowTopLevelDomains] is `true`, then the validator will
+	/// allow addresses with top-level domains like `email@example`.
+  /// 
+  /// If [allowInternational] is `true`, then the validator
+	/// will use the newer International Email standards for validating the email address.
+  /// 
+  /// Throws an [ArgumentError] if the email is null.
   static bool validate(String email,
       [bool allowTopLevelDomains = false, bool allowInternational = true]) {
     _index = 0;
