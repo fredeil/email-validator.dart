@@ -1,4 +1,8 @@
-# 1.0.5
+# 1.0.6
+
+* Code clean up
+
+## 1.0.5
 
 * Add parameter documentation for the `EmailValidator.validate` method
 
