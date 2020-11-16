@@ -4,7 +4,7 @@
 .dart_tool/
 .packages
 build/
-
+.DS_Store
 # If you're building an application, you may want to check-in your pubspec.lock
 pubspec.lock
 
