@@ -116,11 +116,6 @@ void main() {
     'θσερ@εχαμπλε.ψομ', // Greek
   ];
 
-  test('Validate that validate throws error on null email', () {
-    expect(() => EmailValidator.validate(null),
-        throwsA(new isInstanceOf<ArgumentError>()));
-  });
-
   test('Validate invalidAddresses are invalid emails', () {
     invalidAddresses.forEach((String actual) => expect(
         EmailValidator.validate(actual, true), equals(false),
@@ -133,7 +128,7 @@ void main() {
         reason: 'E-mail: ' + actual));
   });
 
-    test('Validate validInternational are valid emails', () {
+  test('Validate validInternational are valid emails', () {
     validInternational.forEach((String actual) => expect(
         EmailValidator.validate(actual, true, true), equals(true),
         reason: 'E-mail: ' + actual));
