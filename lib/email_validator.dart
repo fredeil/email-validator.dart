@@ -127,7 +127,8 @@ class EmailValidator {
       return false;
     }
 
-    // Note: by allowing AlphaNumeric, we get away with not having to support punycode.
+    // Note: by allowing AlphaNumeric,
+    // we get away with not having to support punycode.
     if (_domainType == type.Numeric) {
       return false;
     }
@@ -288,16 +289,11 @@ class EmailValidator {
   /// allow addresses with top-level domains like `email@example`.
   ///
   /// If [allowInternational] is `true`, then the validator
-  /// will use the newer International Email standards for validating the email address.
-  ///
-  /// Throws an [ArgumentError] if the email is null.
+  /// will use the newer International Email standards for validating
+  /// the email address.
   static bool validate(String email,
       [bool allowTopLevelDomains = false, bool allowInternational = true]) {
     _index = 0;
-
-    if (email == null) {
-      throw ArgumentError('email');
-    }
 
     if (email.isEmpty || email.length >= 255) {
       return false;
