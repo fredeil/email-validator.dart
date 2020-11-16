@@ -291,9 +291,13 @@ class EmailValidator {
   /// If [allowInternational] is `true`, then the validator
   /// will use the newer International Email standards for validating
   /// the email address.
-  static bool validate(String email,
+  static bool validate(String? email,
       [bool allowTopLevelDomains = false, bool allowInternational = true]) {
     _index = 0;
+
+    if (email == null) {
+      return false;
+    }
 
     if (email.isEmpty || email.length >= 255) {
       return false;
