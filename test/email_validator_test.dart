@@ -117,20 +117,23 @@ void main() {
   ];
 
   test('Validate invalidAddresses are invalid emails', () {
-    invalidAddresses.forEach((String actual) => expect(
-        EmailValidator.validate(actual, true), equals(false),
-        reason: 'E-mail: ' + actual.toString()));
+    for (var actual in invalidAddresses) {
+      expect(EmailValidator.validate(actual, true), equals(false),
+          reason: 'E-mail: ' + actual.toString());
+    }
   });
 
   test('Validate validAddresses are valid emails', () {
-    validAddresses.forEach((String actual) => expect(
-        EmailValidator.validate(actual, true), equals(true),
-        reason: 'E-mail: ' + actual));
+    for (var actual in validAddresses) {
+      expect(EmailValidator.validate(actual, true), equals(true),
+          reason: 'E-mail: ' + actual);
+    }
   });
 
   test('Validate validInternational are valid emails', () {
-    validInternational.forEach((String actual) => expect(
-        EmailValidator.validate(actual, true, true), equals(true),
-        reason: 'E-mail: ' + actual));
+    for (var actual in validInternational) {
+      expect(EmailValidator.validate(actual, true, true), equals(true),
+          reason: 'E-mail: ' + actual);
+    }
   });
 }
