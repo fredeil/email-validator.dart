@@ -63,7 +63,7 @@ void main() {
     'uncommon-tld@sld.travel'
   ];
 
-  final List<String?> invalidAddresses = [
+  final List<String> invalidAddresses = [
     'invalid',
     'invalid@',
     'invalid @',
@@ -107,9 +107,6 @@ void main() {
     // examples of real (invalid) input from real users.
     'No longer available.',
     'Moved.',
-
-    // Null check
-    null,
   ];
 
   final List<String> validInternational = [
@@ -120,7 +117,7 @@ void main() {
   ];
 
   test('Validate invalidAddresses are invalid emails', () {
-    invalidAddresses.forEach((String? actual) => expect(
+    invalidAddresses.forEach((String actual) => expect(
         EmailValidator.validate(actual, true), equals(false),
         reason: 'E-mail: ' + actual.toString()));
   });
