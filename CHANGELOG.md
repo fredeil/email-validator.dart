@@ -1,4 +1,8 @@
-# 1.0.6
+# 2.0.0-nullsafety
+
+* Migrate to new null safety SDK. See https://dart.dev/null-safety.
+
+## 1.0.6
 
 * Code clean up
 
