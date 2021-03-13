@@ -1,11 +1,11 @@
 name: email_validator
-version: 2.0.0-nullsafety
+version: 2.0.1
 
 homepage: https://github.com/fredeil/email-validator.dart
 description: A simple (but correct) dart class for validating email addresses
-  
+
 environment:
-  sdk: '>=2.12.0-0 <3.0.0'
+  sdk: ">=2.12.0-0 <3.0.0"
 
 dev_dependencies:
-  test: '1.16.0-nullsafety.9'
+  test: ^1.16.8
