@@ -4,7 +4,7 @@ A simple (but correct) Dart class for validating email addresses without using R
 
 ## Installation
 
-Dart requires the latest version of [Dart](https://www.dartlang.org/). You can download the latest and greatest [here](https://www.dartlang.org/tools/sdk#install).
+This package requires the latest version of [Dart](https://www.dartlang.org/). You can download the latest and greatest [here](https://www.dartlang.org/tools/sdk#install).
 
 ### 1. Depend on it
 
