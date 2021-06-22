@@ -116,6 +116,15 @@ void main() {
     'θσερ@εχαμπλε.ψομ', // Greek
   ];
 
+  final List<String> unknownTLD = [
+    'example@domain.a',
+    'example@domain.0',
+    'example@domain.123',
+    'example@domain.bbb',
+    'example@domain.BBB',
+    'example@domain.NONIANATLD',
+  ];
+
   test('Validate invalidAddresses are invalid emails', () {
     for (var actual in invalidAddresses) {
       expect(EmailValidator.validate(actual, true), equals(false),
@@ -133,6 +142,13 @@ void main() {
   test('Validate validInternational are valid emails', () {
     for (var actual in validInternational) {
       expect(EmailValidator.validate(actual, true, true), equals(true),
+          reason: 'E-mail: ' + actual);
+    }
+  });
+
+  test('Validate unknownTLD are invalid emails', () {
+    for (var actual in unknownTLD) {
+      expect(EmailValidator.validate(actual, false, false, true), equals(false),
           reason: 'E-mail: ' + actual);
     }
   });
