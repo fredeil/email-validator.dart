@@ -1,0 +1,18 @@
+on: [pull_request]
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    name: Lint flutter code
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          flutter-version: "2.0.x"
+      - run: flutter pub get
+      - name: Analyze dart code
+        uses: ValentinVignal/action-dart-analyze@v0.11
+        with:
+          fail-on: "format"
