@@ -2,6 +2,11 @@
 
 A simple (but correct) Dart class for validating email addresses without using RegEx. Can also be used to validate emails within Flutter apps (see [Flutter email validation](https://github.com/fredeil/flutter-email-validator)).
 
+**Featured in:**
+1. [How To Validate Emails in Flutter](https://betterprogramming.pub/how-to-validate-emails-in-flutter-957ae75926c9) by https://github.com/lucianojung
+2. [Flutter Tutorial - Email Validation In 7 Minutes](https://www.youtube.com/watch?v=mXyifVJ-NFc) by https://github.com/JohannesMilke
+
+
 ## Installation
 
 This package requires the latest version of [Dart](https://www.dartlang.org/). You can download the latest and greatest [here](https://www.dartlang.org/tools/sdk#install).
