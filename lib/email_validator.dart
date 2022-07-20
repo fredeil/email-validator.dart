@@ -2,41 +2,79 @@ library email_validator;
 
 import 'dart:core';
 
-enum type { None, Alphabetic, Numeric, AlphaNumeric }
+/// The Type enum
+///
+/// The domain type is either None, Alphabetic, Numeric or AlphaNumeric
+enum Type { None, Alphabetic, Numeric, AlphaNumeric }
 
+///The EmailValidator entry point
+///
+/// To use the EmailValidator class, call EmailValidator.methodName
 class EmailValidator {
+  // An atomic index which is reused during iterations in different methods
   static int _index = 0;
-  static const String _atomCharacters = "!#\$%&'*+-/=?^_`{|}~";
-  static type _domainType = type.None;
 
+  // A string character set containing all special characters
+  static const String _atomCharacters = "!#\$%&'*+-/=?^_`{|}~";
+
+  // Sets default domainType to null on initialization
+  static Type _domainType = Type.None;
+
+  // Returns true if the first letter in string c has a 16-bit UTF-16 code unit
+  // greater than or equal to 48 and less than or equal to 57
+  // otherwise return false
   static bool _isDigit(String c) {
     return c.codeUnitAt(0) >= 48 && c.codeUnitAt(0) <= 57;
   }
 
+  // Returns true if the first letter in string c has a 16-bit UTF-16 code unit
+  // greater than or equal to 65 and less than or equal to 90 (capital letters)
+  // or greater than or equal to 97 and less than or equal to 122 (lowercase letters)
+  // otherwise return false
   static bool _isLetter(String c) {
     return (c.codeUnitAt(0) >= 65 && c.codeUnitAt(0) <= 90) ||
         (c.codeUnitAt(0) >= 97 && c.codeUnitAt(0) <= 122);
   }
 
+  // Returns true if calling isLetter or isDigit with the same string returns true
+  // Only returns false if both isLetter and isDigit return false
   static bool _isLetterOrDigit(String c) {
     return _isLetter(c) || _isDigit(c);
   }
 
+  // Returns value of allowInternational if the first letter in the string c isnt a
+  // number or letter or special character otherwise
+  // return the result of _isLetterOrDigit or _atomCharacters.contains(c)
+  // which only returns false if both _isLetterOrDigit and _atomCharacters.contains(c)
+  // returns false
   static bool _isAtom(String c, bool allowInternational) {
     return c.codeUnitAt(0) < 128
         ? _isLetterOrDigit(c) || _atomCharacters.contains(c)
         : allowInternational;
   }
 
+  // First checks whether the first letter in string c is a letter, number or special
+  // character
+  // If calling isLetter returns true or c is '-',
+  // domainType is set to Alphabetic and the function returns true
+  // If calling isDigit returns true
+  // domainType is set to Numeric and the function returns true
+  // Otherwise the function returns false
+  //
+  // If the first if statement for string c being a letter, number or special character
+  // fails
+  // The value of allowInternational is checked where, if true,
+  // domainType is set to Alphabetic and the function returns true
+  // Otherwise, the function returns false
   static bool _isDomain(String c, bool allowInternational) {
     if (c.codeUnitAt(0) < 128) {
       if (_isLetter(c) || c == '-') {
-        _domainType = type.Alphabetic;
+        _domainType = Type.Alphabetic;
         return true;
       }
 
       if (_isDigit(c)) {
-        _domainType = type.Numeric;
+        _domainType = Type.Numeric;
         return true;
       }
 
@@ -44,40 +82,43 @@ class EmailValidator {
     }
 
     if (allowInternational) {
-      _domainType = type.Alphabetic;
+      _domainType = Type.Alphabetic;
       return true;
     }
 
     return false;
   }
 
+  // Returns true if domainType is not None
+  // Otherwise returns false
   static bool _isDomainStart(String c, bool allowInternational) {
     if (c.codeUnitAt(0) < 128) {
       if (_isLetter(c)) {
-        _domainType = type.Alphabetic;
+        _domainType = Type.Alphabetic;
         return true;
       }
 
       if (_isDigit(c)) {
-        _domainType = type.Numeric;
+        _domainType = Type.Numeric;
         return true;
       }
 
-      _domainType = type.None;
+      _domainType = Type.None;
 
       return false;
     }
 
     if (allowInternational) {
-      _domainType = type.Alphabetic;
+      _domainType = Type.Alphabetic;
       return true;
     }
 
-    _domainType = type.None;
+    _domainType = Type.None;
 
     return false;
   }
 
+  // TODO: Documentation for this function is required
   static bool _skipAtom(String text, bool allowInternational) {
     final startIndex = _index;
 
@@ -88,6 +129,8 @@ class EmailValidator {
     return _index > startIndex;
   }
 
+  // Skips checking of subdomain and returns false if domainType is None
+  // Otherwise returns true
   static bool _skipSubDomain(String text, bool allowInternational) {
     final startIndex = _index;
 
@@ -105,6 +148,8 @@ class EmailValidator {
     return (_index - startIndex) < 64 && text[_index - 1] != '-';
   }
 
+  // Skips checking of domain if domainType is numeric and returns false
+  // Otherwise, return true
   static bool _skipDomain(
       String text, bool allowTopLevelDomains, bool allowInternational) {
     if (!_skipSubDomain(text, allowInternational)) {
@@ -129,13 +174,16 @@ class EmailValidator {
 
     // Note: by allowing AlphaNumeric,
     // we get away with not having to support punycode.
-    if (_domainType == type.Numeric) {
+    if (_domainType == Type.Numeric) {
       return false;
     }
 
     return true;
   }
 
+  // Function skips over quoted text where if quoted text is in the string
+  // the function returns true
+  // otherwise the function returns false
   static bool _skipQuoted(String text, bool allowInternational) {
     var escaped = false;
 
@@ -169,6 +217,7 @@ class EmailValidator {
     return true;
   }
 
+  // TODO: Documentation for this function is required
   static bool _skipIPv4Literal(String text) {
     var groups = 0;
 
@@ -197,6 +246,9 @@ class EmailValidator {
     return groups == 4;
   }
 
+  // Returns true if the first letter of the string is
+  // a,b,c,d,e,f,A,B,C,D,E,F,1,2,3,4,5,6,7,8,9,0
+  // otherwise, the function returns false
   static bool _isHexDigit(String str) {
     final c = str.codeUnitAt(0);
     return (c >= 65 && c <= 70) ||
