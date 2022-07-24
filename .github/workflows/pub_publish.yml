@@ -7,7 +7,7 @@ on:
         description: "Version: git tag and package version you want create (sample 1.0.0)"
         required: true
 
-      Changelog:
+      changelog:
         description: "CHANGELOG.md notes"
         required: true
         default: "Bug fixes and performance improvements"
@@ -20,9 +20,6 @@ on:
         options:
         - "true"
         - "false"
-env:
-  GIT_TAG: ${{ github.event.inputs.version }}
-  DRY_RUN: ${{ github.event.inputs.dry_run }}
 
 jobs:
 
@@ -37,9 +34,8 @@ jobs:
         id: env
         run: |
           echo "FILE_PATH=pubspec.yaml" | tee -a "$GITHUB_ENV"
-          echo "GIT_TAG=${{ inputs.tag }}" | tee -a "$GITHUB_ENV"
-          echo "DRY_RUN=${{ inputs.dry-run }}" | tee -a "$GITHUB_ENV"
-          echo "::set-output name=branch-name::${{ env.DRY_RUN_BRANCH_PREFIX }}-${{ inputs.tag }}"
+          echo "GIT_TAG=${{ inputs.version }}" | tee -a "$GITHUB_ENV"
+          echo "DRY_RUN=${{ inputs.dry_run }}" | tee -a "$GITHUB_ENV"
       
       - uses: actions/checkout@v3
 
