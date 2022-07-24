@@ -15,13 +15,13 @@ on:
       dry_run:
         description: "Dry-run: true will not publish the release."     
         required: true
-        default: 'true' 
+        default: "true" 
         type: choice
         options:
-        - true
-        - false
+        - "true"
+        - "false"
 env:
-  GIT_TAG: ${{ github.event.inputs.tag }}
+  GIT_TAG: ${{ github.event.inputs.version }}
   DRY_RUN: ${{ github.event.inputs.dry_run }}
 
 jobs:
