@@ -3,11 +3,8 @@ name: Analyze
 on: [push, pull_request]
 
 jobs:
-
-  check-score:
-
+  Analyze:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
 

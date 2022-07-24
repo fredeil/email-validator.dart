@@ -6,11 +6,20 @@ on:
       version:
         description: "Version: git tag and package version you want create (sample 1.0.0)"
         required: true
-      dry_run:
-        description: "dry_run: true will never publish the release."
-        required: true
-        default: "false"
 
+      Changelog:
+        description: "CHANGELOG.md notes"
+        required: true
+        default: "Bug fixes and performance improvements"
+
+      dry_run:
+        description: "Dry-run: true will not publish the release."     
+        required: true
+        default: 'true' 
+        type: choice
+        options:
+        - true
+        - false
 env:
   GIT_TAG: ${{ github.event.inputs.tag }}
   DRY_RUN: ${{ github.event.inputs.dry_run }}
@@ -73,29 +82,19 @@ jobs:
           branch: ${{ github.ref }}
           tags: true
 
-      - name: Push changes (dry_run)
-        if: env.DRY_RUN == 'true' && steps.check_update.outputs.changed == '1'
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ steps.env.outputs.branch-name }}
-          tags: false
-
-      - name: Publish release
+      - name: Publish to pub.dev 🚀
         if: env.DRY_RUN == 'false' && steps.check_update.outputs.changed == '1'
-        uses: sakebook/actions-flutter-pub-publisher@v1.3.1
-        with:
-          credential: ${{ secrets.CREDENTIALS }}
-          skip_test: true
-          dry_run: false
-
-      - name: Publish release (dry-run)
-        if: env.DRY_RUN == 'true' && steps.check_update.outputs.changed == '1'
-        uses: sakebook/actions-flutter-pub-publisher@v1.3.1
-        with:
-          credential: ${{ secrets.CREDENTIALS }}
-          skip_test: true
-          dry_run: true
-
-
+        run: | 
+          mkdir -p $HOME/.config/dart
+          cat <<EOF > $HOME/.config/dart/pub-credentials.json
+          {
+            "accessToken": "${{ secrets.PUB_CREDS_ACCESS_TOKEN }}",
+            "refreshToken": "${{ secrets.PUB_CREDS_REFRESH_TOKEN }}",
+            "idToken": "${{ secrets.PUB_CREDS_ID_TOKEN }}",
+            "tokenEndpoint": "https://accounts.google.com/o/oauth2/token",
+            "scopes": [ "openid", "https://www.googleapis.com/auth/userinfo.email" ],
+            "expiration": ${{ secrets.PUB_CREDS_EXPIRATION }}
+          }
+          EOF
+          dart pub publish -f
 
