@@ -27,7 +27,7 @@ jobs:
       - name: Configure Environment Variables
         id: env
         run: |
-          echo "FILE_PATH=${{ inputs.file-path }}" | tee -a "$GITHUB_ENV"
+          echo "FILE_PATH=pubspec.yaml" | tee -a "$GITHUB_ENV"
           echo "GIT_TAG=${{ inputs.tag }}" | tee -a "$GITHUB_ENV"
           echo "DRY_RUN=${{ inputs.dry-run }}" | tee -a "$GITHUB_ENV"
           echo "::set-output name=branch-name::${{ env.DRY_RUN_BRANCH_PREFIX }}-${{ inputs.tag }}"
