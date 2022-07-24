@@ -1,4 +1,8 @@
-# 2.0.1
+# 2.1.2
+
+* Fix static anlyzer warnings and update Dart SDK
+
+## 2.0.1
 
 * Migrate to new null safety SDK. See https://dart.dev/null-safety.
 
