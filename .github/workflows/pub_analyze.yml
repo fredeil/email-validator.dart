@@ -1,0 +1,29 @@
+name: Check score
+
+on: [push, pull_request]
+
+jobs:
+
+  check-score:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: axel-op/dart-package-analyzer@v3
+        id: workflow
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check score
+        env:
+          TOTAL: ${{ steps.workflow.outputs.total }}
+          TOTAL_MAX: ${{ steps.workflow.outputs.total_max }}
+        run: |
+          PERCENTAGE=$(( $TOTAL * 100 / $TOTAL_MAX ))
+          if (( $PERCENTAGE < 100 ))
+          then
+            echo Score can be improved!
+            exit 1
+          fi
