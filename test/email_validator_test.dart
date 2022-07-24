@@ -1,6 +1,5 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:test/test.dart';
-
-import '../lib/email_validator.dart';
 
 void main() {
   final List<String> validAddresses = [
