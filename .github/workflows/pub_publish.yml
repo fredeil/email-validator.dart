@@ -21,13 +21,24 @@ on:
         - "true"
         - "false"
 
+      pre_release:
+        description: "Whether the release is a prerelease"
+        required: true
+        default: "false"
+        type: choice
+        options:
+        - "false"
+        - "true"
+
 jobs:
 
   publish:
     runs-on: ubuntu-latest
+    container:
+      image: google/dart:latest
+      
     outputs:
       sha: ${{ steps.commit.outputs.sha }}
-      branch-name: ${{ steps.env.outputs.branch-name }}
 
     steps:
       - name: Configure Environment Variables
@@ -36,11 +47,14 @@ jobs:
           echo "FILE_PATH=pubspec.yaml" | tee -a "$GITHUB_ENV"
           echo "GIT_TAG=${{ inputs.version }}" | tee -a "$GITHUB_ENV"
           echo "DRY_RUN=${{ inputs.dry_run }}" | tee -a "$GITHUB_ENV"
+          if [ -z "${{ inputs.pre_release }}" ]; then
+            echo "GIT_TAG=${{ inputs.version }}-dev" | tee -a "$GITHUB_ENV"
+          fi
       
       - uses: actions/checkout@v3
 
       - name: Output pubspec.yaml (Before)
-        run: cat ${{ env.FILE_PATH}}
+        run: cat ${{ env.FILE_PATH }}
 
       - name: Update pubspec.yaml to version ${{ env.GIT_TAG }}
         run: sed -i -e 's/^\(\s*version\s*:\s*\).*/\1 ${{ env.GIT_TAG }}/' ${{ env.FILE_PATH }}
@@ -68,7 +82,20 @@ jobs:
 
       - name: Create Tag
         if: steps.check_update.outputs.changed == '1'
-        run: git tag ${{ env.GIT_TAG }}
+        uses: mathieudutour/github-tag-action@v6.0
+        with:
+          custom_tag: ${{ env.GIT_TAG }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create GitHub release
+        if: steps.check_update.outputs.changed == '1'
+        uses: softprops/action-gh-release@v1
+        with:
+          body: ${{ inputs.changelog }}
+          tag_name: v${{ env.GIT_TAG }}
+          draft: 'false'
+          prerelease: ${{ inputs.pre_release }}
+          target_commitish: ${{ github.sha }}
 
       - name: Push changes
         if: env.DRY_RUN == 'false' && steps.check_update.outputs.changed == '1'
@@ -78,7 +105,7 @@ jobs:
           branch: ${{ github.ref }}
           tags: true
 
-      - name: Publish to pub.dev 🚀
+      - name: Publish to pub.dev 
         if: env.DRY_RUN == 'false' && steps.check_update.outputs.changed == '1'
         run: | 
           mkdir -p $HOME/.config/dart
