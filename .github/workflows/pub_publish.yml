@@ -22,12 +22,10 @@ on:
         - "true"
 
 jobs:
-
   publish:
     runs-on: ubuntu-latest
     container:
       image: google/dart:latest
-      
     outputs:
       sha: ${{ steps.commit.outputs.sha }}
 
@@ -42,9 +40,6 @@ jobs:
           fi
       
       - uses: actions/checkout@v3
-
-      - name: Output pubspec.yaml (Before)
-        run: cat ${{ env.FILE_PATH }}
 
       - name: Update pubspec.yaml to version ${{ env.GIT_TAG }}
         run: sed -i -e 's/^\(\s*version\s*:\s*\).*/\1 ${{ env.GIT_TAG }}/' ${{ env.FILE_PATH }}
@@ -62,7 +57,7 @@ jobs:
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add pubspec.yaml
-          git commit -m "feat: Update pubspec.yaml to ${{ env.GIT_TAG }}"
+          git commit -m "CI: Update pubspec.yaml to ${{ env.GIT_TAG }}"
           echo "::set-output name=sha::$(git rev-parse HEAD)"
 
       - name: Check sha
@@ -109,5 +104,4 @@ jobs:
             "expiration": ${{ secrets.PUB_CREDS_EXPIRATION }}
           }
           EOF
-          dart pub publish -f --dry-run ${{ inputs.dry_run }}
-
+          dart pub publish -f 
