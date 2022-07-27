@@ -45,8 +45,8 @@ jobs:
         run: sed -i -e 's/^\(\s*version\s*:\s*\).*/\1 ${{ env.GIT_TAG }}/' ${{ env.FILE_PATH }}
 
       - name: Update CHANGELOG.md
-        run: cat <<< "## ${{ env.GIT_TAG }} 
-             ${{ inputs.changelog }}      
+        run: cat <<< "## ${{ env.GIT_TAG }} \
+             ${{ inputs.changelog }} \ 
              $(cat CHANGELOG.md)" > CHANGELOG.md  
 
       - name: Check update
