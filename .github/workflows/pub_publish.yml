@@ -61,7 +61,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add pubspec.yaml
           git add CHANGELOG.md
-          git commit -m "CI: Update pubspec.yaml to ${{ env.GIT_TAG }}"
+          git commit -m "CI: Bump version to ${{ env.GIT_TAG }}"
           echo "::set-output name=sha::$(git rev-parse HEAD)"
 
       - name: Check sha
