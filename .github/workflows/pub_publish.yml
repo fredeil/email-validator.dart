@@ -44,6 +44,11 @@ jobs:
       - name: Update pubspec.yaml to version ${{ env.GIT_TAG }}
         run: sed -i -e 's/^\(\s*version\s*:\s*\).*/\1 ${{ env.GIT_TAG }}/' ${{ env.FILE_PATH }}
 
+      - name: Update CHANGELOG.md
+        run: cat <<< "## ${{ env.GIT_TAG }} 
+             ${{ inputs.changelog }}      
+             $(cat CHANGELOG.md)" > CHANGELOG.md  
+
       - name: Check update
         id: check_update
         run: |
@@ -57,6 +62,7 @@ jobs:
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add pubspec.yaml
+          git add CHANGELOG.md
           git commit -m "CI: Update pubspec.yaml to ${{ env.GIT_TAG }}"
           echo "::set-output name=sha::$(git rev-parse HEAD)"
 
