@@ -1,19 +1,6 @@
 ## 2.1.15
 Bug fixes and performance improvements
-## 2.1.14
-Bug fixes and performance improvements
-## 2.1.11
-Bug fixes and performance improvements
-## 2.1.10
-Bug fixes and performance improvements
-## 2.1.9
-Bug fixes and performance improvements
-## 2.1.8
-Bug fixes and performance improvements
-## 2.1.7
-Bug fixes and performance improvements
-## 2.1.6
-Bug fixes and performance improvements
+
 ## 2.1.2
 
 * Fix static anlyzer warnings and update Dart SDK
