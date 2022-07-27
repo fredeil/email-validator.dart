@@ -1,3 +1,5 @@
+## 2.1.6
+Bug fixes and performance improvements
 ## 2.1.2
 
 * Fix static anlyzer warnings and update Dart SDK
