@@ -99,3 +99,4 @@ jobs:
         run: |
          mkdir -p $HOME/.config/dart
          echo '${{ secrets.PUB_CREDENTIALS }}' > "$HOME/.config/dart/pub-credentials.json"
+         dart pub publish -f
