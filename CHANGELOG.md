@@ -1,3 +1,5 @@
+## 2.1.16
+Bug fixes and performance improvements
 ## 2.1.15
 Bug fixes and performance improvements
 
