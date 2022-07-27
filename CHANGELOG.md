@@ -1,3 +1,7 @@
+## 2.1.8
+Bug fixes and performance improvements
+## 2.1.7
+Bug fixes and performance improvements
 ## 2.1.6
 Bug fixes and performance improvements
 ## 2.1.2
