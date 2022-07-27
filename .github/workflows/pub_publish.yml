@@ -96,4 +96,6 @@ jobs:
 
       - name: Publish to pub.dev 
         if: steps.check_update.outputs.changed == '1'
-        run: echo '${{ secrets.PUB_CREDENTIALS }}' > "$HOME/.config/dart/pub-credentials.json"
+        #run: echo '${{ secrets.PUB_CREDENTIALS }}' > "$HOME/.config/dart/pub-credentials.json"
+
+        run: where dart && dart pub logout
