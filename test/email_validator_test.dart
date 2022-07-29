@@ -66,11 +66,17 @@ void main() {
     'invalid',
     'invalid@',
     'invalid @',
+    'invalid@[]', // empty IP literal
     'invalid@[555.666.777.888]',
     'invalid@[IPv6:123456]',
+    'invalid@[IPv6::1::1]',
+    'invalid@[IPv6:2607:f0d0:1002:51::4', // unenclosed IPv6 literal
+    'invalid@[IPv6:1111:::1111::1111]', // more than 2 consecutive :'s in IPv6
+    'invalid@[IPv6:aaaa:aaaa:aaaa:aaaa:aaaa:aaaa:555.666.777.888]', // invalid IPv4 address in IPv6v4
     'invalid@[127.0.0.1.]',
     'invalid@[127.0.0.1].',
     'invalid@[127.0.0.1]x',
+    'invalid@domain1.com@domain2.com',
 
     // examples from wikipedia
     'Abc.example.com',
