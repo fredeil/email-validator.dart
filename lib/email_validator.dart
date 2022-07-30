@@ -217,7 +217,6 @@ class EmailValidator {
     return true;
   }
 
-  // TODO: Documentation for this function is required
   static bool _skipIPv4Literal(String text) {
     var groups = 0;
 
@@ -246,9 +245,7 @@ class EmailValidator {
     return groups == 4;
   }
 
-  // Returns true if the first letter of the string is
-  // a,b,c,d,e,f,A,B,C,D,E,F,1,2,3,4,5,6,7,8,9,0
-  // otherwise, the function returns false
+  // Check of first character of string is a hex digit
   static bool _isHexDigit(String str) {
     final c = str.codeUnitAt(0);
     return (c >= 65 && c <= 70) ||
@@ -273,7 +270,8 @@ class EmailValidator {
   //             ; IPv4-address-literal may be present
   static bool _skipIPv6Literal(String text) {
     var compact = false;
-    var colons = 0;
+    var needGroup = false;
+    var groups = 0;
 
     while (_index < text.length) {
       var startIndex = _index;
@@ -286,7 +284,9 @@ class EmailValidator {
         break;
       }
 
-      if (_index > startIndex && colons > 2 && text[_index] == '.') {
+      if (_index > startIndex &&
+          text[_index] == '.' &&
+          (compact || groups == 6)) {
         // IPv6v4
         _index = startIndex;
 
@@ -294,7 +294,7 @@ class EmailValidator {
           return false;
         }
 
-        return compact ? colons < 6 : colons == 6;
+        return compact ? groups <= 4 : groups == 6;
       }
 
       var count = _index - startIndex;
@@ -302,8 +302,20 @@ class EmailValidator {
         return false;
       }
 
-      if (text[_index] != ':') {
-        break;
+      var comp = false;
+
+      if (count > 0) {
+        needGroup = false;
+        comp = false;
+        groups++;
+
+        if (text[_index] != ':') {
+          break;
+        } else if (text[_index] == ':') {
+          comp = true;
+        } else {
+          break;
+        }
       }
 
       startIndex = _index;
@@ -320,19 +332,15 @@ class EmailValidator {
         if (compact) {
           return false;
         }
-
         compact = true;
-        colons += 2;
+      } else if (comp) {
+        return false;
       } else {
-        colons++;
+        needGroup = true;
       }
     }
 
-    if (colons < 2) {
-      return false;
-    }
-
-    return compact ? colons < 7 : colons == 7;
+    return !needGroup && (compact ? groups <= 6 : groups == 8);
   }
 
   /// Validate the specified email address.
@@ -399,8 +407,8 @@ class EmailValidator {
     // address literal
     _index++;
 
-    // we need at least 8 more characters
-    if (_index + 8 >= email.length) {
+    // We need at least 7 more characters. "1.1.1.1" and "IPv6:::" are the shortest literals we can have.
+    if (_index + 7 >= email.length) {
       return false;
     }
 
