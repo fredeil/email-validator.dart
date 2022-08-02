@@ -1,3 +1,5 @@
+## 2.1.7
+Duplicate type enum found in flutter
 ## 2.1.16
 Bug fixes and performance improvements
 ## 2.1.15
