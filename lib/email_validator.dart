@@ -20,6 +20,12 @@ class EmailValidator {
   // Sets default domainType to null on initialization
   static Type _domainType = Type.None;
 
+  static bool _isControl(String c) {
+    final res = c.codeUnitAt(0) <= 31 || c.codeUnitAt(0) == 127;
+
+    return res;
+  }
+
   // Returns true if the first letter in string c has a 16-bit UTF-16 code unit
   // greater than or equal to 48 and less than or equal to 57
   // otherwise return false
@@ -48,6 +54,10 @@ class EmailValidator {
   // which only returns false if both _isLetterOrDigit and _atomCharacters.contains(c)
   // returns false
   static bool _isAtom(String c, bool allowInternational) {
+    if (_isControl(c)) {
+      return false;
+    }
+
     return c.codeUnitAt(0) < 128
         ? _isLetterOrDigit(c) || _atomCharacters.contains(c)
         : allowInternational;
@@ -81,7 +91,7 @@ class EmailValidator {
       return false;
     }
 
-    if (allowInternational) {
+    if (allowInternational && c.codeUnitAt(0) != 32) {
       _domainType = Type.Alphabetic;
       return true;
     }
@@ -108,7 +118,7 @@ class EmailValidator {
       return false;
     }
 
-    if (allowInternational) {
+    if (allowInternational && c.codeUnitAt(0) != 32) {
       _domainType = Type.Alphabetic;
       return true;
     }
@@ -145,11 +155,17 @@ class EmailValidator {
       _index++;
     }
 
+    // Don't allow single-character top-level domains.
+    if (_index == text.length && (_index - startIndex) == 1) {
+      return false;
+    }
+
+    // https://datatracker.ietf.org/doc/html/rfc2181#section-11
+    // The length of any one label is limited to between 1 and 63 octets. A full domain
+    // name is limited to 255 octets (including the separators).
     return (_index - startIndex) < 64 && text[_index - 1] != '-';
   }
 
-  // Skips checking of domain if domainType is numeric and returns false
-  // Otherwise, return true
   static bool _skipDomain(
       String text, bool allowTopLevelDomains, bool allowInternational) {
     if (!_skipSubDomain(text, allowInternational)) {
@@ -191,7 +207,8 @@ class EmailValidator {
     _index++;
 
     while (_index < text.length) {
-      if (text[_index].codeUnitAt(0) >= 128 && !allowInternational) {
+      if (_isControl(text) ||
+          (text[_index].codeUnitAt(0) >= 128 && !allowInternational)) {
         return false;
       }
 
@@ -217,7 +234,6 @@ class EmailValidator {
     return true;
   }
 
-  // TODO: Documentation for this function is required
   static bool _skipIPv4Literal(String text) {
     var groups = 0;
 
@@ -225,9 +241,7 @@ class EmailValidator {
       final startIndex = _index;
       var value = 0;
 
-      while (_index < text.length &&
-          text[_index].codeUnitAt(0) >= 48 &&
-          text[_index].codeUnitAt(0) <= 57) {
+      while (_index < text.length && _isDigit(text)) {
         value = (value * 10) + (text[_index].codeUnitAt(0) - 48);
         _index++;
       }
@@ -246,9 +260,7 @@ class EmailValidator {
     return groups == 4;
   }
 
-  // Returns true if the first letter of the string is
-  // a,b,c,d,e,f,A,B,C,D,E,F,1,2,3,4,5,6,7,8,9,0
-  // otherwise, the function returns false
+  // Checks if the first character of the given string is a valid hex digit
   static bool _isHexDigit(String str) {
     final c = str.codeUnitAt(0);
     return (c >= 65 && c <= 70) ||
@@ -272,8 +284,9 @@ class EmailValidator {
   //             ; No more than 4 groups in addition to the "::" and
   //             ; IPv4-address-literal may be present
   static bool _skipIPv6Literal(String text) {
+    var needGroup = false;
     var compact = false;
-    var colons = 0;
+    var groups = 0;
 
     while (_index < text.length) {
       var startIndex = _index;
@@ -286,7 +299,9 @@ class EmailValidator {
         break;
       }
 
-      if (_index > startIndex && colons > 2 && text[_index] == '.') {
+      if (_index > startIndex &&
+          text[_index] == '.' &&
+          (compact || groups == 6)) {
         // IPv6v4
         _index = startIndex;
 
@@ -294,7 +309,7 @@ class EmailValidator {
           return false;
         }
 
-        return compact ? colons < 6 : colons == 6;
+        return compact ? groups <= 4 : groups == 6;
       }
 
       var count = _index - startIndex;
@@ -302,7 +317,21 @@ class EmailValidator {
         return false;
       }
 
-      if (text[_index] != ':') {
+      var comp = false;
+
+      if (count > 0) {
+        needGroup = false;
+        comp = false;
+        groups++;
+
+        if (text[_index] != ':') {
+          break;
+        }
+      } else if (text[_index] == ':') {
+        // There were no hex digits at the start, so this must be an IPv6-comp
+        // or an IPv6v4-comp which means we will need exactly 2 colons.
+        comp = true;
+      } else {
         break;
       }
 
@@ -322,17 +351,15 @@ class EmailValidator {
         }
 
         compact = true;
-        colons += 2;
+      } else if (comp) {
+        // expected exactly 2 colons for IPv6-comp or IPv6v4-comp address
+        return false;
       } else {
-        colons++;
+        needGroup = true;
       }
     }
 
-    if (colons < 2) {
-      return false;
-    }
-
-    return compact ? colons < 7 : colons == 7;
+    return !needGroup && (compact ? groups <= 6 : groups == 8);
   }
 
   /// Validate the specified email address.
@@ -383,6 +410,8 @@ class EmailValidator {
       }
     }
 
+    // https://datatracker.ietf.org/doc/html/rfc5321#section-4.5.3.1.1
+    // The maximum total length of a user name or other local-part is 64 octets.
     if (_index + 1 >= email.length || _index > 64 || email[_index++] != '@') {
       return false;
     }
@@ -400,7 +429,7 @@ class EmailValidator {
     _index++;
 
     // we need at least 8 more characters
-    if (_index + 8 >= email.length) {
+    if (_index + 7 >= email.length) {
       return false;
     }
 

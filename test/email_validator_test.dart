@@ -71,6 +71,10 @@ void main() {
     'invalid@[127.0.0.1.]',
     'invalid@[127.0.0.1].',
     'invalid@[127.0.0.1]x',
+    "\"invalid-qstring@example.com", // unterminated q-string in local-part of the addr-spec
+    'control-\u007f\-character@example.com',
+    'control-\u001f\-character@example.com',
+    '\"control-\\\u007f\-character\"@example.com',
 
     // examples from wikipedia
     'Abc.example.com',
