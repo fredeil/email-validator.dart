@@ -10,6 +10,15 @@ A simple Dart class for validating email addresses without using RegEx. Can also
 2. [Flutter Tutorial - Email Validation In 7 Minutes](https://www.youtube.com/watch?v=mXyifVJ-NFc) by https://github.com/JohannesMilke
 3. [Flutter Tutorial - Email Validation | Package of the week](https://www.youtube.com/watch?v=ZN_7Pur5h8Q&t=31s) by https://github.com/Dhanraj-FlutterDev
 
+**Found in several big libraries and apps:**
+
+1. [Google Firebase](https://github.com/firebase/flutterfire)
+1. [TubeCards - The world’s best flashcard platform](https://github.com/friebetill/TubeCards)
+1. [Serverpod - Serverpod is a next-generation app and web server, explicitly built for Flutter](https://github.com/serverpod/serverpod)
+1. [Supabase - Flutter auth UI](https://github.com/supabase-community/flutter-auth-ui)
+
+And many more! 
+
 
 ## **Installation**
 
