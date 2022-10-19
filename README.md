@@ -28,7 +28,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-    email_validator: '^2.1.16'
+    email_validator: '^2.1.17'
 ```
 
 
