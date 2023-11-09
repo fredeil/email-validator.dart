@@ -16,33 +16,19 @@ class EmailValidator {
   static const String _atomCharacters = "!#\$%&'*+-/=?^_`{|}~";
   static SubdomainType _domainType = SubdomainType.None;
 
-  // Returns true if the first letter in string c has a 16-bit UTF-16 code unit
-  // greater than or equal to 48 and less than or equal to 57
-  // otherwise return false
   static bool _isDigit(String c) {
     return c.codeUnitAt(0) >= 48 && c.codeUnitAt(0) <= 57;
   }
 
-  // Returns true if the first letter in string c has a 16-bit UTF-16 code unit
-  // greater than or equal to 65 and less than or equal to 90 (capital letters)
-  // or greater than or equal to 97 and less than or equal to 122 (lowercase letters)
-  // otherwise return false
   static bool _isLetter(String c) {
     return (c.codeUnitAt(0) >= 65 && c.codeUnitAt(0) <= 90) ||
         (c.codeUnitAt(0) >= 97 && c.codeUnitAt(0) <= 122);
   }
 
-  // Returns true if calling isLetter or isDigit with the same string returns true
-  // Only returns false if both isLetter and isDigit return false
   static bool _isLetterOrDigit(String c) {
     return _isLetter(c) || _isDigit(c);
   }
 
-  // Returns value of allowInternational if the first letter in the string c isnt a
-  // number or letter or special character otherwise
-  // return the result of _isLetterOrDigit or _atomCharacters.contains(c)
-  // which only returns false if both _isLetterOrDigit and _atomCharacters.contains(c)
-  // returns false
   static bool _isAtom(String c, bool allowInternational) {
     return c.codeUnitAt(0) < 128
         ? _isLetterOrDigit(c) || _atomCharacters.contains(c)
