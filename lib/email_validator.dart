@@ -11,13 +11,9 @@ enum SubdomainType { None, Alphabetic, Numeric, AlphaNumeric }
 ///
 /// To use the EmailValidator class, call EmailValidator.methodName
 class EmailValidator {
-  // An atomic index which is reused during iterations in different methods
   static int _index = 0;
 
-  // A string character set containing all special characters
   static const String _atomCharacters = "!#\$%&'*+-/=?^_`{|}~";
-
-  // Sets default domainType to null on initialization
   static SubdomainType _domainType = SubdomainType.None;
 
   // Returns true if the first letter in string c has a 16-bit UTF-16 code unit
@@ -118,7 +114,6 @@ class EmailValidator {
     return false;
   }
 
-  // TODO: Documentation for this function is required
   static bool _skipAtom(String text, bool allowInternational) {
     final startIndex = _index;
 
@@ -246,9 +241,6 @@ class EmailValidator {
     return groups == 4;
   }
 
-  // Returns true if the first letter of the string is
-  // a,b,c,d,e,f,A,B,C,D,E,F,1,2,3,4,5,6,7,8,9,0
-  // otherwise, the function returns false
   static bool _isHexDigit(String str) {
     final c = str.codeUnitAt(0);
     return (c >= 65 && c <= 70) ||
