@@ -1,5 +1,7 @@
 # **Description**
-This is a fork of [email_vaidator](https://github.com/fredeil/email-validator.dart) package
+This is a fork of [email-validator.dart](https://github.com/fredeil/email-validator.dart) package. 
+
+I made a fork because - **default package doesn't check minimum characters into domain.**
 
 # **Email validator** [![Build status](https://ci.appveyor.com/api/projects/status/fb7ssu5fg8k334vi?svg=true)](https://ci.appveyor.com/project/fredeil/email-validator-dart) [![pub package](https://img.shields.io/pub/v/email_validator.svg)](https://pub.dev/packages/email_validator)
 
