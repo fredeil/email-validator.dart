@@ -329,6 +329,10 @@ class EmailValidator {
       return false;
     }
 
+    if (!_isCorrectSubdomainLength(email)) {
+      return false;
+    }
+
     // Local-part = Dot-string / Quoted-string
     //       ; MAY be case-sensitive
     //
@@ -400,5 +404,16 @@ class EmailValidator {
     }
 
     return _index == email.length;
+  }
+
+  /// Check if subdomain length is greater whan 2 charactes.
+  static bool _isCorrectSubdomainLength(String text) {
+    final reversedText = text.split('').reversed.join();
+    int index = 0;
+    while (index + 1 < reversedText.length && reversedText[index] != '.') {
+      index++;
+    }
+
+    return index > 1;
   }
 }
