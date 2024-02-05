@@ -65,13 +65,9 @@ void main() {
 }
 ```
 
-## Tips
-
 # **Additional**
 This is a fork of [email-validator.dart](https://github.com/fredeil/email-validator.dart) package. 
 
 I made a fork because -
 ***default package doesn't check minimum characters into domain.***
-
-You can also use this repo as a template for creating Dart packages, just clone the repo and start hacking :) 
 
