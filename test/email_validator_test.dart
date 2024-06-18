@@ -102,6 +102,7 @@ void main() {
     'the-total-length@of-an-entire-address.cannot-be-longer-than-two-hundred-and-fifty-four-characters.and-this-address-is-255-characters-exactly.so-it-should-be-invalid.and-im-going-to-add-some-more-words-here.to-increase-the-lenght-blah-blah-blah-blah-bl.org',
     'two..consecutive-dots@sld.com',
     'unbracketed-IP@127.0.0.1',
+    'onelettertld@gmail.c',
 
     // examples of real (invalid) input from real users.
     'No longer available.',

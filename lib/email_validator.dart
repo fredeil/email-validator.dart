@@ -126,6 +126,11 @@ class EmailValidator {
       _index++;
     }
 
+    // 1 letter tld is not valid
+    if (_index == text.length && (_index - startIndex) == 1) {
+      return false;
+    }
+
     return (_index - startIndex) < 64 && text[_index - 1] != '-';
   }
 
