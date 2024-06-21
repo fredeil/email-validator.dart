@@ -1,3 +1,5 @@
+## 2.2.9
+One letter TLD not allowed
 
 ## 2.1.2
 Fix static anlyzer warnings and update Dart SDK
