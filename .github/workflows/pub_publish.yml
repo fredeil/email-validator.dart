@@ -30,6 +30,8 @@ jobs:
       image: google/dart:latest
     outputs:
       sha: ${{ steps.commit.outputs.sha }}
+    permissions:
+      id-token: write # Required for authentication using OIDC
 
     steps:
       - name: Configure Environment Variables
@@ -42,7 +44,7 @@ jobs:
           fi
       
       - uses: actions/checkout@v3
-
+      - uses: dart-lang/setup-dart@v1
       - name: Update pubspec.yaml
         run: sed -i -e 's/^\(\s*version\s*:\s*\).*/\1 ${{ env.GIT_TAG }}/' ${{ env.FILE_PATH }}
 
@@ -87,7 +89,4 @@ jobs:
           tags: true
 
       - name: Publish to pub.dev 
-        run: |
-         mkdir -p $HOME/.config/dart
-         echo '${{ secrets.PUB_CREDENTIALS }}' > "$HOME/.config/dart/pub-credentials.json"
-         dart pub publish -f
+        run: dart pub publish --force
