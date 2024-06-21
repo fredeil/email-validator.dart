@@ -30,8 +30,6 @@ jobs:
       image: google/dart:latest
     outputs:
       sha: ${{ steps.commit.outputs.sha }}
-    permissions:
-      id-token: write # Required for authentication using OIDC
 
     steps:
       - name: Configure Environment Variables
@@ -42,7 +40,7 @@ jobs:
           if [ ${{ inputs.pre_release }} = "true" ]; then
             echo "GIT_TAG=${{ inputs.version }}-dev" | tee -a "$GITHUB_ENV"
           fi
-      
+      - uses: dart-lang/setup-dart@v1
       - uses: actions/checkout@v3
       - name: Update pubspec.yaml
         run: sed -i -e 's/^\(\s*version\s*:\s*\).*/\1 ${{ env.GIT_TAG }}/' ${{ env.FILE_PATH }}
