@@ -44,7 +44,6 @@ jobs:
           fi
       
       - uses: actions/checkout@v3
-      - uses: dart-lang/setup-dart@v1
       - name: Update pubspec.yaml
         run: sed -i -e 's/^\(\s*version\s*:\s*\).*/\1 ${{ env.GIT_TAG }}/' ${{ env.FILE_PATH }}
 
