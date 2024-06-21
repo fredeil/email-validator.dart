@@ -1,17 +1,3 @@
-## 2.2.8
-One letter TLD is not allowed anymore...
-## 2.2.0
-One letter TLD is not allowed anymore
-## 2.1.20
-Bug fixes and performance improvements
-## 2.1.17
-Duplicate type enum found in flutter
-## 2.1.7
-Duplicate type enum found in flutter
-## 2.1.16
-Bug fixes and performance improvements
-## 2.1.15
-Bug fixes and performance improvements
 
 ## 2.1.2
 Fix static anlyzer warnings and update Dart SDK
