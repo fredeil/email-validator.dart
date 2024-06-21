@@ -1,3 +1,5 @@
+## 3.0.0
+One letter TLD not allowed anymore
 ## 2.2.9
 One letter TLD not allowed
 
