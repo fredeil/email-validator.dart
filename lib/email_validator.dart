@@ -1,6 +1,7 @@
 library email_validator;
 
 import 'dart:core';
+import 'tld_validator.dart';
 
 /// The Type enum
 ///
@@ -327,7 +328,7 @@ class EmailValidator {
   /// will use the newer International Email standards for validating
   /// the email address.
   static bool validate(String email,
-      [bool allowTopLevelDomains = false, bool allowInternational = true]) {
+      [bool allowTopLevelDomains = false, bool allowInternational = true, bool knownTld = false]) {
     _index = 0;
 
     if (email.isEmpty || email.length >= 255) {
@@ -374,6 +375,10 @@ class EmailValidator {
       // domain
       if (!_skipDomain(email, allowTopLevelDomains, allowInternational)) {
         return false;
+      }
+
+      if (knownTld == true) {
+        return TldValidator.hasKnownTld(email);
       }
 
       return _index == email.length;
