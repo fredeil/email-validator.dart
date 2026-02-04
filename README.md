@@ -12,12 +12,12 @@ A simple Dart class for validating email addresses without using RegEx. Can also
 
 **Found in several big libraries and apps:**
 
-1. [Google Firebase](https://github.com/firebase/flutterfire)
+1. [Google Firebase](https://github.com/firebase/FirebaseUI-Flutter)
 1. [Flutter GenUI](https://github.com/flutter/genui)
 1. [Supabase - Flutter auth UI](https://github.com/supabase-community/flutter-auth-ui)
 1. [TubeCards - The world’s best flashcard platform](https://github.com/friebetill/TubeCards)
 1. [Serverpod - Serverpod is a next-generation app and web server, explicitly built for Flutter](https://github.com/serverpod/serverpod)
-1. [Ventyr.app - An app for last minute experiences - Startup from Tromsø, Norway](https://ventyr.app/)
+1. [Several other packages on pub.dev](https://pub.dev/packages?q=dependency%3Aemail_validator&sort=downloads)
 
 And many more! 
 
