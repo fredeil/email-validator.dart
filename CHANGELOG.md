@@ -1,3 +1,6 @@
+## 3.0.6
+Bug fixes and performance improvements
+
 ## 3.0.5
 Bug fixes and performance improvements
 
