@@ -14,7 +14,6 @@ linter:
     # https://github.com/dart-lang/linter/blob/master/example/all.yaml
     - always_declare_return_types
     - always_put_control_body_on_new_line
-    - always_require_non_null_named_parameters
     - annotate_overrides
     - avoid_empty_else
     - avoid_field_initializers_in_const_classes
@@ -37,15 +36,12 @@ linter:
     - empty_statements
     - hash_and_equals
     - implementation_imports
-    - iterable_contains_unrelated_type
     - library_names
     - library_prefixes
-    - list_remove_unrelated_type
     - no_adjacent_strings_in_list
     - no_duplicate_case_values
     - non_constant_identifier_names
     - overridden_fields
-    - package_api_docs
     - package_names
     - package_prefixed_library_names
     - prefer_adjacent_string_concatenation
@@ -57,7 +53,6 @@ linter:
     - prefer_const_declarations
     - prefer_const_literals_to_create_immutables
     - prefer_contains
-    - prefer_equal_for_default_values
     - prefer_final_fields
     - prefer_final_locals
     - prefer_foreach
