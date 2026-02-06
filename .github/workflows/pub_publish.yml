@@ -1,4 +1,4 @@
-name: Publish
+name: Release
 
 on:
   workflow_dispatch:
@@ -22,11 +22,10 @@ on:
           - "true"
 
 permissions:
-  id-token: write
   contents: write
 
 jobs:
-  publish:
+  release:
     runs-on: ubuntu-latest
 
     steps:
@@ -84,6 +83,3 @@ jobs:
           body: ${{ inputs.changelog }}
           prerelease: ${{ inputs.pre_release == 'true' }}
           target_commitish: ${{ github.ref_name }}
-
-      - name: Publish to pub.dev
-        run: dart pub publish --force
