@@ -1,8 +1,10 @@
 {
-  "last_updated": "2026-02-25T09:01:09Z",
-  "last_run": "2026-02-25T09:01:09Z",
-  "run_id": "22389617204",
+  "last_updated": "2026-02-25T09:07:41Z",
+  "last_run": "2026-02-25T09:07:41Z",
+  "run_id": "22389861017",
   "tasks_run_history": [
+    {"task": 11, "date": "2026-02-25"},
+    {"task": 7, "date": "2026-02-25"},
     {"task": 11, "date": "2026-02-25"},
     {"task": 5, "date": "2026-02-25"},
     {"task": 10, "date": "2026-02-25"},
@@ -32,7 +34,7 @@
   "improvement_ideas": [
     {"title": "Update README pub get command", "branch": "repo-assist/improve-readme-dart-pub-get", "date": "2026-02-25", "pr": 69},
     {"title": "Add CONTRIBUTING.md", "branch": "repo-assist/improve-contributing-guide", "date": "2026-02-25", "pr": 70},
-    {"title": "Add CI workflow", "branch": "repo-assist/ci-workflow-2026-02-25b", "date": "2026-02-25", "pr": null, "note": "Multiple attempts. Push always blocked by firewall. Patch at /tmp/gh-aw/aw-repo-assist-ci-workflow-2026-02-25b.patch. Issue #73 contains the patch from run 22389366705. Issue #71 is the canonical tracking issue. DO NOT RETRY - maintainer must apply manually."}
+    {"title": "Add CI workflow", "branch": "repo-assist/ci-workflow-2026-02-25b", "date": "2026-02-25", "pr": null, "note": "Multiple attempts. Push always blocked by firewall. Latest patch in issue #74 (supersedes #73). Issue #71 is the canonical tracking issue. DO NOT RETRY - maintainer must apply manually."}
   ],
   "welcomed_contributors": [],
   "nudged_prs": [],
@@ -42,7 +44,8 @@
   "labels_applied": [
     {"item": 65, "type": "pr", "labels": ["enhancement"], "date": "2026-02-25"},
     {"item": 71, "type": "issue", "labels": ["enhancement"], "date": "2026-02-25"},
-    {"item": 70, "type": "pr", "labels": ["documentation"], "date": "2026-02-25"}
+    {"item": 70, "type": "pr", "labels": ["documentation"], "date": "2026-02-25"},
+    {"item": 74, "type": "issue", "labels": ["enhancement"], "date": "2026-02-25"}
   ],
   "closed_issues": [
     {"number": 72, "reason": "Duplicate of #71 - both are CI workflow fallback issues", "date": "2026-02-25"}
@@ -51,6 +54,10 @@
     {"number": 69, "branch": "repo-assist/improve-readme-dart-pub-get", "title": "[Repo Assist] docs: update `pub get` to `dart pub get` in README", "created": "2026-02-25"},
     {"number": 70, "branch": "repo-assist/improve-contributing-guide", "title": "[Repo Assist] docs: add CONTRIBUTING.md with dev setup and PR guidelines", "created": "2026-02-25"}
   ],
-  "ci_workflow_status": "BLOCKED - git push always fails due to firewall. Patch exists in issue #73. Maintainer must apply manually. DO NOT retry creating CI workflow PR.",
-  "notes": "PR #65 (Copilot unit tests) open since 2026-02-13 - qualifies for stale nudge after 2026-02-27. No code changes since v3.0.6 warranting a release. Tasks 1, 2, 4 not yet run - prioritize on next run. CI workflow: DO NOT retry - multiple failed attempts, maintainer must apply manually from issue #73."
+  "ci_workflow_status": "BLOCKED - git push always fails due to firewall. Latest patch in issue #74 (supersedes #73). Maintainer must apply manually. DO NOT retry creating CI workflow PR.",
+  "fallback_issues": [
+    {"number": 73, "date": "2026-02-25", "note": "CI workflow patch fallback, superseded by #74"},
+    {"number": 74, "date": "2026-02-25", "note": "CI workflow patch fallback - latest/current"}
+  ],
+  "notes": "PR #65 (Copilot unit tests) open since 2026-02-13 - qualifies for stale nudge after 2026-02-27. No code changes since v3.0.6 warranting a release. Tasks 1, 2, 4 not actionable (no external issues/bugs). CI workflow: DO NOT retry - multiple failed attempts, maintainer must apply manually from issue #74 (newer) or #73."
 }
