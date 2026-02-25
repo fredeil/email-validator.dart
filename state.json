@@ -1,8 +1,9 @@
 {
-  "last_updated": "2026-02-25T08:30:56Z",
-  "last_run": "2026-02-25T08:30:56Z",
-  "run_id": "22388608528",
+  "last_updated": "2026-02-25T08:37:11Z",
+  "last_run": "2026-02-25T08:37:11Z",
+  "run_id": "22388827890",
   "tasks_run_history": [
+    {"task": 11, "date": "2026-02-25"},
     {"task": 5, "date": "2026-02-25"},
     {"task": 11, "date": "2026-02-25"},
     {"task": 5, "date": "2026-02-25"},
@@ -11,8 +12,7 @@
     {"task": 11, "date": "2026-02-25"},
     {"task": 1, "date": "2026-02-25"},
     {"task": 5, "date": "2026-02-25"},
-    {"task": 3, "date": "2026-02-25"},
-    {"task": 11, "date": "2026-02-25"}
+    {"task": 3, "date": "2026-02-25"}
   ],
   "issue_backlog_cursor": null,
   "pr_backlog_cursor": null,
@@ -46,5 +46,5 @@
     {"number": 69, "branch": "repo-assist/improve-readme-dart-pub-get", "title": "[Repo Assist] docs: update `pub get` to `dart pub get` in README", "created": "2026-02-25"},
     {"number": 70, "branch": "repo-assist/improve-contributing-guide", "title": "[Repo Assist] docs: add CONTRIBUTING.md with dev setup and PR guidelines", "created": "2026-02-25"}
   ],
-  "notes": "CI workflow push has failed on every run. Issue #71 is the canonical fallback issue. Issue #72 (duplicate) was closed this run. Do NOT retry CI workflow PR creation. Next run: try tasks 1, 2, 4, 6, 8, 9 - none have run recently."
+  "notes": "CI workflow push has failed on every run. Issue #71 is the canonical fallback issue. Do NOT retry CI workflow PR creation. Next run: try tasks 2, 4, 6, 7, 8, 9 - none have run recently. Commits since v3.0.6 are infrastructure-only (copilot-instructions, repo-assist workflow) - no code changes warranting a release."
 }
