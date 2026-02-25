@@ -1,8 +1,10 @@
 {
-  "last_updated": "2026-02-25T09:07:41Z",
-  "last_run": "2026-02-25T09:07:41Z",
-  "run_id": "22389861017",
+  "last_updated": "2026-02-25T09:13:47Z",
+  "last_run": "2026-02-25T09:13:47Z",
+  "run_id": "22390064499",
   "tasks_run_history": [
+    {"task": 11, "date": "2026-02-25"},
+    {"task": 5, "date": "2026-02-25"},
     {"task": 11, "date": "2026-02-25"},
     {"task": 7, "date": "2026-02-25"},
     {"task": 11, "date": "2026-02-25"},
@@ -59,5 +61,5 @@
     {"number": 73, "date": "2026-02-25", "note": "CI workflow patch fallback, superseded by #74"},
     {"number": 74, "date": "2026-02-25", "note": "CI workflow patch fallback - latest/current"}
   ],
-  "notes": "PR #65 (Copilot unit tests) open since 2026-02-13 - qualifies for stale nudge after 2026-02-27. No code changes since v3.0.6 warranting a release. Tasks 1, 2, 4 not actionable (no external issues/bugs). CI workflow: DO NOT retry - multiple failed attempts, maintainer must apply manually from issue #74 (newer) or #73."
+  "notes": "PR #65 (Copilot unit tests) open since 2026-02-13, qualifies for stale nudge after 2026-02-27. No code changes since v3.0.6 warranting a release. Maintainer merged PR #66 (repo-assist workflow) and #67 (copilot instructions) on 2026-02-25. Tasks 1, 2, 4 not actionable (no external issues/bugs). CI workflow: DO NOT retry - multiple failed attempts, maintainer must apply manually from issue #74."
 }
