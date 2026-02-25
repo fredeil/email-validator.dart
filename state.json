@@ -1,8 +1,11 @@
 {
-  "last_updated": "2026-02-25T09:13:47Z",
-  "last_run": "2026-02-25T09:13:47Z",
-  "run_id": "22390064499",
+  "last_updated": "2026-02-25T09:19:51Z",
+  "last_run": "2026-02-25T09:19:51Z",
+  "run_id": "22390282020",
   "tasks_run_history": [
+    {"task": 11, "date": "2026-02-25"},
+    {"task": 8, "date": "2026-02-25"},
+    {"task": 1, "date": "2026-02-25"},
     {"task": 11, "date": "2026-02-25"},
     {"task": 5, "date": "2026-02-25"},
     {"task": 11, "date": "2026-02-25"},
@@ -42,6 +45,13 @@
   "nudged_prs": [],
   "dependency_last_checked": "2026-02-25",
   "release_last_proposed": null,
+  "release_check": {
+    "date": "2026-02-25",
+    "last_release": "v3.0.6",
+    "last_release_date": "2026-02-06",
+    "commits_since": ["Add copilot (PR #67)", "Add agentic workflow repo-assist (PR #66)"],
+    "assessment": "No library code changes - only dev/workflow files added. No release warranted."
+  },
   "checked_off_actions": [],
   "labels_applied": [
     {"item": 65, "type": "pr", "labels": ["enhancement"], "date": "2026-02-25"},
