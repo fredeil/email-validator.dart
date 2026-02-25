@@ -1,8 +1,10 @@
 {
-  "last_updated": "2026-02-25T08:37:11Z",
-  "last_run": "2026-02-25T08:37:11Z",
-  "run_id": "22388827890",
+  "last_updated": "2026-02-25T08:42:16Z",
+  "last_run": "2026-02-25T08:42:16Z",
+  "run_id": "22388989951",
   "tasks_run_history": [
+    {"task": 11, "date": "2026-02-25"},
+    {"task": 7, "date": "2026-02-25"},
     {"task": 11, "date": "2026-02-25"},
     {"task": 5, "date": "2026-02-25"},
     {"task": 11, "date": "2026-02-25"},
@@ -10,9 +12,7 @@
     {"task": 11, "date": "2026-02-25"},
     {"task": 3, "date": "2026-02-25"},
     {"task": 11, "date": "2026-02-25"},
-    {"task": 1, "date": "2026-02-25"},
-    {"task": 5, "date": "2026-02-25"},
-    {"task": 3, "date": "2026-02-25"}
+    {"task": 1, "date": "2026-02-25"}
   ],
   "issue_backlog_cursor": null,
   "pr_backlog_cursor": null,
@@ -37,7 +37,9 @@
   "release_last_proposed": null,
   "checked_off_actions": [],
   "labels_applied": [
-    {"item": 65, "type": "pr", "labels": ["enhancement"], "date": "2026-02-25"}
+    {"item": 65, "type": "pr", "labels": ["enhancement"], "date": "2026-02-25"},
+    {"item": 71, "type": "issue", "labels": ["enhancement"], "date": "2026-02-25"},
+    {"item": 70, "type": "pr", "labels": ["documentation"], "date": "2026-02-25"}
   ],
   "closed_issues": [
     {"number": 72, "reason": "Duplicate of #71 - both are CI workflow fallback issues", "date": "2026-02-25"}
@@ -46,5 +48,5 @@
     {"number": 69, "branch": "repo-assist/improve-readme-dart-pub-get", "title": "[Repo Assist] docs: update `pub get` to `dart pub get` in README", "created": "2026-02-25"},
     {"number": 70, "branch": "repo-assist/improve-contributing-guide", "title": "[Repo Assist] docs: add CONTRIBUTING.md with dev setup and PR guidelines", "created": "2026-02-25"}
   ],
-  "notes": "CI workflow push has failed on every run. Issue #71 is the canonical fallback issue. Do NOT retry CI workflow PR creation. Next run: try tasks 2, 4, 6, 7, 8, 9 - none have run recently. Commits since v3.0.6 are infrastructure-only (copilot-instructions, repo-assist workflow) - no code changes warranting a release."
+  "notes": "CI workflow push has failed on every run. Issue #71 is the canonical fallback issue. Do NOT retry CI workflow PR creation. Next run: try tasks 2, 4, 6, 8, 9 - none have run recently. Commits since v3.0.6 are infrastructure-only (copilot-instructions, repo-assist workflow) - no code changes warranting a release. PR #65 (Copilot unit tests) still open and awaiting maintainer review - created 2026-02-13."
 }
