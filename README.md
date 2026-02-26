@@ -39,8 +39,7 @@ dependencies:
 You can install packages from the command line:
 
 ```bash
-$ pub get
-..
+$ dart pub get
 ```
 
 Alternatively, your editor might support pub. Check the docs for your editor to learn more.
