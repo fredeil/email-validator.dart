@@ -292,7 +292,7 @@ void main() {
         reason: 'Empty quoted local-part should be valid');
     expect(EmailValidator.validate('"@"@example.com', true), equals(true),
         reason: 'Quoted @ sign in local-part should be valid');
-    expect(EmailValidator.validate('"unclosed@example.com'), equals(false),
+    expect(EmailValidator.validate('"unclosed@example.com', true), equals(false),
         reason: 'Unclosed quote should be invalid');
   });
 
