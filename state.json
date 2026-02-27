@@ -1,8 +1,12 @@
 {
-  "last_updated": "2026-02-26T07:41:23Z",
-  "last_run": "2026-02-26T07:41:23Z",
-  "run_id": "22432552644",
+  "last_updated": "2026-02-27T07:38:00Z",
+  "last_run": "2026-02-27T07:38:00Z",
+  "run_id": "22477257628",
   "tasks_run_history": [
+    {"task": 11, "date": "2026-02-27"},
+    {"task": 1, "date": "2026-02-27"},
+    {"task": 7, "date": "2026-02-27"},
+    {"task": 8, "date": "2026-02-27"},
     {"task": 11, "date": "2026-02-26"},
     {"task": 5, "date": "2026-02-26"},
     {"task": 6, "date": "2026-02-26"},
@@ -23,48 +27,55 @@
   "pr_backlog_cursor": null,
   "monthly_summary_issue": {
     "month": "2026-02",
-    "number": 68,
-    "created_at": "2026-02-25"
+    "number": 77,
+    "created_at": "2026-02-27",
+    "note": "Previous summary #68 was closed by fredeil on 2026-02-26. New issue #77 created this run."
   },
-  "commented_issues": [],
-  "commented_prs": [
-    {"number": 65, "date": "2026-02-25", "type": "review-verification"}
+  "commented_issues": [
+    {"number": 76, "date": "2026-02-27", "type": "triage-scope-explanation"}
   ],
+  "commented_prs": [],
   "fix_attempts": [],
   "improvement_ideas": [
-    {"title": "Update README pub get command", "branch": "repo-assist/improve-readme-dart-pub-get", "date": "2026-02-25", "pr": 69},
-    {"title": "Add CONTRIBUTING.md", "branch": "repo-assist/improve-contributing-guide", "date": "2026-02-25", "pr": 70},
-    {"title": "Add CI workflow", "branch": "repo-assist/ci-workflow-2026-02-25b", "date": "2026-02-25", "pr": null, "note": "Multiple attempts. Push always blocked by firewall. Latest patch in issue #74 (supersedes #73). Issue #71 is the canonical tracking issue. DO NOT RETRY - maintainer must apply manually."}
+    {"title": "Update README pub get command", "branch": "repo-assist/improve-readme-dart-pub-get", "date": "2026-02-25", "pr": 69, "status": "merged-2026-02-26"},
+    {"title": "Add CONTRIBUTING.md", "branch": "repo-assist/improve-contributing-guide", "date": "2026-02-25", "pr": 70, "status": "merged-2026-02-26"},
+    {"title": "Add CI workflow", "branch": "repo-assist/ci-workflow-2026-02-25b", "date": "2026-02-25", "pr": null, "status": "resolved-2026-02-26", "note": "Copilot created PR #75 from issue #74 patch, merged by fredeil. Issues #71, #73, #74 all closed."}
   ],
   "welcomed_contributors": [],
   "nudged_prs": [],
   "dependency_last_checked": "2026-02-25",
   "release_last_proposed": null,
   "release_check": {
-    "date": "2026-02-25",
+    "date": "2026-02-27",
     "last_release": "v3.0.6",
     "last_release_date": "2026-02-06",
-    "commits_since": ["Add copilot (PR #67)", "Add agentic workflow repo-assist (PR #66)"],
-    "assessment": "No library code changes - only dev/workflow files added. No release warranted."
+    "commits_since": [
+      "Merge PR #75: CI workflow (2026-02-26)",
+      "Merge PR #65: Unit tests (2026-02-26)",
+      "Merge PR #69: README dart pub get docs (2026-02-26)",
+      "Merge PR #70: CONTRIBUTING.md (2026-02-26)",
+      "Add copilot (PR #67)",
+      "Add agentic workflow repo-assist (PR #66)"
+    ],
+    "assessment": "No library code changes since v3.0.6 - all dev/workflow/docs/test files. No release warranted."
   },
   "checked_off_actions": [],
   "labels_applied": [
+    {"item": 76, "type": "issue", "labels": ["question"], "date": "2026-02-27"},
     {"item": 65, "type": "pr", "labels": ["enhancement"], "date": "2026-02-25"},
     {"item": 71, "type": "issue", "labels": ["enhancement"], "date": "2026-02-25"},
     {"item": 70, "type": "pr", "labels": ["documentation"], "date": "2026-02-25"},
     {"item": 74, "type": "issue", "labels": ["enhancement"], "date": "2026-02-25"}
   ],
   "closed_issues": [
-    {"number": 72, "reason": "Duplicate of #71 - both are CI workflow fallback issues", "date": "2026-02-25"}
+    {"number": 72, "reason": "Duplicate of #71", "date": "2026-02-25"},
+    {"number": 71, "reason": "CI workflow resolved - PR #75 merged", "closed_by": "fredeil", "date": "2026-02-26"},
+    {"number": 73, "reason": "Superseded by #74, both resolved", "closed_by": "fredeil", "date": "2026-02-26"},
+    {"number": 74, "reason": "CI workflow resolved - PR #75 merged", "closed_by": "fredeil", "date": "2026-02-26"},
+    {"number": 68, "reason": "Monthly summary closed by maintainer", "closed_by": "fredeil", "date": "2026-02-26"}
   ],
-  "open_repo_assist_prs": [
-    {"number": 69, "branch": "repo-assist/improve-readme-dart-pub-get", "title": "[Repo Assist] docs: update `pub get` to `dart pub get` in README", "created": "2026-02-25"},
-    {"number": 70, "branch": "repo-assist/improve-contributing-guide", "title": "[Repo Assist] docs: add CONTRIBUTING.md with dev setup and PR guidelines", "created": "2026-02-25"}
-  ],
-  "ci_workflow_status": "BLOCKED - git push always fails due to firewall. Latest patch in issue #74 (supersedes #73). Maintainer must apply manually. DO NOT retry creating CI workflow PR.",
-  "fallback_issues": [
-    {"number": 73, "date": "2026-02-25", "note": "CI workflow patch fallback, superseded by #74"},
-    {"number": 74, "date": "2026-02-25", "note": "CI workflow patch fallback - latest/current"}
-  ],
-  "notes": "PR #65 (Copilot unit tests) open since 2026-02-13 - was last updated 2026-02-25. Stale nudge due 2026-02-27 if no human activity. No code changes since v3.0.6 warranting a release. CI workflow: DO NOT retry - multiple failed attempts, maintainer must apply manually from issue #74. Next run priority: Task 6 stale nudge for PR #65 if still open after 2026-02-27."
+  "open_repo_assist_prs": [],
+  "ci_workflow_status": "RESOLVED - PR #75 merged by fredeil on 2026-02-26. CI is now active.",
+  "fallback_issues": [],
+  "notes": "2026-02-26: Maintainer fredeil merged PRs #65, #69, #70, #75 and closed issues #71, #73, #74, #68. Repository is now in great shape with CI, CONTRIBUTING.md, README docs, and unit tests all in place. New issue #76 about TLD validation scope - commented to explain this is by design (syntax validator, not TLD existence checker). New monthly summary created as #77. Next priority: watch for new issues; consider feature proposal for optional TLD allowlist (motivated by #76)."
 }
