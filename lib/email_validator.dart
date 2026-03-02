@@ -1,7 +1,5 @@
 library email_validator;
 
-import 'dart:core';
-
 /// The Type enum
 ///
 /// The domain type is either None, Alphabetic, Numeric or AlphaNumeric
@@ -203,7 +201,11 @@ class EmailValidator {
     return true;
   }
 
-  // TODO: Documentation for this function is required
+  /// Attempts to parse an IPv4 address literal at the current [_index] in [text].
+  ///
+  /// Expects exactly four decimal groups in the range 0–255, separated by
+  /// dots (e.g. `127.0.0.1`).  Advances [_index] past the address on success.
+  /// Returns `true` if a valid four-octet address was consumed, `false` otherwise.
   static bool _skipIPv4Literal(String text) {
     var groups = 0;
 
