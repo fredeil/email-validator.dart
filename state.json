@@ -1,8 +1,13 @@
 {
-  "last_updated": "2026-03-01T07:34:30Z",
-  "last_run": "2026-03-01T07:34:30Z",
-  "run_id": "22538631870",
+  "last_updated": "2026-03-02T07:41:08Z",
+  "last_run": "2026-03-02T07:41:08Z",
+  "run_id": "22566125142",
   "tasks_run_history": [
+    {"task": 11, "date": "2026-03-02"},
+    {"task": 2, "date": "2026-03-02"},
+    {"task": 4, "date": "2026-03-02"},
+    {"task": 5, "date": "2026-03-02"},
+    {"task": 6, "date": "2026-03-02"},
     {"task": 11, "date": "2026-03-01"},
     {"task": 10, "date": "2026-03-01"},
     {"task": 5, "date": "2026-03-01"},
@@ -16,18 +21,7 @@
     {"task": 11, "date": "2026-02-26"},
     {"task": 5, "date": "2026-02-26"},
     {"task": 6, "date": "2026-02-26"},
-    {"task": 7, "date": "2026-02-26"},
-    {"task": 11, "date": "2026-02-25"},
-    {"task": 2, "date": "2026-02-25"},
-    {"task": 1, "date": "2026-02-25"},
-    {"task": 4, "date": "2026-02-25"},
-    {"task": 5, "date": "2026-02-25"},
-    {"task": 8, "date": "2026-02-25"},
-    {"task": 7, "date": "2026-02-25"},
-    {"task": 10, "date": "2026-02-25"},
-    {"task": 6, "date": "2026-02-25"},
-    {"task": 9, "date": "2026-02-25"},
-    {"task": 3, "date": "2026-02-25"}
+    {"task": 7, "date": "2026-02-26"}
   ],
   "issue_backlog_cursor": null,
   "pr_backlog_cursor": null,
@@ -47,16 +41,19 @@
     {"number": 76, "date": "2026-02-27", "type": "triage-scope-explanation"}
   ],
   "commented_prs": [],
-  "fix_attempts": [],
+  "fix_attempts": [
+    {"issue": 80, "branch": "repo-assist/fix-issue-80-dart-format", "pr": 82, "date": "2026-03-02", "status": "open", "description": "Auto-format lib/email_validator.dart and test/email_validator_test.dart with dart format"}
+  ],
   "improvement_ideas": [
     {"title": "Update README pub get command", "branch": "repo-assist/improve-readme-dart-pub-get", "date": "2026-02-25", "pr": 69, "status": "merged-2026-02-26"},
     {"title": "Add CONTRIBUTING.md", "branch": "repo-assist/improve-contributing-guide", "date": "2026-02-25", "pr": 70, "status": "merged-2026-02-26"},
     {"title": "Add CI workflow", "branch": "repo-assist/ci-workflow-2026-02-25b", "date": "2026-02-25", "pr": null, "status": "resolved-2026-02-26", "note": "Copilot created PR #75 from issue #74 patch, merged by fredeil. Issues #71, #73, #74 all closed."},
-    {"title": "Remove redundant dart:core import and document _skipIPv4Literal", "branch": "repo-assist/improve-code-cleanup-2026-02-28", "date": "2026-02-28", "pr": 79, "status": "open"}
+    {"title": "Remove redundant dart:core import and document _skipIPv4Literal", "branch": "repo-assist/improve-code-cleanup-2026-02-28", "date": "2026-02-28", "pr": 79, "status": "merged-2026-03-02"}
   ],
   "welcomed_contributors": [],
   "nudged_prs": [],
-  "dependency_last_checked": "2026-02-25",
+  "dependency_last_checked": "2026-03-02",
+  "dependency_notes": "Only dev dep: test: ^1.16.8. pub outdated unavailable due to network firewall. Should check manually or in CI.",
   "release_last_proposed": null,
   "release_check": {
     "date": "2026-02-27",
@@ -68,9 +65,10 @@
       "Merge PR #69: README dart pub get docs (2026-02-26)",
       "Merge PR #70: CONTRIBUTING.md (2026-02-26)",
       "Add copilot (PR #67)",
-      "Add agentic workflow repo-assist (PR #66)"
+      "Add agentic workflow repo-assist (PR #66)",
+      "Merge PR #79: Remove dart:core import + _skipIPv4Literal docs (2026-03-02)"
     ],
-    "assessment": "No library code changes since v3.0.6 - all dev/workflow/docs/test files. No release warranted."
+    "assessment": "No library logic changes since v3.0.6 - all dev/workflow/docs/test/style files. No release warranted."
   },
   "checked_off_actions": [],
   "labels_applied": [
@@ -88,18 +86,21 @@
     {"number": 68, "reason": "Monthly summary closed by maintainer", "closed_by": "fredeil", "date": "2026-02-26"},
     {"number": 77, "reason": "February monthly summary - month rolled over to March", "date": "2026-03-01"}
   ],
+  "closed_prs": [
+    {"number": 78, "reason": "Closed (not merged) - no changes needed for TLD question", "date": "2026-03-02"},
+    {"number": 79, "reason": "Merged by @fredeil", "date": "2026-03-02"}
+  ],
   "open_repo_assist_prs": [
-    {"number": 79, "title": "chore: remove redundant dart:core import and document _skipIPv4Literal", "branch": "repo-assist/improve-code-cleanup-2026-02-28", "created": "2026-02-28", "ci_note": "github-actions bot PRs do not auto-trigger CI. Maintainer must manually trigger."}
+    {"number": 82, "title": "[Repo Assist] fix: auto-format Dart files to fix CI formatting failures", "branch": "repo-assist/fix-issue-80-dart-format", "created": "2026-03-02", "closes": "#80", "note": "Rebased on master after PR #79 merged. Patch verified to apply cleanly."}
   ],
   "open_issues": [
     {"number": 76, "title": "TLD validation scope question", "user": "Leekogram"},
-    {"number": 80, "title": "CI failing on master: test file needs dart format", "created_by": "repo-assist", "date": "2026-03-01"},
+    {"number": 80, "title": "CI failing on master: test file needs dart format", "created_by": "repo-assist", "date": "2026-03-01", "fix_pr": 82},
     {"number": 81, "title": "[Repo Assist] Monthly Activity 2026-03", "created_by": "repo-assist", "date": "2026-03-01"}
   ],
-  "ci_workflow_status": "FAILING on master - test/email_validator_test.dart needs dart format. Issue #80 filed.",
+  "ci_workflow_status": "PR #82 open to fix master CI failures",
   "known_issues": [
-    {"issue": "master CI failing: dart format test/email_validator_test.dart", "github_issue": 80, "filed_date": "2026-03-01"},
-    {"issue": "github-actions bot PRs do not auto-trigger CI workflows", "affects_pr": 79, "filed_date": "2026-03-01"}
+    {"issue": "github-actions bot PRs do not auto-trigger CI workflows", "note": "Maintainer must manually trigger CI"}
   ],
-  "notes": "2026-03-01: Filed issue #80 about CI formatting failure on master (test/email_validator_test.dart needs dart format). PR #79 CI never triggered - github-actions bot limitation. Created March 2026 monthly summary #81. Closed February summary #77. Next priority: Tasks 1 (issue triage), 2 (fix issues - consider fixing test formatting), 4 (dependency update), 6 (stale PR nudges - PR #78 will be 14+ days on 2026-03-13), 7 (label issues/PRs), 9 (welcome new contributors)."
+  "notes": "2026-03-02: Maintainer merged PR #79 and closed PR #78 just before/during this run. Created PR #82 to fix issue #80 (dart format failures). Rebased cleanly on new master including PR #79 changes. Next priority: Tasks 1 (issue triage), 7 (label issues/PRs), 8 (release check - may warrant release with style/doc changes), 9 (welcome new contributors)."
 }
