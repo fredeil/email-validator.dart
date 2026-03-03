@@ -1,8 +1,14 @@
 {
-  "last_updated": "2026-03-02T07:41:08Z",
-  "last_run": "2026-03-02T07:41:08Z",
-  "run_id": "22566125142",
+  "last_updated": "2026-03-03T07:36:50Z",
+  "last_run": "2026-03-03T07:36:50Z",
+  "run_id": "22613026506",
   "tasks_run_history": [
+    {"task": 11, "date": "2026-03-03"},
+    {"task": 1, "date": "2026-03-03"},
+    {"task": 7, "date": "2026-03-03"},
+    {"task": 8, "date": "2026-03-03"},
+    {"task": 9, "date": "2026-03-03"},
+    {"task": 10, "date": "2026-03-03"},
     {"task": 11, "date": "2026-03-02"},
     {"task": 2, "date": "2026-03-02"},
     {"task": 4, "date": "2026-03-02"},
@@ -16,12 +22,7 @@
     {"task": 9, "date": "2026-02-28"},
     {"task": 11, "date": "2026-02-27"},
     {"task": 1, "date": "2026-02-27"},
-    {"task": 7, "date": "2026-02-27"},
-    {"task": 8, "date": "2026-02-27"},
-    {"task": 11, "date": "2026-02-26"},
-    {"task": 5, "date": "2026-02-26"},
-    {"task": 6, "date": "2026-02-26"},
-    {"task": 7, "date": "2026-02-26"}
+    {"task": 7, "date": "2026-02-27"}
   ],
   "issue_backlog_cursor": null,
   "pr_backlog_cursor": null,
@@ -29,7 +30,7 @@
     "month": "2026-03",
     "number": 81,
     "created_at": "2026-03-01",
-    "note": "Created March 2026 summary. Closed February summary #77."
+    "note": "Updated 2026-03-03 with new CI matrix PR."
   },
   "previous_monthly_summary": {
     "month": "2026-02",
@@ -48,7 +49,8 @@
     {"title": "Update README pub get command", "branch": "repo-assist/improve-readme-dart-pub-get", "date": "2026-02-25", "pr": 69, "status": "merged-2026-02-26"},
     {"title": "Add CONTRIBUTING.md", "branch": "repo-assist/improve-contributing-guide", "date": "2026-02-25", "pr": 70, "status": "merged-2026-02-26"},
     {"title": "Add CI workflow", "branch": "repo-assist/ci-workflow-2026-02-25b", "date": "2026-02-25", "pr": null, "status": "resolved-2026-02-26", "note": "Copilot created PR #75 from issue #74 patch, merged by fredeil. Issues #71, #73, #74 all closed."},
-    {"title": "Remove redundant dart:core import and document _skipIPv4Literal", "branch": "repo-assist/improve-code-cleanup-2026-02-28", "date": "2026-02-28", "pr": 79, "status": "merged-2026-03-02"}
+    {"title": "Remove redundant dart:core import and document _skipIPv4Literal", "branch": "repo-assist/improve-code-cleanup-2026-02-28", "date": "2026-02-28", "pr": 79, "status": "merged-2026-03-02"},
+    {"title": "Add Dart SDK matrix (stable + beta) to CI", "branch": "repo-assist/improve-ci-sdk-matrix-2026-03-03", "date": "2026-03-03", "pr": "pending", "status": "open", "description": "Matrix-test CI against both stable and beta Dart SDKs to catch breakage early"}
   ],
   "welcomed_contributors": [],
   "nudged_prs": [],
@@ -56,7 +58,7 @@
   "dependency_notes": "Only dev dep: test: ^1.16.8. pub outdated unavailable due to network firewall. Should check manually or in CI.",
   "release_last_proposed": null,
   "release_check": {
-    "date": "2026-02-27",
+    "date": "2026-03-03",
     "last_release": "v3.0.6",
     "last_release_date": "2026-02-06",
     "commits_since": [
@@ -91,16 +93,17 @@
     {"number": 79, "reason": "Merged by @fredeil", "date": "2026-03-02"}
   ],
   "open_repo_assist_prs": [
-    {"number": 82, "title": "[Repo Assist] fix: auto-format Dart files to fix CI formatting failures", "branch": "repo-assist/fix-issue-80-dart-format", "created": "2026-03-02", "closes": "#80", "note": "Rebased on master after PR #79 merged. Patch verified to apply cleanly."}
+    {"number": 82, "title": "[Repo Assist] fix: auto-format Dart files to fix CI formatting failures", "branch": "repo-assist/fix-issue-80-dart-format", "created": "2026-03-02", "closes": "#80", "note": "Rebased on master after PR #79 merged. Patch verified to apply cleanly."},
+    {"number": "pending", "title": "[Repo Assist] ci: add Dart SDK matrix (stable + beta) to CI", "branch": "repo-assist/improve-ci-sdk-matrix-2026-03-03", "created": "2026-03-03", "closes": null, "note": "Adds matrix strategy to test both stable and beta Dart SDKs in CI."}
   ],
   "open_issues": [
     {"number": 76, "title": "TLD validation scope question", "user": "Leekogram"},
     {"number": 80, "title": "CI failing on master: test file needs dart format", "created_by": "repo-assist", "date": "2026-03-01", "fix_pr": 82},
     {"number": 81, "title": "[Repo Assist] Monthly Activity 2026-03", "created_by": "repo-assist", "date": "2026-03-01"}
   ],
-  "ci_workflow_status": "PR #82 open to fix master CI failures",
+  "ci_workflow_status": "PR #82 open to fix master CI failures; CI matrix PR pending",
   "known_issues": [
     {"issue": "github-actions bot PRs do not auto-trigger CI workflows", "note": "Maintainer must manually trigger CI"}
   ],
-  "notes": "2026-03-02: Maintainer merged PR #79 and closed PR #78 just before/during this run. Created PR #82 to fix issue #80 (dart format failures). Rebased cleanly on new master including PR #79 changes. Next priority: Tasks 1 (issue triage), 7 (label issues/PRs), 8 (release check - may warrant release with style/doc changes), 9 (welcome new contributors)."
+  "notes": "2026-03-03: Tasks run: 1 (nothing to triage), 7 (labels all correct, no changes), 8 (no release warranted - no library changes), 9 (no new contributors), 10 (created CI SDK matrix PR), 11 (monthly summary updated). Next priority: Task 3 (codebase study), Task 6 (stale PR nudge), Task 5 (maintain Repo Assist PRs)."
 }
