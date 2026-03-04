@@ -1,8 +1,12 @@
 {
-  "last_updated": "2026-03-03T07:36:50Z",
-  "last_run": "2026-03-03T07:36:50Z",
-  "run_id": "22613026506",
+  "last_updated": "2026-03-04T07:35:49Z",
+  "last_run": "2026-03-04T07:35:49Z",
+  "run_id": "22659623816",
   "tasks_run_history": [
+    {"task": 11, "date": "2026-03-04"},
+    {"task": 5, "date": "2026-03-04"},
+    {"task": 3, "date": "2026-03-04"},
+    {"task": 6, "date": "2026-03-04"},
     {"task": 11, "date": "2026-03-03"},
     {"task": 1, "date": "2026-03-03"},
     {"task": 7, "date": "2026-03-03"},
@@ -18,11 +22,7 @@
     {"task": 10, "date": "2026-03-01"},
     {"task": 5, "date": "2026-03-01"},
     {"task": 11, "date": "2026-02-28"},
-    {"task": 3, "date": "2026-02-28"},
-    {"task": 9, "date": "2026-02-28"},
-    {"task": 11, "date": "2026-02-27"},
-    {"task": 1, "date": "2026-02-27"},
-    {"task": 7, "date": "2026-02-27"}
+    {"task": 3, "date": "2026-02-28"}
   ],
   "issue_backlog_cursor": null,
   "pr_backlog_cursor": null,
@@ -30,7 +30,7 @@
     "month": "2026-03",
     "number": 81,
     "created_at": "2026-03-01",
-    "note": "Updated 2026-03-03 with new CI matrix PR."
+    "note": "Updated 2026-03-04 with run history and CI matrix PR push failure note."
   },
   "previous_monthly_summary": {
     "month": "2026-02",
@@ -50,7 +50,7 @@
     {"title": "Add CONTRIBUTING.md", "branch": "repo-assist/improve-contributing-guide", "date": "2026-02-25", "pr": 70, "status": "merged-2026-02-26"},
     {"title": "Add CI workflow", "branch": "repo-assist/ci-workflow-2026-02-25b", "date": "2026-02-25", "pr": null, "status": "resolved-2026-02-26", "note": "Copilot created PR #75 from issue #74 patch, merged by fredeil. Issues #71, #73, #74 all closed."},
     {"title": "Remove redundant dart:core import and document _skipIPv4Literal", "branch": "repo-assist/improve-code-cleanup-2026-02-28", "date": "2026-02-28", "pr": 79, "status": "merged-2026-03-02"},
-    {"title": "Add Dart SDK matrix (stable + beta) to CI", "branch": "repo-assist/improve-ci-sdk-matrix-2026-03-03", "date": "2026-03-03", "pr": "pending", "status": "open", "description": "Matrix-test CI against both stable and beta Dart SDKs to catch breakage early"}
+    {"title": "Add Dart SDK matrix (stable + beta) to CI", "branch": "repo-assist/improve-ci-sdk-matrix-2026-03-03", "date": "2026-03-03", "issue": 83, "status": "issue-only", "description": "PR push failed twice (2026-03-03 and 2026-03-04). Issue #83 documents patch for manual application.", "retry_count": 2}
   ],
   "welcomed_contributors": [],
   "nudged_prs": [],
@@ -93,17 +93,22 @@
     {"number": 79, "reason": "Merged by @fredeil", "date": "2026-03-02"}
   ],
   "open_repo_assist_prs": [
-    {"number": 82, "title": "[Repo Assist] fix: auto-format Dart files to fix CI formatting failures", "branch": "repo-assist/fix-issue-80-dart-format", "created": "2026-03-02", "closes": "#80", "note": "Rebased on master after PR #79 merged. Patch verified to apply cleanly."},
-    {"number": "pending", "title": "[Repo Assist] ci: add Dart SDK matrix (stable + beta) to CI", "branch": "repo-assist/improve-ci-sdk-matrix-2026-03-03", "created": "2026-03-03", "closes": null, "note": "Adds matrix strategy to test both stable and beta Dart SDKs in CI."}
+    {"number": 82, "title": "[Repo Assist] fix: auto-format Dart files to fix CI formatting failures", "branch": "repo-assist/fix-issue-80-dart-format-eee8951073a3c5e2", "created": "2026-03-02", "closes": "#80", "note": "Still open, clean/mergeable, no CI failures from our changes."}
   ],
   "open_issues": [
     {"number": 76, "title": "TLD validation scope question", "user": "Leekogram"},
     {"number": 80, "title": "CI failing on master: test file needs dart format", "created_by": "repo-assist", "date": "2026-03-01", "fix_pr": 82},
-    {"number": 81, "title": "[Repo Assist] Monthly Activity 2026-03", "created_by": "repo-assist", "date": "2026-03-01"}
+    {"number": 81, "title": "[Repo Assist] Monthly Activity 2026-03", "created_by": "repo-assist", "date": "2026-03-01"},
+    {"number": 83, "title": "[Repo Assist] ci: add Dart SDK matrix (stable + beta) to CI", "created_by": "repo-assist", "date": "2026-03-03", "note": "PR push failed twice - patch documented in issue for manual application"}
   ],
-  "ci_workflow_status": "PR #82 open to fix master CI failures; CI matrix PR pending",
+  "ci_workflow_status": "PR #82 open to fix master CI failures. Issue #83 documents CI SDK matrix patch.",
   "known_issues": [
-    {"issue": "github-actions bot PRs do not auto-trigger CI workflows", "note": "Maintainer must manually trigger CI"}
+    {"issue": "github-actions bot PRs do not auto-trigger CI workflows", "note": "Maintainer must manually trigger CI"},
+    {"issue": "safeoutputs-create_pull_request fails silently for CI SDK matrix changes", "note": "Push returns success but no branch/PR/issue created. Tried 2026-03-03 and 2026-03-04. Unknown root cause. Do not retry."}
   ],
-  "notes": "2026-03-03: Tasks run: 1 (nothing to triage), 7 (labels all correct, no changes), 8 (no release warranted - no library changes), 9 (no new contributors), 10 (created CI SDK matrix PR), 11 (monthly summary updated). Next priority: Task 3 (codebase study), Task 6 (stale PR nudge), Task 5 (maintain Repo Assist PRs)."
+  "unmerged_maintainer_branches": [
+    {"branch": "ipv6-parser-bug", "author": "fredeil", "date": "2022-07-30", "note": "Old IPv6 bug fix branch from 2022, not merged. Do not act on without maintainer guidance."},
+    {"branch": "disallow-control-characters", "author": "fredeil", "date": "2022-08-04", "note": "Old control characters fix branch from 2022, not merged. Do not act on without maintainer guidance."}
+  ],
+  "notes": "2026-03-04: Tasks 5 (PR #82 clean, CI matrix push still failing), 3 (codebase study - no bugs, noted old branches), 6 (no stale PRs), 11 (monthly summary updated). Next priority: Task 1 (issue triage), Task 7 (labels), Task 9 (new contributors), Task 2 (fix issues)."
 }
