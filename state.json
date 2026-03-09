@@ -1,8 +1,13 @@
 {
-  "last_updated": "2026-03-08T07:34:00Z",
-  "last_run": "2026-03-08T07:34:00Z",
-  "run_id": "22816545673",
+  "last_updated": "2026-03-09T07:41:16Z",
+  "last_run": "2026-03-09T07:41:16Z",
+  "run_id": "22843211904",
   "tasks_run_history": [
+    {"task": 2, "date": "2026-03-09"},
+    {"task": 4, "date": "2026-03-09"},
+    {"task": 5, "date": "2026-03-09"},
+    {"task": 10, "date": "2026-03-09"},
+    {"task": 11, "date": "2026-03-09"},
     {"task": 1, "date": "2026-03-08"},
     {"task": 5, "date": "2026-03-08"},
     {"task": 8, "date": "2026-03-08"},
@@ -36,7 +41,7 @@
     "month": "2026-03",
     "number": 81,
     "created_at": "2026-03-01",
-    "note": "Updated 2026-03-08 with run history."
+    "note": "Updated 2026-03-09 with run history."
   },
   "previous_monthly_summary": {
     "month": "2026-02",
@@ -56,11 +61,12 @@
     {"title": "Add CONTRIBUTING.md", "branch": "repo-assist/improve-contributing-guide", "date": "2026-02-25", "pr": 70, "status": "merged-2026-02-26"},
     {"title": "Add CI workflow", "branch": "repo-assist/ci-workflow-2026-02-25b", "date": "2026-02-25", "pr": null, "status": "resolved-2026-02-26", "note": "Copilot created PR #75 from issue #74 patch, merged by fredeil. Issues #71, #73, #74 all closed."},
     {"title": "Remove redundant dart:core import and document _skipIPv4Literal", "branch": "repo-assist/improve-code-cleanup-2026-02-28", "date": "2026-02-28", "pr": 79, "status": "merged-2026-03-02"},
-    {"title": "Add Dart SDK matrix (stable + beta) to CI", "branch": "N/A", "date": "2026-03-03", "issue": 83, "status": "issue-only", "description": "PR push failed repeatedly (2026-03-03, 2026-03-04). Issue #83 documents patch for manual application. DO NOT RETRY.", "retry_count": 3}
+    {"title": "Add Dart SDK matrix (stable + beta) to CI", "branch": "N/A", "date": "2026-03-03", "issue": 83, "status": "issue-only", "description": "PR push failed repeatedly (2026-03-03, 2026-03-04). Issue #83 documents patch for manual application. DO NOT RETRY.", "retry_count": 3},
+    {"title": "README: add CI/pub.dev badges, update version ref, fix code fence casing", "branch": "repo-assist/improve-readme-badges-and-version", "date": "2026-03-09", "pr": "pending-creation", "status": "pr-queued", "description": "Documentation-only: CI badge, pub.dev badge, version ^3.0.0->^3.0.6, Dart->dart in code fences, single-quoted string example"}
   ],
   "welcomed_contributors": [],
   "nudged_prs": [],
-  "dependency_last_checked": "2026-03-02",
+  "dependency_last_checked": "2026-03-09",
   "dependency_notes": "Only dev dep: test: ^1.16.8. pub outdated unavailable due to network firewall.",
   "release_last_proposed": null,
   "release_check": {
@@ -94,7 +100,8 @@
     {"number": 79, "reason": "Merged by @fredeil", "date": "2026-03-02"}
   ],
   "open_repo_assist_prs": [
-    {"number": 82, "title": "[Repo Assist] fix: auto-format Dart files to fix CI formatting failures", "branch": "repo-assist/fix-issue-80-dart-format-eee8951073a3c5e2", "created": "2026-03-02", "closes": "#80", "note": "Still open, clean/mergeable, no CI failures from our changes. Will hit 14-day stale threshold on 2026-03-16."}
+    {"number": 82, "title": "[Repo Assist] fix: auto-format Dart files to fix CI formatting failures", "branch": "repo-assist/fix-issue-80-dart-format-eee8951073a3c5e2", "created": "2026-03-02", "closes": "#80", "note": "Still open, clean/mergeable, no CI failures from our changes. Will hit 14-day stale threshold on 2026-03-16."},
+    {"number": "pending", "title": "[Repo Assist] docs: add CI/pub.dev badges, update version reference, fix code fence casing", "branch": "repo-assist/improve-readme-badges-and-version", "created": "2026-03-09", "note": "PR queued via safeoutputs; actual PR number assigned post-workflow. Documentation-only change."}
   ],
   "open_issues": [
     {"number": 76, "title": "TLD validation scope question", "user": "Leekogram"},
@@ -106,10 +113,11 @@
     "ipv6-parser-bug": {"note": "2022 branch. Changes re-add dart:core import (we removed), rename SubdomainType to Type. IPv6 logic changes are minimal and redundant with current code. NOT worth porting."},
     "disallow-control-characters": {"note": "2022 branch. Adds _isControl helper (codeUnit <= 31 or == 127) in _isAtom - but ASCII control chars already blocked by existing atom char check. C1 control chars (128-159) not addressed. NOT worth porting."}
   },
-  "ci_workflow_status": "PR #82 open to fix master CI failures. Issue #83 documents CI SDK matrix patch (manual apply required).",
+  "ci_workflow_status": "PR #82 open to fix master CI failures. Issue #83 documents CI SDK matrix patch (manual apply required). New README improvement PR queued.",
   "known_issues": [
     {"issue": "github-actions bot PRs do not auto-trigger CI workflows", "note": "Maintainer must manually trigger CI"},
-    {"issue": "safeoutputs-create_pull_request fails silently for CI SDK matrix changes", "note": "Push returns success but no branch/PR created. Tried 3 times. DO NOT RETRY - issue #83 exists for manual application."}
+    {"issue": "safeoutputs-create_pull_request fails silently for CI SDK matrix changes", "note": "Push returns success but no branch/PR created. Tried 3 times. DO NOT RETRY - issue #83 exists for manual application."},
+    {"issue": "PR number not immediately available after safeoutputs-create_pull_request", "note": "PR is created post-workflow. Check open PRs on next run to get number."}
   ],
-  "notes": "2026-03-08: Ran Tasks 1, 5, 8, 9, 11. No new issues/PRs/contributors. PR #82 still open. Discovered v3.0.7 git tag anomaly (no GitHub release, pubspec says 3.0.6) - flagged in monthly summary. Next priority: Task 2 (fix), Task 4 (deps), Task 6 (stale nudge - PR #82 hits 14 days on 2026-03-16), Task 7 (labels), Task 10 (take forward). Consider: once tag anomaly resolved, propose patch release."
+  "notes": "2026-03-09: Ran Tasks 2, 4, 5, 10, 11. No new issues/PRs/contributors. PR #82 still open. Created README improvement PR (queued): adds CI+pub.dev badges, updates version ref ^3.0.0->^3.0.6, fixes code fence casing Dart->dart. Next priority: Task 1 (triage), Task 6 (stale - PR #82 hits threshold 2026-03-16), Task 7 (labels), Task 8 (release), Task 9 (welcome). On next run: verify README PR number from safeoutputs and update monthly summary + memory."
 }
