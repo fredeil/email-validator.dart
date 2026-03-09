@@ -1,4 +1,7 @@
-# **Email Validator.dart** 
+# **Email Validator.dart**
+
+[![CI](https://github.com/fredeil/email-validator.dart/actions/workflows/ci.yml/badge.svg)](https://github.com/fredeil/email-validator.dart/actions/workflows/ci.yml)
+[![pub package](https://img.shields.io/pub/v/email_validator.svg)](https://pub.dev/packages/email_validator)
 
 A simple Dart class for validating email addresses without using RegEx. Can also be used to validate emails within Flutter apps (see [Flutter email validation](https://github.com/fredeil/flutter-email-validator)).
 
@@ -30,7 +33,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-    email_validator: '^3.0.0'
+    email_validator: '^3.0.6'
 ```
 
 
@@ -48,7 +51,7 @@ Alternatively, your editor might support pub. Check the docs for your editor to 
 
 Now in your Dart code, you can use:
 
-```Dart
+```dart
 import 'package:email_validator/email_validator.dart';
 ```
 
@@ -56,10 +59,9 @@ import 'package:email_validator/email_validator.dart';
 
 Read the unit tests under `test`, or see code example below:
 
-```Dart
+```dart
 void main() {
-
-    var email = "fredrik@gmail.com";
+    var email = 'fredrik@gmail.com';
 
     assert(EmailValidator.validate(email));
 }
