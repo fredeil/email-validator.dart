@@ -1,8 +1,12 @@
 {
-  "last_updated": "2026-03-11T07:37:22Z",
-  "last_run": "2026-03-11T07:37:22Z",
-  "run_id": "22941838050",
+  "last_updated": "2026-03-12T07:38:13Z",
+  "last_run": "2026-03-12T07:38:13Z",
+  "run_id": "22991410215",
   "tasks_run_history": [
+    {"task": 5, "date": "2026-03-12"},
+    {"task": 6, "date": "2026-03-12"},
+    {"task": 2, "date": "2026-03-12"},
+    {"task": 11, "date": "2026-03-12"},
     {"task": 3, "date": "2026-03-11"},
     {"task": 8, "date": "2026-03-11"},
     {"task": 9, "date": "2026-03-11"},
@@ -28,11 +32,7 @@
     {"task": 7, "date": "2026-03-06"},
     {"task": 9, "date": "2026-03-06"},
     {"task": 10, "date": "2026-03-06"},
-    {"task": 11, "date": "2026-03-05"},
-    {"task": 1, "date": "2026-03-05"},
-    {"task": 5, "date": "2026-03-05"},
-    {"task": 9, "date": "2026-03-05"},
-    {"task": 11, "date": "2026-03-04"}
+    {"task": 11, "date": "2026-03-05"}
   ],
   "issue_backlog_cursor": null,
   "pr_backlog_cursor": null,
@@ -40,7 +40,7 @@
     "month": "2026-03",
     "number": 81,
     "created_at": "2026-03-01",
-    "note": "Updated 2026-03-11 with example PR entry."
+    "note": "Updated 2026-03-12 with PR #86 confirmed and current run activity."
   },
   "previous_monthly_summary": {
     "month": "2026-02",
@@ -62,7 +62,7 @@
     {"title": "Remove redundant dart:core import and document _skipIPv4Literal", "branch": "repo-assist/improve-code-cleanup-2026-02-28", "date": "2026-02-28", "pr": 79, "status": "merged-2026-03-02"},
     {"title": "Add Dart SDK matrix (stable + beta) to CI", "branch": "N/A", "date": "2026-03-03", "issue": 83, "status": "issue-only", "description": "PR push failed repeatedly (2026-03-03, 2026-03-04). Issue #83 documents patch for manual application. DO NOT RETRY.", "retry_count": 3},
     {"title": "README: add CI/pub.dev badges, update version ref, fix code fence casing", "branch": "repo-assist/improve-readme-badges-and-version-d22dd9f87d2781ac", "date": "2026-03-09", "pr": 85, "status": "open", "description": "Documentation-only: CI badge, pub.dev badge, version ^3.0.0->^3.0.6, Dart->dart in code fences, single-quoted string example"},
-    {"title": "Expand example to show valid/invalid cases and optional parameters", "branch": "repo-assist/improve-example-more-illustrative", "date": "2026-03-11", "pr": null, "status": "open-pr-number-tbc", "description": "Expanded example/example.dart: basic validation, allowTopLevelDomains, allowInternational, both valid and invalid cases. PR number to be confirmed next run."}
+    {"title": "Expand example to show valid/invalid cases and optional parameters", "branch": "repo-assist/improve-example-more-illustrative", "date": "2026-03-11", "pr": 86, "status": "open", "description": "Expanded example/example.dart: basic validation, allowTopLevelDomains, allowInternational, both valid and invalid cases. PR #86."}
   ],
   "welcomed_contributors": [],
   "nudged_prs": [],
@@ -73,7 +73,7 @@
     "date": "2026-03-11",
     "last_release": "v3.0.6",
     "last_release_date": "2026-02-06",
-    "assessment": "v3.0.7 git tag exists but no matching GitHub release and pubspec still reads 3.0.6. Flagged to maintainer. PRs #82 (format fix) and #85 (README) still open - wait for those to merge before proposing release.",
+    "assessment": "v3.0.7 git tag exists but no matching GitHub release and pubspec still reads 3.0.6. Flagged to maintainer. PRs #82, #85, #86 still open - wait for those to merge before proposing release.",
     "tag_anomaly": "v3.0.7 tag points to same commit as v3.0.6 (e1ad8572) but no GitHub release and pubspec shows 3.0.6. Raised in Monthly Activity #81 suggested actions."
   },
   "checked_off_actions": [],
@@ -100,9 +100,9 @@
     {"number": 79, "reason": "Merged by @fredeil", "date": "2026-03-02"}
   ],
   "open_repo_assist_prs": [
-    {"number": 82, "title": "[Repo Assist] fix: auto-format Dart files to fix CI formatting failures", "branch": "repo-assist/fix-issue-80-dart-format-eee8951073a3c5e2", "created": "2026-03-02", "closes": "#80", "last_updated": "2026-03-03", "stale_threshold_date": "2026-03-17", "note": "Still open, clean/mergeable, no CI failures from our changes. Will hit 14-day stale threshold on 2026-03-17."},
+    {"number": 82, "title": "[Repo Assist] fix: auto-format Dart files to fix CI formatting failures", "branch": "repo-assist/fix-issue-80-dart-format-eee8951073a3c5e2", "created": "2026-03-02", "closes": "#80", "last_updated": "2026-03-03", "stale_threshold_date": "2026-03-17", "note": "Still open, clean/mergeable. Hits 14-day stale threshold on 2026-03-17 - nudge maintainer if still open next run (2026-03-13)."},
     {"number": 85, "title": "[Repo Assist] docs: add CI/pub.dev badges, update version reference, fix code fence casing", "branch": "repo-assist/improve-readme-badges-and-version-d22dd9f87d2781ac", "created": "2026-03-09", "last_updated": "2026-03-09", "stale_threshold_date": "2026-03-23", "note": "Documentation-only draft PR. Created 2026-03-09."},
-    {"number": null, "title": "[Repo Assist] docs: expand example to show valid/invalid cases and optional parameters", "branch": "repo-assist/improve-example-more-illustrative", "created": "2026-03-11", "stale_threshold_date": "2026-03-25", "note": "PR number to be confirmed next run. Example file only change."}
+    {"number": 86, "title": "[Repo Assist] docs: expand example to show valid/invalid cases and optional parameters", "branch": "repo-assist/improve-example-more-illustrative", "created": "2026-03-11", "last_updated": "2026-03-11", "stale_threshold_date": "2026-03-25", "note": "Example file only change. PR number confirmed."}
   ],
   "open_issues": [
     {"number": 76, "title": "TLD validation scope question", "user": "Leekogram"},
@@ -114,11 +114,11 @@
     "ipv6-parser-bug": {"note": "2022 branch. Changes re-add dart:core import (we removed), rename SubdomainType to Type. IPv6 logic changes are minimal and redundant with current code. NOT worth porting."},
     "disallow-control-characters": {"note": "2022 branch. Adds _isControl helper (codeUnit <= 31 or == 127) in _isAtom - but ASCII control chars already blocked by existing atom char check. C1 control chars (128-159) not addressed. NOT worth porting."}
   },
-  "ci_workflow_status": "PR #82 open to fix master CI failures. Issue #83 documents CI SDK matrix patch (manual apply required). PR #85 (README badges) open. Example improvement PR open (TBC).",
+  "ci_workflow_status": "PRs #82, #85, #86 all open with pending CI (expected for bot PRs). Issue #83 documents CI SDK matrix patch (manual apply required).",
   "known_issues": [
     {"issue": "github-actions bot PRs do not auto-trigger CI workflows", "note": "Maintainer must manually trigger CI"},
     {"issue": "safeoutputs-create_pull_request fails silently for CI SDK matrix changes", "note": "Push returns success but no branch/PR created. Tried 3 times. DO NOT RETRY - issue #83 exists for manual application."},
     {"issue": "PR number not immediately available after safeoutputs-create_pull_request", "note": "PR is created post-workflow. Check open PRs on next run to get number."}
   ],
-  "notes": "2026-03-11: Ran Tasks 3, 8, 9, 11. Task 3: Created PR for expanded example (example/example.dart) - number TBC. Task 8: Release not warranted - PRs #82/#85 open, v3.0.7 tag anomaly unresolved. Task 9: No new contributors. PR #82 hits stale threshold 2026-03-17 - nudge next run if still open."
+  "notes": "2026-03-12: Ran Tasks 5, 6, 2, 11. Task 5: PRs #82, #85, #86 all clean - CI pending is expected. Task 6: No stale PRs (PR #82 is 9 days, threshold 14 days). Task 2: No new fixable issues. Task 11: Updated monthly summary - PR #86 confirmed and linked. ALERT: PR #82 hits 14-day stale threshold on 2026-03-17 - nudge maintainer on next run if still open."
 }
