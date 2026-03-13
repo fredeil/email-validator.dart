@@ -2,9 +2,20 @@
 
 set -e
 
-DIR=$( cd $( dirname "${BASH_SOURCE[0]}" )/.. && pwd )
+DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )
 
-echo "Analyzing library for warnings or type errors"
-pub run test $DIR/test/email_validator_test.dart
+cd "$DIR"
 
-echo -e "\n[32m✓ OK[0m"
+echo "Installing dependencies..."
+dart pub get
+
+echo "Checking formatting..."
+dart format --output=none --set-exit-if-changed .
+
+echo "Analyzing for warnings and type errors..."
+dart analyze --fatal-infos
+
+echo "Running tests..."
+dart test
+
+echo -e "\n\033[32m✓ OK\033[0m"
