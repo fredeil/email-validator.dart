@@ -1,37 +1,37 @@
 {
-  "last_updated": "2026-03-13T07:37:05Z",
-  "last_run": "2026-03-13T07:37:05Z",
-  "run_id": "23040972067",
+  "last_updated": "2026-03-15T07:37:23Z",
+  "last_run": "2026-03-15T07:37:23Z",
+  "run_id": "23105953103",
   "tasks_run_history": [
+    {"task": 5, "date": "2026-03-15"},
+    {"task": 6, "date": "2026-03-15"},
+    {"task": 1, "date": "2026-03-15"},
+    {"task": 9, "date": "2026-03-15"},
+    {"task": 11, "date": "2026-03-15"},
+    {"task": 7, "date": "2026-03-14"},
+    {"task": 8, "date": "2026-03-14"},
+    {"task": 10, "date": "2026-03-14"},
     {"task": 4, "date": "2026-03-13"},
-    {"task": 9, "date": "2026-03-13"},
     {"task": 1, "date": "2026-03-13"},
     {"task": 11, "date": "2026-03-13"},
     {"task": 5, "date": "2026-03-12"},
     {"task": 6, "date": "2026-03-12"},
     {"task": 2, "date": "2026-03-12"},
-    {"task": 11, "date": "2026-03-12"},
     {"task": 3, "date": "2026-03-11"},
     {"task": 8, "date": "2026-03-11"},
     {"task": 9, "date": "2026-03-11"},
-    {"task": 11, "date": "2026-03-11"},
     {"task": 7, "date": "2026-03-10"},
     {"task": 1, "date": "2026-03-10"},
     {"task": 6, "date": "2026-03-10"},
-    {"task": 11, "date": "2026-03-10"},
     {"task": 2, "date": "2026-03-09"},
     {"task": 4, "date": "2026-03-09"},
     {"task": 5, "date": "2026-03-09"},
     {"task": 10, "date": "2026-03-09"},
-    {"task": 11, "date": "2026-03-09"},
     {"task": 1, "date": "2026-03-08"},
     {"task": 5, "date": "2026-03-08"},
     {"task": 8, "date": "2026-03-08"},
     {"task": 9, "date": "2026-03-08"},
-    {"task": 11, "date": "2026-03-08"},
     {"task": 7, "date": "2026-03-07"},
-    {"task": 11, "date": "2026-03-07"},
-    {"task": 11, "date": "2026-03-06"},
     {"task": 5, "date": "2026-03-06"}
   ],
   "issue_backlog_cursor": null,
@@ -40,7 +40,7 @@
     "month": "2026-03",
     "number": 81,
     "created_at": "2026-03-01",
-    "note": "Updated 2026-03-13 with run_tests.sh PR (est. #87)."
+    "note": "Updated 2026-03-15."
   },
   "previous_monthly_summary": {
     "month": "2026-02",
@@ -63,7 +63,7 @@
     {"title": "Add Dart SDK matrix (stable + beta) to CI", "branch": "N/A", "date": "2026-03-03", "issue": 83, "status": "issue-only", "description": "PR push failed repeatedly (2026-03-03, 2026-03-04). Issue #83 documents patch for manual application. DO NOT RETRY.", "retry_count": 3},
     {"title": "README: add CI/pub.dev badges, update version ref, fix code fence casing", "branch": "repo-assist/improve-readme-badges-and-version-d22dd9f87d2781ac", "date": "2026-03-09", "pr": 85, "status": "open", "description": "Documentation-only: CI badge, pub.dev badge, version ^3.0.0->^3.0.6, Dart->dart in code fences, single-quoted string example"},
     {"title": "Expand example to show valid/invalid cases and optional parameters", "branch": "repo-assist/improve-example-more-illustrative", "date": "2026-03-11", "pr": 86, "status": "open", "description": "Expanded example/example.dart: basic validation, allowTopLevelDomains, allowInternational, both valid and invalid cases. PR #86."},
-    {"title": "Modernise tool/run_tests.sh to use dart CLI", "branch": "repo-assist/improve-run-tests-script", "date": "2026-03-13", "pr": "unknown-check-next-run-est-87", "status": "open", "description": "Replace pub run test with dart test; add dart pub get, format, analyze to match CI; fix echo message and shell quoting."}
+    {"title": "Modernise tool/run_tests.sh to use dart CLI", "branch": "repo-assist/improve-run-tests-script", "date": "2026-03-13", "pr": 87, "status": "open", "description": "Replace pub run test with dart test; add dart pub get, format, analyze to match CI; fix echo message and shell quoting."}
   ],
   "welcomed_contributors": [],
   "nudged_prs": [],
@@ -71,7 +71,7 @@
   "dependency_notes": "Only dev dep: test: ^1.16.8. pub outdated unavailable due to network firewall. tool/run_tests.sh updated to modern dart CLI.",
   "release_last_proposed": null,
   "release_check": {
-    "date": "2026-03-11",
+    "date": "2026-03-14",
     "last_release": "v3.0.6",
     "last_release_date": "2026-02-06",
     "assessment": "v3.0.7 git tag exists but no matching GitHub release and pubspec still reads 3.0.6. Flagged to maintainer. PRs #82, #85, #86, #87 still open - wait for those to merge before proposing release.",
@@ -79,6 +79,8 @@
   },
   "checked_off_actions": [],
   "labels_applied": [
+    {"item": 86, "type": "pr", "labels": ["documentation"], "date": "2026-03-14"},
+    {"item": 87, "type": "pr", "labels": ["refactor"], "date": "2026-03-14"},
     {"item": 76, "type": "issue", "labels": ["question"], "date": "2026-03-07"},
     {"item": 83, "type": "issue", "labels": ["enhancement"], "date": "2026-03-07"},
     {"item": 80, "type": "issue", "labels": ["bug"], "date": "2026-03-01"},
@@ -101,10 +103,10 @@
     {"number": 79, "reason": "Merged by @fredeil", "date": "2026-03-02"}
   ],
   "open_repo_assist_prs": [
-    {"number": 82, "title": "[Repo Assist] fix: auto-format Dart files to fix CI formatting failures", "branch": "repo-assist/fix-issue-80-dart-format-eee8951073a3c5e2", "created": "2026-03-02", "closes": "#80", "last_updated": "2026-03-03", "stale_threshold_date": "2026-03-16", "note": "APPROACHING STALE: hits 14-day threshold on 2026-03-16. Nudge maintainer next run."},
+    {"number": 82, "title": "[Repo Assist] fix: auto-format Dart files to fix CI formatting failures", "branch": "repo-assist/fix-issue-80-dart-format-eee8951073a3c5e2", "created": "2026-03-02", "closes": "#80", "last_updated": "2026-03-03", "stale_threshold_date": "2026-03-16", "note": "HITS STALE THRESHOLD TOMORROW (2026-03-16). Nudge maintainer next run."},
     {"number": 85, "title": "[Repo Assist] docs: add CI/pub.dev badges, update version reference, fix code fence casing", "branch": "repo-assist/improve-readme-badges-and-version-d22dd9f87d2781ac", "created": "2026-03-09", "last_updated": "2026-03-09", "stale_threshold_date": "2026-03-23"},
-    {"number": 86, "title": "[Repo Assist] docs: expand example to show valid/invalid cases and optional parameters", "branch": "repo-assist/improve-example-more-illustrative", "created": "2026-03-11", "last_updated": "2026-03-11", "stale_threshold_date": "2026-03-25"},
-    {"number": "est-87", "title": "[Repo Assist] chore: modernise tool/run_tests.sh to use dart CLI", "branch": "repo-assist/improve-run-tests-script", "created": "2026-03-13", "last_updated": "2026-03-13", "stale_threshold_date": "2026-03-27", "note": "PR number not yet confirmed - check next run. Expected #87."}
+    {"number": 86, "title": "[Repo Assist] docs: expand example to show valid/invalid cases and optional parameters", "branch": "repo-assist/improve-example-more-illustrative", "created": "2026-03-11", "last_updated": "2026-03-14", "stale_threshold_date": "2026-03-25"},
+    {"number": 87, "title": "[Repo Assist] chore: modernise tool/run_tests.sh to use dart CLI", "branch": "repo-assist/improve-run-tests-script", "created": "2026-03-13", "last_updated": "2026-03-14", "stale_threshold_date": "2026-03-27"}
   ],
   "open_issues": [
     {"number": 76, "title": "TLD validation scope question", "user": "Leekogram"},
@@ -116,11 +118,11 @@
     "ipv6-parser-bug": {"note": "2022 branch. Changes re-add dart:core import (we removed), rename SubdomainType to Type. IPv6 logic changes are minimal and redundant with current code. NOT worth porting."},
     "disallow-control-characters": {"note": "2022 branch. Adds _isControl helper (codeUnit <= 31 or == 127) in _isAtom - but ASCII control chars already blocked by existing atom char check. C1 control chars (128-159) not addressed. NOT worth porting."}
   },
-  "ci_workflow_status": "PRs #82, #85, #86 all open with pending CI (expected for bot PRs). Issue #83 documents CI SDK matrix patch (manual apply required). PR est-#87 just created.",
+  "ci_workflow_status": "PRs #82, #85, #86, #87 all open with pending CI (expected for bot PRs). Issue #83 documents CI SDK matrix patch (manual apply required).",
   "known_issues": [
     {"issue": "github-actions bot PRs do not auto-trigger CI workflows", "note": "Maintainer must manually trigger CI"},
     {"issue": "safeoutputs-create_pull_request fails silently for CI SDK matrix changes", "note": "Push returns success but no branch/PR created. Tried 3 times. DO NOT RETRY - issue #83 exists for manual application."},
     {"issue": "PR number not immediately available after safeoutputs-create_pull_request", "note": "PR is created post-workflow. Check open PRs on next run to get number."}
   ],
-  "notes": "2026-03-13: Ran Tasks 4, 9, 1, 11. Task 4: Updated tool/run_tests.sh (pub run test -> dart test + added format/analyze). Created draft PR (est. #87). Task 9: No new contributors. Task 1: No new human comments on issues. Task 11: Updated monthly summary. ALERT: PR #82 hits 14-day stale threshold on 2026-03-16 - nudge maintainer on next run if still open."
+  "notes": "2026-03-15: Ran Tasks 5, 6, 1, 9, 11. All PRs clean. PR #82 hits 14-day stale threshold tomorrow (2026-03-16) - NUDGE MAINTAINER next run via PR comment. No new human comments. No new contributors."
 }
