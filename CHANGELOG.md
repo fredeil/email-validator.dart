@@ -1,3 +1,8 @@
+## 3.0.8
+- Add comprehensive test suite covering boundary conditions, quoted strings, IPv4/IPv6, international addresses, and all parameter combinations
+- Add GitHub Actions CI workflow (format check, static analysis, test run)
+- Remove redundant `dart:core` import; add documentation for `_skipIPv4Literal`
+
 ## 3.0.6
 Bug fixes and performance improvements
 
